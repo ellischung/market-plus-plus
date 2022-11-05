@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 import "./App.css";
 
 function App() {
@@ -8,8 +8,8 @@ function App() {
 
   return (
     <div className="App">
-      <div>Market++</div>
       <div className="container">
+        <Typography>Market++</Typography>
         <TextField
           label="Username"
           variant="filled"
