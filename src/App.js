@@ -9,8 +9,9 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Typography>Market++</Typography>
+        <Typography className="title">Market++</Typography>
         <TextField
+          className="input"
           label="Username"
           variant="filled"
           onChange={(event) => {
@@ -18,13 +19,16 @@ function App() {
           }}
         />
         <TextField
+          className="input"
           label="Password"
           variant="filled"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <Button variant="outlined">Sign In</Button>
+        <Button className="input" variant="outlined">
+          Sign In
+        </Button>
       </div>
     </div>
   );
