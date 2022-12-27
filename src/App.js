@@ -1,36 +1,61 @@
-import React, { useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
+import React from "react";
+import { Router, Route, NavLink } from "react-router-dom";
+// import { TextField, Button, Typography } from "@mui/material";
+import SignUpForm from "./components/SignUpForm";
+import SignInForm from "./components/SignInForm";
 import "./App.css";
 
 function App() {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
 
   return (
-    <div className="App">
-      <div className="container">
-        <Typography className="title">Market++</Typography>
-        <TextField
-          className="input"
-          label="Username"
-          variant="filled"
-          onChange={(event) => {
-            setUserName(event.target.value);
-          }}
-        />
-        <TextField
-          className="input"
-          label="Password"
-          variant="filled"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <Button className="input" variant="outlined">
-          Sign In
-        </Button>
+    // <Router basename="/">
+      <div className="App">
+        <div className="appAside" />
+        <div className="appForm">
+          <div className="pageSwitcher">
+            <NavLink
+              to="/sign-in"
+              activeClassName="pageSwitcherItem-active"
+              className="pageSwitcherItem"
+            >
+              Sign In
+            </NavLink>
+            <NavLink
+              exact
+              to="/"
+              activeClassName="pageSwitcherItem-active"
+              className="pageSwitcherItem"
+            >
+              Sign Up
+            </NavLink>
+          </div>
+
+          <div className="formTitle">
+            <NavLink
+              to="/sign-in"
+              activeClassName="formTitleLink-active"
+              className="formTitleLink"
+            >
+              Sign In
+            </NavLink>{" "}
+            or{" "}
+            <NavLink
+              exact
+              to="/"
+              activeClassName="formTitleLink-active"
+              className="formTitleLink"
+            >
+              Sign Up
+            </NavLink>
+          </div>
+
+          <Route exact path="/" component={SignUpForm} />
+          <Route path="/sign-in" component={SignInForm} />
+        </div>
       </div>
-    </div>
+    // </Router>
   );
 }
 
