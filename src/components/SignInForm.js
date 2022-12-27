@@ -5,12 +5,6 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChange = (event) => {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -31,7 +25,9 @@ const SignInForm = () => {
             placeholder="Enter your email"
             name="email"
             value={email}
-            onChange={handleChange}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }} 
           />
         </div>
 
@@ -46,7 +42,9 @@ const SignInForm = () => {
             placeholder="Enter your password"
             name="password"
             value={password}
-            onChange={handleChange}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }} 
           />
         </div>
 

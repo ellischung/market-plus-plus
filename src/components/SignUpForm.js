@@ -7,14 +7,6 @@ const SignUpForm = () => {
   const [name, setName] = useState("");
   const [hasAgreed, setHasAgreed] = useState(false);
 
-  const handleChange = (event) => {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
-    setName(value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,7 +27,9 @@ const SignUpForm = () => {
             placeholder="Enter your full name"
             name="name"
             value={name}
-            onChange={handleChange}
+            onChange={(event) => {
+              setName(event.target.value);
+            }} 
           />
         </div>
         <div className="formField">
@@ -49,7 +43,9 @@ const SignUpForm = () => {
             placeholder="Enter your password"
             name="password"
             value={password}
-            onChange={handleChange}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }} 
           />
         </div>
         <div className="formField">
@@ -63,7 +59,9 @@ const SignUpForm = () => {
             placeholder="Enter your email"
             name="email"
             value={email}
-            onChange={handleChange}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }} 
           />
         </div>
 
@@ -74,7 +72,9 @@ const SignUpForm = () => {
               type="checkbox"
               name="hasAgreed"
               value={hasAgreed}
-              onChange={handleChange}
+              onChange={(event) => {
+                setHasAgreed(event.target.value);
+              }} 
             />{" "}
             I agree all statements in{" "}
             <a href="null" className="formFieldTermsLink">
