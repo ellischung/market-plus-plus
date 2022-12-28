@@ -8,7 +8,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="appAside" />
+        <div className="appAside">
+          <img
+            alt="market-plus-plus"
+            src={require("./images/test.png")}
+            className="appLogo"
+          />
+        </div>
         <div className="appForm">
           <div className="pageSwitcher">
             <NavLink
