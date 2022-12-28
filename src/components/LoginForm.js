@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SignInForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,7 +50,7 @@ const SignInForm = () => {
 
         <div className="formField">
           <button className="formFieldButton" onClick={handleSubmit}>
-            Sign In
+            Log In
           </button>
           <Link to="/" className="formFieldLink">
             Create an account
@@ -61,4 +61,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default LoginForm;

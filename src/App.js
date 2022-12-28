@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, NavLink } from "react-router-dom";
 import SignUpForm from "./components/SignUpForm";
-import SignInForm from "./components/SignInForm";
+import LoginForm from "./components/LoginForm";
 import "./App.css";
 
 function App() {
@@ -18,11 +18,11 @@ function App() {
         <div className="appForm">
           <div className="pageSwitcher">
             <NavLink
-              to="/sign-in"
+              to="/login"
               activeClassName="pageSwitcherItem-active"
               className="pageSwitcherItem"
             >
-              Sign In
+              Log In
             </NavLink>
             <NavLink
               exact
@@ -36,11 +36,11 @@ function App() {
 
           <div className="formTitle">
             <NavLink
-              to="/sign-in"
+              to="/login"
               activeClassName="formTitleLink-active"
               className="formTitleLink"
             >
-              Sign In
+              Log In
             </NavLink>{" "}
             or{" "}
             <NavLink
@@ -54,7 +54,7 @@ function App() {
           </div>
 
           <Route exact path="/" component={SignUpForm} />
-          <Route path="/sign-in" component={SignInForm} />
+          <Route path="/login" component={LoginForm} />
         </div>
       </div>
     </Router>

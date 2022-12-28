@@ -87,7 +87,7 @@ const SignUpForm = () => {
           <button className="formFieldButton" onClick={handleSubmit}>
             Sign Up
           </button>
-          <Link to="/sign-in" className="formFieldLink">
+          <Link to="/login" className="formFieldLink">
             I'm already a member
           </Link>
         </div>
