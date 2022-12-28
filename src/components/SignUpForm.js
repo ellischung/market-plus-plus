@@ -15,7 +15,7 @@ const SignUpForm = () => {
 
   return (
     <div className="formCenter">
-      <form onSubmit={handleSubmit} className="formFields">
+      <form className="formFields">
         <div className="formField">
           <label className="formFieldLabel" htmlFor="name">
             Full Name
@@ -29,7 +29,7 @@ const SignUpForm = () => {
             value={name}
             onChange={(event) => {
               setName(event.target.value);
-            }} 
+            }}
           />
         </div>
         <div className="formField">
@@ -45,7 +45,7 @@ const SignUpForm = () => {
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
-            }} 
+            }}
           />
         </div>
         <div className="formField">
@@ -61,7 +61,7 @@ const SignUpForm = () => {
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
-            }} 
+            }}
           />
         </div>
 
@@ -74,9 +74,9 @@ const SignUpForm = () => {
               value={hasAgreed}
               onChange={(event) => {
                 setHasAgreed(event.target.value);
-              }} 
+              }}
             />{" "}
-            I agree all statements in{" "}
+            I agree all statements in the
             <a href="null" className="formFieldTermsLink">
               terms of service
             </a>
@@ -84,7 +84,9 @@ const SignUpForm = () => {
         </div>
 
         <div className="formField">
-          <button className="formFieldButton">Sign Up</button>{" "}
+          <button className="formFieldButton" onClick={handleSubmit}>
+            Sign Up
+          </button>
           <Link to="/sign-in" className="formFieldLink">
             I'm already a member
           </Link>

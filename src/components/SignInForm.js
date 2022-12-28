@@ -13,7 +13,7 @@ const SignInForm = () => {
 
   return (
     <div className="formCenter">
-      <form className="formFields" onSubmit={handleSubmit}>
+      <form className="formFields">
         <div className="formField">
           <label className="formFieldLabel" htmlFor="email">
             E-Mail Address
@@ -27,7 +27,7 @@ const SignInForm = () => {
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
-            }} 
+            }}
           />
         </div>
 
@@ -44,12 +44,14 @@ const SignInForm = () => {
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
-            }} 
+            }}
           />
         </div>
 
         <div className="formField">
-          <button className="formFieldButton">Sign In</button>{" "}
+          <button className="formFieldButton" onClick={handleSubmit}>
+            Sign In
+          </button>
           <Link to="/" className="formFieldLink">
             Create an account
           </Link>
