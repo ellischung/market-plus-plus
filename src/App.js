@@ -11,7 +11,7 @@ function App() {
         <div className="appAside">
           <img
             alt="market-plus-plus"
-            src={require("./images/test.png")}
+            src={require("./images/marketpluslogo3.png")}
             className="appLogo"
           />
         </div>

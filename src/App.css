@@ -8,14 +8,15 @@
 
 .appAside {
   width: 50%;
-  background-color: #707c8b;
+  /* background-color: #707c8b; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .appLogo {
-  width: 300px;
+  width: 600px;
+  height: 400px;
 }
 
 .appForm {
