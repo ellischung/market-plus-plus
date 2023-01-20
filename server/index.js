@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import userRoutes from './routes/users.js'
-import { signin, signup } from '../controllers/user.js'
+// import userRoutes from './routes/users.js'
+import { signin, signup } from './controllers/user.js'
 
 const app = express();
 dotenv.config();
@@ -16,12 +16,13 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.post('/user/signin', signin);
+app.post('/user/signup', signup);
 
 app.get('/', (req, res) => {
     res.send('APP IS RUNNING.');
 });
 
-const CONNECTION_URL = 'mongodb+srv://chunghomeacc123:homepc123@cluster0.zrh6jxo.mongodb.net/?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb+srv://marketplusplus:markettest@cluster0.8nzquvu.mongodb.net/?retryWrites=true&w=majority'
 const PORT = 5000;
 
 mongoose.connect(CONNECTION_URL)

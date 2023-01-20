@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 // exporting mongoose model
 
 const userSchema = mongoose.Schema({
-    name: { type: String, required: true },
+    given_name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
     id: { type: String },
