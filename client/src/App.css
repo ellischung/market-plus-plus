@@ -8,7 +8,7 @@
 
 .appAside {
   width: 50%;
-  /* background-color: #707c8b; */
+  background-image: url("images/marketpluslogo3.png");
   display: flex;
   justify-content: center;
   align-items: center;
