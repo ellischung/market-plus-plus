@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const SignUpForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [hasAgreed, setHasAgreed] = useState(false);
+  const API = axios.create({ baseURL: 'http://localhost:5000/user' });
+  const initialState = { name: '', password: '', email: '', hasAgreed: false};
+  const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    API.post('/signup', formData);
+
     console.log("The form was submitted with the following data:");
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })    
   };
 
   return (
     <div className="formCenter">
-      <form className="formFields">
+      <form className="formFields" onSubmit={handleSubmit}>
         <div className="formField">
           <label className="formFieldLabel" htmlFor="name">
             Full Name
@@ -26,9 +32,8 @@ const SignUpForm = () => {
             className="formFieldInput"
             placeholder="Enter your full name"
             name="name"
-            value={name}
             onChange={(event) => {
-              setName(event.target.value);
+              handleChange(event);
             }}
           />
         </div>
@@ -42,9 +47,8 @@ const SignUpForm = () => {
             className="formFieldInput"
             placeholder="Enter your password"
             name="password"
-            value={password}
             onChange={(event) => {
-              setPassword(event.target.value);
+              handleChange(event);
             }}
           />
         </div>
@@ -58,9 +62,9 @@ const SignUpForm = () => {
             className="formFieldInput"
             placeholder="Enter your email"
             name="email"
-            value={email}
             onChange={(event) => {
-              setEmail(event.target.value);
+              console.log(event.target.value);
+              handleChange(event);
             }}
           />
         </div>
@@ -71,9 +75,9 @@ const SignUpForm = () => {
               className="formFieldCheckbox"
               type="checkbox"
               name="hasAgreed"
-              value={hasAgreed}
+              // value={hasAgreed}
               onChange={(event) => {
-                setHasAgreed(event.target.value);
+                handleChange(event);
               }}
             />{" "}
             I agree all statements in the
@@ -84,7 +88,7 @@ const SignUpForm = () => {
         </div>
 
         <div className="formField">
-          <button className="formFieldButton" onClick={handleSubmit}>
+          <button className="formFieldButton" type="submit">
             Sign Up
           </button>
           <Link to="/login" className="formFieldLink">
