@@ -15,9 +15,6 @@ const LoginForm = () => {
     <div className="formCenter">
       <form className="formFields">
         <div className="formField">
-          <label className="formFieldLabel" htmlFor="email">
-            E-Mail Address
-          </label>
           <input
             type="email"
             id="email"
@@ -32,9 +29,6 @@ const LoginForm = () => {
         </div>
 
         <div className="formField">
-          <label className="formFieldLabel" htmlFor="password">
-            Password
-          </label>
           <input
             type="password"
             id="password"

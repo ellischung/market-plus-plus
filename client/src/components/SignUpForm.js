@@ -23,9 +23,6 @@ const SignUpForm = () => {
     <div className="formCenter">
       <form className="formFields" onSubmit={handleSubmit}>
         <div className="formField">
-          <label className="formFieldLabel" htmlFor="name">
-            Full Name
-          </label>
           <input
             type="text"
             id="name"
@@ -38,9 +35,6 @@ const SignUpForm = () => {
           />
         </div>
         <div className="formField">
-          <label className="formFieldLabel" htmlFor="password">
-            Password
-          </label>
           <input
             type="password"
             id="password"
@@ -53,9 +47,6 @@ const SignUpForm = () => {
           />
         </div>
         <div className="formField">
-          <label className="formFieldLabel" htmlFor="email">
-            E-Mail Address
-          </label>
           <input
             type="email"
             id="email"

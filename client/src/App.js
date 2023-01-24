@@ -9,43 +9,31 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="appAside">
-          <Wave
-            className="App"
-            fill='#0F52BA'
-            paused={false}
-            options={{
-              height: 300,
-              amplitude: 30,
-              speed: 0.15,
-              points: 3
-            }}
-          />
-            {/* <img
-              alt="market-plus-plus"
-              src={require("./images/marketpluslogo3.png")}
-              className="appLogo"
-            /> */} 
-        </div>
-        <div className="appForm">
-          <div className="pageSwitcher">
-            <NavLink
-              to="/login"
-              activeClassName="pageSwitcherItem-active"
-              className="pageSwitcherItem"
-            >
-              Log In
-            </NavLink>
-            <NavLink
-              exact
-              to="/"
-              activeClassName="pageSwitcherItem-active"
-              className="pageSwitcherItem"
-            >
-              Sign Up
-            </NavLink>
-          </div>
+        <img
+          alt="market-plus-plus"
+          src={require("./images/marketpluslogo3.png")}
+          className="appLogo"
+        />
+        <Wave
+          className="App"
+          fill="#707c8b"
+          paused={false}
+          options={{
+            height: 70,
+            amplitude: 30,
+            speed: 0.2,
+            points: 3,
+          }}
+        />
 
+        {/* <div className="appAside">
+          <img
+            alt="market-plus-plus"
+            src={require("./images/marketpluslogo3.png")}
+            className="appLogo"
+          />
+        </div> */}
+        <div className="appForm">
           <div className="formTitle">
             <NavLink
               to="/login"

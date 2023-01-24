@@ -3,13 +3,7 @@
 .App {
   height: 100vh;
   display: flex;
-  color: white;
-}
-
-.appAside {
-  width: 50%;
-  background-image: url("images/marketpluslogo3.png");
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -20,58 +14,20 @@
 }
 
 .appForm {
-  width: 50%;
-  background-color: #12130f;
-  padding: 25px 40px;
-  overflow: auto;
-}
-
-.pageSwitcher {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10%;
-}
-
-.pageSwitcherItem {
-  background-color: #40434e;
-  color: #9da6b1;
-  padding: 10px 25px;
-  cursor: pointer;
-  font-family: 'Open Sans';
-  font-size: 0.9em;
-  border: none;
-  outline: none;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.pageSwitcherItem-active {
-  background-color: #0F52BA;
-  color: white;
-}
-
-.pageSwitcherItem:first-child {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-.pageSwitcherItem:last-child {
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
-
-.formCenter {
-  margin-bottom: 100px;
+  background-color: #707c8b;
+  width: 100%;
+  text-align: center;
 }
 
 .formTitle {
-  color: #707c8b;
+  color: darkgray;
   font-family: 'Open Sans';
   font-weight: 300;
   margin-bottom: 50px;
 }
 
 .formTitleLink {
-  color: #707c8b;
+  color: darkgray;
   text-decoration: none;
   display: inline-block;
   font-family: 'Open Sans';
@@ -102,7 +58,7 @@
 }
 
 .formFieldInput {
-  width: 85%;
+  /* width: 85%; */
   background-color: transparent;
   border: none;
   color: white;
