@@ -45,6 +45,19 @@
   border-bottom: 1px solid #0F52BA;
 }
 
+.loginFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.signUpFields {
+  padding-left: 20px;
+  margin-bottom: 40px;
+}
+
 .formField {
   margin-bottom: 40px;
 }

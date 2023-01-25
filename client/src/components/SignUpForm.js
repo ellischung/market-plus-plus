@@ -1,29 +1,34 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import { TextField } from "@mui/material";
+import axios from "axios";
 
 const SignUpForm = () => {
-  const API = axios.create({ baseURL: 'http://localhost:5000/user' });
-  const initialState = { name: '', password: '', email: '', hasAgreed: false};
+  const API = axios.create({ baseURL: "http://localhost:5000/user" });
+  const initialState = { name: "", password: "", email: "", hasAgreed: false };
   const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    API.post('/signup', formData);
+    API.post("/signup", formData);
 
     console.log("The form was submitted with the following data:");
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })    
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <div className="formCenter">
       <form className="formFields" onSubmit={handleSubmit}>
-        <div className="formField">
-          <input
+        <div className="signUpFields">
+          <TextField required id="outlined-required" label="Username" />
+          <TextField required id="outlined-required" label="Password" />
+          <TextField required id="outlined-required" label="Email Address" />
+        </div>
+        {/* <input
             type="text"
             id="name"
             className="formFieldInput"
@@ -32,10 +37,8 @@ const SignUpForm = () => {
             onChange={(event) => {
               handleChange(event);
             }}
-          />
-        </div>
-        <div className="formField">
-          <input
+          /> */}
+        {/* <input
             type="password"
             id="password"
             className="formFieldInput"
@@ -44,10 +47,8 @@ const SignUpForm = () => {
             onChange={(event) => {
               handleChange(event);
             }}
-          />
-        </div>
-        <div className="formField">
-          <input
+          /> */}
+        {/* <input
             type="email"
             id="email"
             className="formFieldInput"
@@ -57,8 +58,7 @@ const SignUpForm = () => {
               console.log(event.target.value);
               handleChange(event);
             }}
-          />
-        </div>
+          /> */}
 
         <div className="formField">
           <label className="formFieldCheckboxLabel">

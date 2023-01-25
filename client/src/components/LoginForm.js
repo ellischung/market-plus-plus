@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { TextField } from "@mui/material";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const LoginForm = () => {
   return (
     <div className="formCenter">
       <form className="formFields">
-        <div className="formField">
+        {/* <div className="formField">
           <input
             type="email"
             id="email"
@@ -40,6 +41,10 @@ const LoginForm = () => {
               setPassword(event.target.value);
             }}
           />
+        </div> */}
+        <div className="loginFields">
+          <TextField required id="outlined-required" label="Username" />
+          <TextField required id="outlined-required" label="Password" />
         </div>
 
         <div className="formField">
