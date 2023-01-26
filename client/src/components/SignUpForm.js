@@ -24,42 +24,34 @@ const SignUpForm = () => {
     <div className="formCenter">
       <form className="formFields" onSubmit={handleSubmit}>
         <div className="signUpFields">
-          <TextField required id="outlined-required" label="Username" />
-          <TextField required id="outlined-required" label="Password" />
-          <TextField required id="outlined-required" label="Email Address" />
+          <TextField 
+              required 
+              id="outlined-required" 
+              name="name"
+              label="Full Name" 
+              onChange={(event) => {
+                handleChange(event);
+              }}
+          />
+          <TextField 
+              required 
+              id="outlined-required" 
+              name="password"
+              label="Password" 
+              onChange={(event) => {
+                handleChange(event);
+              }}
+          />
+          <TextField 
+              required 
+              id="outlined-required" 
+              name="email"
+              label="Email Address" 
+              onChange={(event) => {
+                handleChange(event);
+              }}
+          />
         </div>
-        {/* <input
-            type="text"
-            id="name"
-            className="formFieldInput"
-            placeholder="Enter your full name"
-            name="name"
-            onChange={(event) => {
-              handleChange(event);
-            }}
-          /> */}
-        {/* <input
-            type="password"
-            id="password"
-            className="formFieldInput"
-            placeholder="Enter your password"
-            name="password"
-            onChange={(event) => {
-              handleChange(event);
-            }}
-          /> */}
-        {/* <input
-            type="email"
-            id="email"
-            className="formFieldInput"
-            placeholder="Enter your email"
-            name="email"
-            onChange={(event) => {
-              console.log(event.target.value);
-              handleChange(event);
-            }}
-          /> */}
-
         <div className="formField">
           <label className="formFieldCheckboxLabel">
             <input

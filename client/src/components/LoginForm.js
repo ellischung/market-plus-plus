@@ -1,52 +1,50 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
+import axios from "axios";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const API = axios.create({ baseURL: "http://localhost:5000/user" });
+  const initialState = { email: "", password: "" };
+  const [formData, setFormData] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    API.post("/signin", formData).catch(function (error) {
+      alert(error.toJSON());
+    });
+
     console.log("The form was submitted with the following data:");
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <div className="formCenter">
-      <form className="formFields">
-        {/* <div className="formField">
-          <input
-            type="email"
-            id="email"
-            className="formFieldInput"
-            placeholder="Enter your email"
-            name="email"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-        </div>
-
-        <div className="formField">
-          <input
-            type="password"
-            id="password"
-            className="formFieldInput"
-            placeholder="Enter your password"
-            name="password"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-        </div> */}
+      <form className="formFields" onSubmit={handleSubmit}>
         <div className="loginFields">
-          <TextField required id="outlined-required" label="Username" />
-          <TextField required id="outlined-required" label="Password" />
+          <TextField 
+              required 
+              id="outlined-required" 
+              name="email"
+              label="Email Address"
+              onChange={(event) => {
+                handleChange(event);
+              }}
+          />
+          <TextField 
+              required 
+              id="outlined-required" 
+              name="password"
+              label="Password" 
+              onChange={(event) => {
+                handleChange(event);
+              }}
+          />
         </div>
-
         <div className="formField">
           <button className="formFieldButton" onClick={handleSubmit}>
             Log In
