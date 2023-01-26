@@ -65,7 +65,7 @@ const LoginForm = () => {
         />
       </div>
       <div className="formField">
-        <button className="formFieldButton" onClick={handleSubmit}>
+        <button className="formFieldButton" type="submit">
           Log In
         </button>
         <Link to="/" className="formFieldLink">
