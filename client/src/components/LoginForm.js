@@ -16,11 +16,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     API.post("/signin", formData).catch(function (error) {
-<<<<<<< HEAD
-      alert(error.request.response.replace(/['"]/g, ""));
-=======
       setError(error.request.response.replace(/['"]/g, ''));
->>>>>>> 887e93a284be2f6a2f891ef8142ec1db6b345457
     });
 
     console.log("The form was submitted with the following data:");
