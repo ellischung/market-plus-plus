@@ -73,6 +73,7 @@ const SignUpForm = () => {
           required
           name="email"
           label="Email Address"
+          type="email"
           onChange={(event) => {
             handleChange(event);
           }}
