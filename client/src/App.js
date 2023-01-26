@@ -44,7 +44,6 @@ function App() {
               Sign Up
             </NavLink>
           </div>
-
           <Route exact path="/" component={SignUpForm} />
           <Route path="/login" component={LoginForm} />
         </div>

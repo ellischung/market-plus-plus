@@ -45,16 +45,15 @@
   border-bottom: 1px solid #0F52BA;
 }
 
-.loginField {
+.signUpFields {
+  margin-bottom: 40px;
+}
+
+.inputFields {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
-}
-
-.signUpFields {
-  padding-left: 20px;
   margin-bottom: 40px;
 }
 
@@ -92,7 +91,7 @@
 }
 
 .formFieldLink {
-  color: #66707d;
+  color: white;
   text-decoration: none;
   display: inline-block;
   border-bottom: 1.5px solid #0F52BA;

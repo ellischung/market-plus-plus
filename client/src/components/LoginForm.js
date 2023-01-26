@@ -16,7 +16,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     API.post("/signin", formData).catch(function (error) {
-      setError(error.request.response.replace(/['"]/g, ''));
+      setError(error.request.response.replace(/['"]/g, ""));
     });
 
     console.log("The form was submitted with the following data:");
@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   return (
     <form className="formFields" onSubmit={handleSubmit}>
-      <div className="loginField">
+      <div className="inputFields">
         <TextField
           className="inputField"
           required
@@ -43,8 +43,6 @@ const LoginForm = () => {
             handleChange(event);
           }}
         />
-      </div>
-      <div className="loginField">
         <TextField
           className="inputField"
           required
@@ -67,8 +65,7 @@ const LoginForm = () => {
             ),
           }}
         />
-        <br/>
-        {error ? <Alert severity="error">{error}</Alert>: ""}
+        {error ? <Alert severity="error">{error}</Alert> : ""}
       </div>
       <div className="formField">
         <button className="formFieldButton" type="submit">
