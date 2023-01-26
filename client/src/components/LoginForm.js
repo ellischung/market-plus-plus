@@ -12,7 +12,7 @@ const LoginForm = () => {
     event.preventDefault();
 
     API.post("/signin", formData).catch(function (error) {
-      alert(error.toJSON());
+      alert(error.request.response.replace(/['"]/g, ''));
     });
 
     console.log("The form was submitted with the following data:");
