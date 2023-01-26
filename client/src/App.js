@@ -15,15 +15,22 @@ function App() {
           className="appLogo"
         />
         <Wave
-          fill="#707c8b"
+          fill="url(#gradient)"
           paused={false}
           options={{
             height: 70,
-            amplitude: 30,
-            speed: 0.2,
-            points: 3,
+            amplitude: 35,
+            speed: 0.25,
+            points: 4,
           }}
-        />
+        >
+          <defs>
+            <linearGradient id="gradient" gradientTransform="rotate(90)">
+              <stop offset="10%" stopColor="#b0c4de" />
+              <stop offset="90%" stopColor="#76ABDF" />
+            </linearGradient>
+          </defs>
+        </Wave>
         <div className="appForm">
           <div className="formTitle">
             <NavLink

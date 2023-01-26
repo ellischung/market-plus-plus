@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #b0c4de;
 }
 
 .appLogo {
@@ -14,21 +15,21 @@
 }
 
 .appForm {
-  background-color: #707c8b;
+  background-color: #76ABDF;
   width: 100%;
   height: 100%;
   text-align: center;
 }
 
 .formTitle {
-  color: darkgray;
+  color: #56585a;
   font-family: 'Open Sans';
   font-weight: 300;
   margin-bottom: 40px;
 }
 
 .formTitleLink {
-  color: darkgray;
+  color: #56585a;
   text-decoration: none;
   display: inline-block;
   font-family: 'Open Sans';
@@ -69,7 +70,7 @@
 }
 
 .checkBoxText {
-  color:darkgray;
+  color:#56585a;
 }
 
 .checkBoxTermsLink {
