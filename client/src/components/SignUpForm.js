@@ -38,6 +38,7 @@ const SignUpForm = () => {
     <form className="formFields" onSubmit={handleSubmit}>
       <div className="signUpFields">
         <TextField
+          className="inputField"
           required
           name="name"
           label="Full Name"
@@ -46,6 +47,7 @@ const SignUpForm = () => {
           }}
         />
         <TextField
+          className="inputField"
           required
           name="password"
           label="Password"
@@ -67,6 +69,7 @@ const SignUpForm = () => {
           }}
         />
         <TextField
+          className="inputField"
           required
           name="email"
           label="Email Address"

@@ -58,6 +58,10 @@
   margin-bottom: 40px;
 }
 
+.inputField {
+  width: 15%;
+}
+
 .checkBoxText {
   color:darkgray;
 }
