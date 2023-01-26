@@ -45,7 +45,7 @@
   border-bottom: 1px solid #0F52BA;
 }
 
-.loginFields {
+.loginField {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,6 +58,10 @@
   margin-bottom: 40px;
 }
 
+.checkBoxText {
+  color:darkgray;
+}
+
 .formField {
   margin-bottom: 40px;
 }
@@ -68,24 +72,6 @@
   font-family: 'Open Sans';
   font-size: 0.9em;
   color: white;
-}
-
-.formFieldInput {
-  /* width: 85%; */
-  background-color: transparent;
-  border: none;
-  color: white;
-  outline: none;
-  border-bottom: 1px solid #445366;
-  font-family: 'Open Sans';
-  font-size: 1em;
-  font-weight: 300;
-  padding-bottom: 10px;
-  margin-top: 10px;
-}
-
-.formFieldInput::placeholder {
-  color: #616e7f;
 }
 
 .formFieldButton {
@@ -108,17 +94,6 @@
   border-bottom: 1.5px solid #0F52BA;
   padding-bottom: 5px;
   font-family: 'Open Sans';
-}
-
-.formFieldCheckboxLabel {
-  color: #646f7d;
-  font-family: 'Open Sans';
-  font-size: 0.9em;
-}
-
-.formFieldCheckbox {
-  position: relative;
-  top: 1.5px;
 }
 
 .formFieldTermsLink {
