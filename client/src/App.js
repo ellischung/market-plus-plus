@@ -25,14 +25,6 @@ function App() {
             points: 3,
           }}
         />
-
-        {/* <div className="appAside">
-          <img
-            alt="market-plus-plus"
-            src={require("./images/marketpluslogo3.png")}
-            className="appLogo"
-          />
-        </div> */}
         <div className="appForm">
           <div className="formTitle">
             <NavLink

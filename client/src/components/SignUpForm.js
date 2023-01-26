@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { TextField } from "@mui/material";
+import {
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 
 const SignUpForm = () => {
   const API = axios.create({ baseURL: "http://localhost:5000/user" });
-  const initialState = { name: "", password: "", email: "", hasAgreed: false };
+  const initialState = { name: "", password: "", email: "" };
   const [formData, setFormData] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,66 +30,81 @@ const SignUpForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return (
-    <div className="formCenter">
-      <form className="formFields" onSubmit={handleSubmit}>
-        <div className="signUpFields">
-          <TextField 
-              required 
-              id="outlined-required" 
-              name="name"
-              label="Full Name" 
-              onChange={(event) => {
-                handleChange(event);
-              }}
-          />
-          <TextField 
-              required 
-              id="outlined-required" 
-              name="password"
-              label="Password" 
-              onChange={(event) => {
-                handleChange(event);
-              }}
-          />
-          <TextField 
-              required 
-              id="outlined-required" 
-              name="email"
-              label="Email Address" 
-              onChange={(event) => {
-                handleChange(event);
-              }}
-          />
-        </div>
-        <div className="formField">
-          <label className="formFieldCheckboxLabel">
-            <input
-              className="formFieldCheckbox"
-              type="checkbox"
-              name="hasAgreed"
-              // value={hasAgreed}
-              onChange={(event) => {
-                handleChange(event);
-              }}
-            />{" "}
-            I agree all statements in the
-            <a href="null" className="formFieldTermsLink">
-              terms of service
-            </a>
-          </label>
-        </div>
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
-        <div className="formField">
-          <button className="formFieldButton" type="submit">
-            Sign Up
-          </button>
-          <Link to="/login" className="formFieldLink">
-            I'm already a member
-          </Link>
-        </div>
-      </form>
-    </div>
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+  return (
+    <form className="formFields" onSubmit={handleSubmit}>
+      <div className="signUpFields">
+        <TextField
+          required
+          name="name"
+          label="Full Name"
+          onChange={(event) => {
+            handleChange(event);
+          }}
+        />
+        <TextField
+          required
+          name="password"
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          onChange={(event) => {
+            handleChange(event);
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          required
+          name="email"
+          label="Email Address"
+          onChange={(event) => {
+            handleChange(event);
+          }}
+        />
+      </div>
+      <div className="formField">
+        <FormControlLabel
+          control={
+            <Checkbox
+              required
+              onChange={(event) => {
+                handleChange(event);
+              }}
+            />
+          }
+          label={
+            <Typography className="checkBoxText">
+              I agree with all statements in the
+              <a href="null" className="formFieldTermsLink">
+                terms of service
+              </a>
+            </Typography>
+          }
+        />
+      </div>
+      <div className="formField">
+        <button className="formFieldButton" type="submit">
+          Sign Up
+        </button>
+        <Link to="/login" className="formFieldLink">
+          I'm already a member
+        </Link>
+      </div>
+    </form>
   );
 };
+
 export default SignUpForm;
