@@ -65,7 +65,7 @@ const LoginForm = () => {
             ),
           }}
         />
-        {error ? <Alert severity="error">{error}</Alert> : ""}
+        {error ? <Alert severity="error">{error}</Alert> : <br />}
       </div>
       <div className="submitField">
         <button className="submitButton" type="submit">

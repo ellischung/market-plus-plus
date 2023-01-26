@@ -15,11 +15,10 @@ function App() {
           className="appLogo"
         />
         <Wave
-          className="App"
           fill="#707c8b"
           paused={false}
           options={{
-            height: 100,
+            height: 70,
             amplitude: 30,
             speed: 0.2,
             points: 3,

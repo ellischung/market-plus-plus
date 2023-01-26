@@ -84,25 +84,27 @@ const SignUpForm = () => {
           }}
         />
       </div>
-      <FormControlLabel
-        className="checkBoxField"
-        control={
-          <Checkbox
-            required
-            onChange={(event) => {
-              handleChange(event);
-            }}
-          />
-        }
-        label={
-          <Typography>
-            I agree with all statements in the
-            <a href="null" className="checkBoxTermsLink">
-              terms of service
-            </a>
-          </Typography>
-        }
-      />
+      <div className="inputFields">
+        <FormControlLabel
+          control={
+            <Checkbox
+              required
+              onChange={(event) => {
+                handleChange(event);
+              }}
+            />
+          }
+          label={
+            <Typography className="checkBoxText">
+              I agree with all statements in the
+              <a href="null" className="checkBoxTermsLink">
+                terms of service
+              </a>
+            </Typography>
+          }
+        />
+        {error ? <Alert severity="error">{error}</Alert> : <br />}
+      </div>
       <div className="submitField">
         <button className="submitButton" type="submit">
           Sign Up
