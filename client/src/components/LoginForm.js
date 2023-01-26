@@ -67,11 +67,11 @@ const LoginForm = () => {
         />
         {error ? <Alert severity="error">{error}</Alert> : ""}
       </div>
-      <div className="formField">
-        <button className="formFieldButton" type="submit">
+      <div className="submitField">
+        <button className="submitButton" type="submit">
           Log In
         </button>
-        <Link to="/" className="formFieldLink">
+        <Link to="/" className="submitFieldLink">
           Create an account
         </Link>
       </div>

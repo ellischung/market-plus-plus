@@ -19,7 +19,7 @@ function App() {
           fill="#707c8b"
           paused={false}
           options={{
-            height: 70,
+            height: 100,
             amplitude: 30,
             speed: 0.2,
             points: 3,

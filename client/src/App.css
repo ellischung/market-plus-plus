@@ -23,7 +23,7 @@
   color: darkgray;
   font-family: 'Open Sans';
   font-weight: 300;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .formTitleLink {
@@ -46,38 +46,46 @@
 }
 
 .signUpFields {
-  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 25px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .inputFields {
   display: flex;
   flex-direction: column;
+  row-gap: 25px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .inputField {
   width: 250px;
 }
 
-.checkBoxText {
+.checkBoxField {
+  margin-bottom: 40px;
   color:darkgray;
 }
 
-.formField {
+.checkBoxTermsLink {
+  color: white;
+  border-bottom: 1px solid #0F52BA;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+
+.submitField {
   margin-bottom: 40px;
 }
 
-.formFieldLabel {
-  display: block;
-  text-transform: uppercase;
-  font-family: 'Open Sans';
-  font-size: 0.9em;
-  color: white;
-}
-
-.formFieldButton {
+.submitButton {
   background-color: #0F52BA;
   color: white;
   border: none;
@@ -90,20 +98,11 @@
   font-weight: 600;
 }
 
-.formFieldLink {
+.submitFieldLink {
   color: white;
   text-decoration: none;
   display: inline-block;
   border-bottom: 1.5px solid #0F52BA;
   padding-bottom: 5px;
   font-family: 'Open Sans';
-}
-
-.formFieldTermsLink {
-  color: white;
-  border-bottom: 1px solid #0F52BA;
-  text-decoration: none;
-  display: inline-block;
-  padding-bottom: 2px;
-  margin-left: 5px;
 }

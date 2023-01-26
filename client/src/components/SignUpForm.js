@@ -24,7 +24,7 @@ const SignUpForm = () => {
     event.preventDefault();
 
     API.post("/signup", formData).catch(function (error) {
-      setError(error.request.response.replace(/['"]/g, ''));
+      setError(error.request.response.replace(/['"]/g, ""));
     });
 
     console.log("The form was submitted with the following data:");
@@ -84,34 +84,30 @@ const SignUpForm = () => {
           }}
         />
       </div>
-      <div className="loginField">
-        {error ? <Alert severity="error">{error}</Alert>: <br/>}
-      </div>
-      <div className="formField">
-        <FormControlLabel
-          control={
-            <Checkbox
-              required
-              onChange={(event) => {
-                handleChange(event);
-              }}
-            />
-          }
-          label={
-            <Typography className="checkBoxText">
-              I agree with all statements in the
-              <a href="null" className="formFieldTermsLink">
-                terms of service
-              </a>
-            </Typography>
-          }
-        />
-      </div>
-      <div className="formField">
-        <button className="formFieldButton" type="submit">
+      <FormControlLabel
+        className="checkBoxField"
+        control={
+          <Checkbox
+            required
+            onChange={(event) => {
+              handleChange(event);
+            }}
+          />
+        }
+        label={
+          <Typography>
+            I agree with all statements in the
+            <a href="null" className="checkBoxTermsLink">
+              terms of service
+            </a>
+          </Typography>
+        }
+      />
+      <div className="submitField">
+        <button className="submitButton" type="submit">
           Sign Up
         </button>
-        <Link to="/login" className="formFieldLink">
+        <Link to="/login" className="submitFieldLink">
           I'm already a member
         </Link>
       </div>
