@@ -19,15 +19,15 @@ function App() {
           paused={false}
           options={{
             height: 70,
-            amplitude: 35,
-            speed: 0.25,
-            points: 4,
+            amplitude: 20,
+            speed: 0.4,
+            points: 5,
           }}
         >
           <defs>
-            <linearGradient id="gradient" gradientTransform="rotate(90)">
-              <stop offset="10%" stopColor="#b0c4de" />
-              <stop offset="90%" stopColor="#76ABDF" />
+            <linearGradient id="gradient" gradientTransform="rotate(70)">
+              <stop offset="10%" stopColor="#d3d3d3" />
+              <stop offset="90%" stopColor="#a9a9a9" />
             </linearGradient>
           </defs>
         </Wave>
