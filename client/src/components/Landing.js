@@ -3,11 +3,11 @@ import { Route, NavLink } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import Wave from "react-wavify";
-import "./App.css";
+import "./Landing.css";
 
 const Landing = () => {
   return (
-    <div className="App">
+    <div className="appLanding">
       <img
         alt="market-plus-plus"
         src={require("../images/marketpluslogo3.png")}

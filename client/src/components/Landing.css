@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-.App {
+.appLanding {
   height: 100vh;
   display: flex;
   flex-direction: column;
