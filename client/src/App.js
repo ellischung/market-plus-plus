@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, NavLink } from "react-router-dom";
-import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 import Wave from "react-wavify";
 import "./App.css";
 
@@ -34,7 +34,8 @@ function App() {
         <div className="appForm">
           <div className="formTitle">
             <NavLink
-              to="/login"
+              exact
+              to="/"
               activeClassName="formTitleLink-active"
               className="formTitleLink"
             >
@@ -42,16 +43,15 @@ function App() {
             </NavLink>{" "}
             or{" "}
             <NavLink
-              exact
-              to="/"
+              to="/signup"
               activeClassName="formTitleLink-active"
               className="formTitleLink"
             >
               Sign Up
             </NavLink>
           </div>
-          <Route exact path="/" component={SignUpForm} />
-          <Route path="/login" component={LoginForm} />
+          <Route exact path="/" component={LoginForm} />
+          <Route path="/signup" component={SignUpForm} />
         </div>
       </div>
     </Router>

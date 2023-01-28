@@ -71,7 +71,7 @@ const LoginForm = () => {
         <button className="submitButton" type="submit">
           Log In
         </button>
-        <Link to="/" className="submitFieldLink">
+        <Link to="/signup" className="submitFieldLink">
           Create an account
         </Link>
       </div>

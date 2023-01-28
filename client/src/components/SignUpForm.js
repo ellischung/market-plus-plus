@@ -130,7 +130,7 @@ const SignUpForm = () => {
         <button className="submitButton" type="submit">
           Sign Up
         </button>
-        <Link to="/login" className="submitFieldLink">
+        <Link to="/" className="submitFieldLink">
           I'm already a member
         </Link>
       </div>
