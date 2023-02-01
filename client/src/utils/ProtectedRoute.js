@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Navigate, useLocation} from "react-router-dom"
 
 const ProtectedRoute = ({children}) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     let location = useLocation();
 
+    // useEffect(() => console.log(user), [user]);
+
     if(!user) {
-        return <Navigate to="/landing" state={{ from: location}} replace />
+        return <Navigate to="/auth" state={{ from: location}} replace />
     }
  return children
 

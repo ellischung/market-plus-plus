@@ -4,6 +4,7 @@ import SignUpForm from "./SignUpForm";
 import Wave from "react-wavify";
 import "./Landing.css";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const API = axios.create({ baseURL: "http://localhost:5000/user" });
@@ -13,6 +14,9 @@ const Landing = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,12 +24,24 @@ const Landing = () => {
     if(!isSignup) {
       API.post("/signin", formData)
          .catch(function (error) {setError(error.request.response.replace(/['"]/g, ""))})
+         .then(({data}) => {
+                              localStorage.setItem('profile', JSON.stringify(data.result));
+                              setUser(JSON.parse(localStorage.getItem('profile')));
+                            })
+         .catch(function (error) {console.log(error)});
     }
 
     if(isSignup) {
       API.post("/signup", formData)
-         .catch(function (error) {setError(error.request.response.replace(/['"]/g, ""))});
+         .catch(function (error) {setError(error.request.response.replace(/['"]/g, ""))})
+         .then(({data}) => {
+                              localStorage.setItem('profile', JSON.stringify(data.result));
+                              setUser(JSON.parse(localStorage.getItem('profile')));
+                            })
+         .catch(function (error) {console.log(error)});
     }
+
+    navigate('/');
 
     console.log("The form was submitted with the following data:");
   };

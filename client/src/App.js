@@ -13,7 +13,7 @@ function App() {
         <Home/>
         </ProtectedRoute>
      }/>
-        <Route path="/landing" element={<Landing/>} />
+        <Route path="/auth" element={<Landing/>} />
     </Routes>
     </BrowserRouter>
   );
