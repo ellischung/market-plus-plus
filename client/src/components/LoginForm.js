@@ -1,36 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { TextField, InputAdornment, IconButton, Alert } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import axios from "axios";
 
-const LoginForm = () => {
-  const API = axios.create({ baseURL: "http://localhost:5000/user" });
-  const initialState = { email: "", password: "" };
-  const [error, setError] = useState("");
-  const [formData, setFormData] = useState(initialState);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    API.post("/signin", formData).catch(function (error) {
-      setError(error.request.response.replace(/['"]/g, ""));
-    });
-
-    console.log("The form was submitted with the following data:");
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError("");
-  };
-
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-
-  const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
+const LoginForm = ({error, handleChange, handleSubmit, signUpMode, handleClickShowPassword, handleMouseDownPassword, showPassword}) => {
   return (
     <form className="formFields" onSubmit={handleSubmit}>
       <div className="inputFields">
@@ -71,9 +44,9 @@ const LoginForm = () => {
         <button className="submitButton" type="submit">
           Log In
         </button>
-        <Link to="/signup" className="submitFieldLink">
+        <div onClick={signUpMode} className="submitFieldLink">
           Create an account
-        </Link>
+        </div>
       </div>
     </form>
   );

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import {
   TextField,
   Checkbox,
@@ -12,39 +11,9 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import axios from "axios";
 
-const SignUpForm = () => {
-  const API = axios.create({ baseURL: "http://localhost:5000/user" });
-  const initialState = { name: "", password: "", email: "" };
-  const [error, setError] = useState("");
-  const [formData, setFormData] = useState(initialState);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    API.post("/signup", formData).catch(function (error) {
-      setError(error.request.response.replace(/['"]/g, ""));
-    });
-
-    console.log("The form was submitted with the following data:");
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError("");
-  };
-
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-
-  const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
-  const handleShowModal = () => setShowModal(true);
-
-  const handleHideModal = () => setShowModal(false);
-
+const SignUpForm = ({error, handleChange, handleSubmit, loginMode, handleClickShowPassword, 
+                    handleMouseDownPassword, handleShowModal, handleHideModal, showPassword, showModal}) => {
   return (
     <form className="formFields" onSubmit={handleSubmit}>
       <div className="signUpFields">
@@ -130,9 +99,9 @@ const SignUpForm = () => {
         <button className="submitButton" type="submit">
           Sign Up
         </button>
-        <Link to="/" className="submitFieldLink">
+        <div onClick={loginMode} className="submitFieldLink">
           I'm already a member
-        </Link>
+        </div>
       </div>
     </form>
   );
