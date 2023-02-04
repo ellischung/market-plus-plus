@@ -7,14 +7,17 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-        <Route path="/" element={
-        <ProtectedRoute>
-        <Home/>
-        </ProtectedRoute>
-     }/>
-        <Route path="/auth" element={<Landing/>} />
-    </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/auth" element={<Landing />} />
+      </Routes>
     </BrowserRouter>
   );
 }

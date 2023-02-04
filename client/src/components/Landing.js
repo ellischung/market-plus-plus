@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import Wave from "react-wavify";
 import "./Landing.css";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
@@ -14,34 +14,42 @@ const Landing = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [loginTitle, setLoginTitle] = useState(true);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const navigate = useNavigate();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(!isSignup) {
+    if (!isSignup) {
       API.post("/signin", formData)
-         .catch(function (error) {setError(error.request.response.replace(/['"]/g, ""))})
-         .then(({data}) => {
-                              localStorage.setItem('profile', JSON.stringify(data.result));
-                              setUser(JSON.parse(localStorage.getItem('profile')));
-                            })
-         .catch(function (error) {console.log(error)});
+        .catch(function (error) {
+          setError(error.request.response.replace(/['"]/g, ""));
+        })
+        .then(({ data }) => {
+          localStorage.setItem("profile", JSON.stringify(data.result));
+          setUser(JSON.parse(localStorage.getItem("profile")));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
-    if(isSignup) {
+    if (isSignup) {
       API.post("/signup", formData)
-         .catch(function (error) {setError(error.request.response.replace(/['"]/g, ""))})
-         .then(({data}) => {
-                              localStorage.setItem('profile', JSON.stringify(data.result));
-                              setUser(JSON.parse(localStorage.getItem('profile')));
-                            })
-         .catch(function (error) {console.log(error)});
+        .catch(function (error) {
+          setError(error.request.response.replace(/['"]/g, ""));
+        })
+        .then(({ data }) => {
+          localStorage.setItem("profile", JSON.stringify(data.result));
+          setUser(JSON.parse(localStorage.getItem("profile")));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
-    navigate('/');
+    navigate("/");
 
     console.log("The form was submitted with the following data:");
   };
@@ -59,9 +67,15 @@ const Landing = () => {
 
   const handleHideModal = () => setShowModal(false);
 
-  const loginMode = () => setIsSignup(false);
-  
-  const signUpMode = () => setIsSignup(true);
+  const loginMode = () => {
+    setIsSignup(false);
+    setLoginTitle(true);
+  };
+
+  const signUpMode = () => {
+    setIsSignup(true);
+    setLoginTitle(false);
+  };
 
   return (
     <div className="appLanding">
@@ -91,24 +105,42 @@ const Landing = () => {
         <div className="formTitle">
           <div
             onClick={loginMode}
-            className="formTitleLink"
+            className={loginTitle ? "formTitleLink-Active" : "formTitleLink"}
           >
             Log In
           </div>{" "}
           or{" "}
           <div
             onClick={signUpMode}
-            className="formTitleLink"
+            className={!loginTitle ? "formTitleLink-Active" : "formTitleLink"}
           >
             Sign Up
           </div>
         </div>
-        {isSignup ? <SignUpForm error={error} handleChange={handleChange} handleSubmit={handleSubmit} loginMode={loginMode}
-                                handleClickShowPassword={handleClickShowPassword} handleMouseDownPassword={handleMouseDownPassword}
-                                handleShowModal={handleShowModal} handleHideModal={handleHideModal} showPassword={showPassword} showModal={showModal}/> 
-                  : <LoginForm error={error} handleChange={handleChange} handleSubmit={handleSubmit} signUpMode={signUpMode}
-                               handleClickShowPassword={handleClickShowPassword} handleMouseDownPassword={handleMouseDownPassword} showPassword={showPassword}/>
-        }
+        {isSignup ? (
+          <SignUpForm
+            error={error}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            loginMode={loginMode}
+            handleClickShowPassword={handleClickShowPassword}
+            handleMouseDownPassword={handleMouseDownPassword}
+            handleShowModal={handleShowModal}
+            handleHideModal={handleHideModal}
+            showPassword={showPassword}
+            showModal={showModal}
+          />
+        ) : (
+          <LoginForm
+            error={error}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            signUpMode={signUpMode}
+            handleClickShowPassword={handleClickShowPassword}
+            handleMouseDownPassword={handleMouseDownPassword}
+            showPassword={showPassword}
+          />
+        )}
       </div>
     </div>
   );

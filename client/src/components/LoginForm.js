@@ -3,7 +3,15 @@ import { TextField, InputAdornment, IconButton, Alert } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const LoginForm = ({error, handleChange, handleSubmit, signUpMode, handleClickShowPassword, handleMouseDownPassword, showPassword}) => {
+const LoginForm = ({
+  error,
+  handleChange,
+  handleSubmit,
+  signUpMode,
+  handleClickShowPassword,
+  handleMouseDownPassword,
+  showPassword,
+}) => {
   return (
     <form className="formFields" onSubmit={handleSubmit}>
       <div className="inputFields">

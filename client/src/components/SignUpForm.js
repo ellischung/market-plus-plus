@@ -12,8 +12,18 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-const SignUpForm = ({error, handleChange, handleSubmit, loginMode, handleClickShowPassword, 
-                    handleMouseDownPassword, handleShowModal, handleHideModal, showPassword, showModal}) => {
+const SignUpForm = ({
+  error,
+  handleChange,
+  handleSubmit,
+  loginMode,
+  handleClickShowPassword,
+  handleMouseDownPassword,
+  handleShowModal,
+  handleHideModal,
+  showPassword,
+  showModal,
+}) => {
   return (
     <form className="formFields" onSubmit={handleSubmit}>
       <div className="signUpFields">

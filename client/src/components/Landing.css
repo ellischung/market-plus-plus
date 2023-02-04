@@ -29,21 +29,23 @@
 
 .formTitleLink {
   color: #56585a;
-  text-decoration: none;
   display: inline-block;
   font-family: 'Open Sans';
   font-size: 1.7em;
   margin: 0 10px;
   padding-bottom: 5px;
+  cursor: pointer;
 }
 
-.formTitleLink:first-child {
-  margin-left: 0;
-}
-
-.formTitleLink-active {
+.formTitleLink-Active {
   color: white;
   border-bottom: 1px solid #0F52BA;
+  display: inline-block;
+  font-family: 'Open Sans';
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+  cursor: pointer;
 }
 
 .signUpFields {
@@ -116,6 +118,7 @@
   font-family: 'Open Sans';
   font-size: 0.8em;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .submitFieldLink {
@@ -125,4 +128,5 @@
   border-bottom: 1.5px solid #0F52BA;
   padding-bottom: 5px;
   font-family: 'Open Sans';
+  cursor: pointer;
 }
