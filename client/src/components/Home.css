@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.content {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: row;
+    max-width: 70%;
+}
+
+/* .filterField {
+    position: fixed;
+} */

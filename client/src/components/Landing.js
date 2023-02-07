@@ -81,7 +81,7 @@ const Landing = () => {
     <div className="appLanding">
       <img
         alt="market-plus-plus"
-        src={require("../images/marketpluslogo3.png")}
+        src={require("../images/marketpluslogo.png")}
         className="appLogo"
       />
       <Wave
