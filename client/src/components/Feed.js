@@ -6,92 +6,92 @@ const Feed = () => {
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
       <img
         style={{maxWidth: "500px", maxHeight: "500px"}}
         alt="temp"
-        src={require("../images/temp.jpeg")}
+        src={require("../images/temp.png")}
       />
     </div>
   );
