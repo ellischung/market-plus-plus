@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.filterContainer {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 15%;
+    top: 15%;
+}
+
+.containerTitle {
+    font-size: 20px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.filterTitle {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.filterOption {
+    font-family: 'Open Sans';
+    letter-spacing: 2px;
+}
+
+.platformLogo {
+    width: 150px;
+}
