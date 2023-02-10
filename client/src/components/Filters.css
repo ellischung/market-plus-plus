@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     left: 15%;
-    top: 15%;
 }
 
 .containerTitle {
@@ -28,4 +27,18 @@
 .filterOption {
     font-family: 'Open Sans';
     letter-spacing: 2px;
+}
+
+.priceRangeContainer {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.priceRangeSeparator {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    margin: 10px;
 }
