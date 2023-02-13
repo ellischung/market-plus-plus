@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ logout }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -27,7 +27,7 @@ const Navbar = () => {
             />
           </div>
           <div className="navBar-Right">
-            <button className="navBar-Button">Followed</button>
+            <button className="navBar-Button" onClick = {logout}>Followed</button>
             <button className="navBar-Button">Liked</button>
             <AccountCircleIcon
               className="avatarIcon"
