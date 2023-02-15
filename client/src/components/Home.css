@@ -10,5 +10,5 @@
     margin-top: 64px;
     display: flex;
     flex-direction: row;
-    max-width: 70%;
+    width: 70%;
 }

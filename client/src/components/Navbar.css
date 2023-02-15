@@ -2,12 +2,12 @@
 
 .appBarLogo {
     position: fixed;
-    left: 50px;
-    top: 13px;
+    left: 2.75em;
+    top: 1.55em;
     background: transparent;
     overflow: hidden;
     z-index: 1;
-    width: 175px;
+    width: 8em;
 }
 
 .navBar {

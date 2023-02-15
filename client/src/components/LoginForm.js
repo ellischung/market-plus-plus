@@ -13,7 +13,7 @@ const LoginForm = ({
   showPassword,
 }) => {
   return (
-    <form className="formFields" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="inputFields">
         <TextField
           className="inputField"
@@ -48,7 +48,7 @@ const LoginForm = ({
         />
         {error ? <Alert severity="error">{error}</Alert> : <br />}
       </div>
-      <div className="submitField">
+      <div>
         <button className="submitButton" type="submit">
           Log In
         </button>

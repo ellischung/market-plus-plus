@@ -83,6 +83,7 @@ const Landing = () => {
         className="appLogo"
       />
       <Wave
+        className="appWave"
         fill="url(#gradient)"
         paused={false}
         options={{

@@ -25,7 +25,7 @@ const SignUpForm = ({
   showModal,
 }) => {
   return (
-    <form className="formFields" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="signUpFields">
         <TextField
           className="inputField"
@@ -105,7 +105,7 @@ const SignUpForm = ({
         </div>
         {error ? <Alert severity="error">{error}</Alert> : <br />}
       </div>
-      <div className="submitField">
+      <div>
         <button className="submitButton" type="submit">
           Sign Up
         </button>
