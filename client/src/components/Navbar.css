@@ -30,8 +30,8 @@
     border-style: none;
     padding: 10px;
     font-family: 'Open Sans';
-    font-size: 18px;
-    letter-spacing: 2px;
+    font-size: 1em;
+    letter-spacing: .1em;
     outline: none;
     border-radius: 25px;
     transition: all .5s ease-in-out;
@@ -41,8 +41,8 @@
 
 .input-search::placeholder {
     font-family: 'Open Sans';
-    font-size: 18px;
-    letter-spacing: 2px;
+    font-size: 1em;
+    letter-spacing: .1em;
     font-weight: 100;
 }
 
@@ -53,8 +53,6 @@
     border-style: none;
     width: 50px;
     height: 50px;
-    font-size: 20px;
-    font-weight: bold;
     outline: none;
     cursor: pointer;
     border-radius: 50%;
@@ -65,7 +63,7 @@
 }
 
 .btn-search:focus ~ .input-search {
-    width: 500px;
+    width: 350px;
     border-radius: 0px;
     background-color: transparent;
     border-bottom:1px solid black;
@@ -73,7 +71,7 @@
 }
 
 .input-search:focus {
-    width: 500px;
+    width: 350px;
     border-radius: 0px;
     background-color: transparent;
     border-bottom:1px solid black;
@@ -86,15 +84,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 1em;
 }
 
 .navBar-Button {
+    background-color: #FFFFFF;
     color: #4B9CD3;
     font-family: 'Open Sans';
-    font-size: 18px;
-    letter-spacing: 2px;
+    font-size: 1em;
+    letter-spacing: .1em;
     font-weight: bold;
-    margin-left: 30px;
+    margin-left: 2em;
     border: 0;
     cursor: pointer;
 }
@@ -105,5 +105,5 @@
 
 .avatarIcon {
     color: #4B9CD3;
-    margin-left: 30px;
+    margin-left: 1em;
 }
