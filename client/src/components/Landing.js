@@ -68,11 +68,13 @@ const Landing = () => {
   const loginMode = () => {
     setIsSignup(false);
     setLoginTitle(true);
+    setError("");
   };
 
   const signUpMode = () => {
     setIsSignup(true);
     setLoginTitle(false);
+    setError("");
   };
 
   return (
