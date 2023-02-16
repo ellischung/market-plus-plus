@@ -101,6 +101,10 @@
   padding: 10px;
 }
 
+.submitField {
+  margin-top: 1em;
+}
+
 .submitButton {
   background-color: #0F52BA;
   color: white;

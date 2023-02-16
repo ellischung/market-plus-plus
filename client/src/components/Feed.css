@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.feedContainer {
+    height: 93vh;
+    margin-top: 64px;
+    overflow-y: scroll;
+}
+
+.itemContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

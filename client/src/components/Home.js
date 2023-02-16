@@ -4,10 +4,10 @@ import { useLocation } from "react-router-dom";
 import Filters from "./Filters";
 import Feed from "./Feed";
 import "./Home.css";
-import decode from 'jwt-decode';
+import decode from "jwt-decode";
 
 const Home = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const location = useLocation();
 
   const logout = () => {
@@ -31,11 +31,9 @@ const Home = () => {
 
   return (
     <div className="container">
-      <Navbar logout={logout}/>
-      <div className="content">
-        <Filters />
-        <Feed />
-      </div>
+      <Navbar logout={logout} />
+      <Filters />
+      <Feed />
     </div>
   );
 };

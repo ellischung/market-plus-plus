@@ -1,32 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .filterContainer {
-    position: fixed;
     display: flex;
     flex-direction: column;
-    left: 15%;
+    margin-right: 2em;
+    margin-top: 64px;
+    margin-bottom: 2em;
 }
 
 .containerTitle {
-    font-size: 0.5em;
+    font-size: 1em;
     font-family: 'Open Sans';
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    letter-spacing: .1em;
+    margin-top: 2em;
 }
 
 .filterTitle {
+    font-size: .8em;
     font-family: 'Open Sans';
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    letter-spacing: .1em;
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
 
 .filterOption {
+    font-size: .8em;
     font-family: 'Open Sans';
-    letter-spacing: 2px;
+    letter-spacing: .1em;
 }
 
 .priceRangeContainer {
@@ -39,6 +41,6 @@
 
 .priceRangeSeparator {
     font-family: 'Open Sans';
-    font-size: 20px;
-    margin: 10px;
+    font-size: 2em;
+    margin: .2em;
 }

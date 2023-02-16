@@ -1,98 +1,99 @@
 import React from "react";
+import "./Feed.css";
 
 const Feed = () => {
   return (
-    <div>
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
-      <img
-        style={{maxWidth: "500px", maxHeight: "500px"}}
-        alt="temp"
-        src={require("../images/temp.png")}
-      />
+    <div className="feedContainer">
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
+      <div className="itemContainer">
+        <img
+          style={{ width: "250px" }}
+          alt="temp"
+          src={require("../images/temp.jpg")}
+        />
+        <text style={{ fontSize: "1.4em" }}>Temp Item</text>
+        <text style={{ fontSize: "1em" }}>sample description</text>
+      </div>
     </div>
   );
 };

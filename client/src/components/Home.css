@@ -2,13 +2,5 @@
 
 .container {
     display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-.content {
-    margin-top: 64px;
-    display: flex;
-    flex-direction: row;
     width: 70%;
 }

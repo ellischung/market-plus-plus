@@ -105,7 +105,7 @@ const SignUpForm = ({
         </div>
         {error ? <Alert severity="error">{error}</Alert> : <br />}
       </div>
-      <div>
+      <div className="submitField">
         <button className="submitButton" type="submit">
           Sign Up
         </button>

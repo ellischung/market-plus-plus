@@ -15,36 +15,76 @@ const Filters = () => {
       <div className="containerTitle">Filters</div>
       <div className="filterTitle">Platforms</div>
       <FormControlLabel
-        control={<Checkbox value="facebook" defaultChecked />}
+        control={
+          <Checkbox
+            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            type="checkbox"
+            value="facebook"
+            defaultChecked
+          />
+        }
         label={<div className="filterOption">Facebook Marketplace</div>}
       />
       <FormControlLabel
-        control={<Checkbox value="ebay" defaultChecked />}
+        control={
+          <Checkbox
+            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            type="checkbox"
+            value="facebook"
+            defaultChecked
+          />
+        }
         label={<div className="filterOption">eBay</div>}
       />
       <FormControlLabel
-        control={<Checkbox value="offerup" defaultChecked />}
+        control={
+          <Checkbox
+            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            type="checkbox"
+            value="facebook"
+            defaultChecked
+          />
+        }
         label={<div className="filterOption">OfferUp</div>}
       />
       <FormControlLabel
-        control={<Checkbox value="craigslist" defaultChecked />}
+        control={
+          <Checkbox
+            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            type="checkbox"
+            value="facebook"
+            defaultChecked
+          />
+        }
         label={<div className="filterOption">craigslist</div>}
       />
       <div className="filterTitle">Sort By</div>
       <RadioGroup defaultValue="newest">
         <FormControlLabel
           value="newest"
-          control={<Radio />}
+          control={
+            <Radio
+              sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            />
+          }
           label={<div className="filterOption">Newest first</div>}
         />
         <FormControlLabel
           value="htol"
-          control={<Radio />}
+          control={
+            <Radio
+              sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            />
+          }
           label={<div className="filterOption">Price - high to low</div>}
         />
         <FormControlLabel
           value="ltoh"
-          control={<Radio />}
+          control={
+            <Radio
+              sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+            />
+          }
           label={<div className="filterOption">Price - low to high</div>}
         />
       </RadioGroup>
