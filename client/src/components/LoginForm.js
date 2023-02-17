@@ -46,7 +46,7 @@ const LoginForm = ({
             ),
           }}
         />
-        {error ? <Alert severity="error">{error}</Alert> : <br />}
+        {error && <Alert className="alertStyle" severity="error">{error}</Alert>}
       </div>
       <div className="submitField">
         <button className="submitButton" type="submit">

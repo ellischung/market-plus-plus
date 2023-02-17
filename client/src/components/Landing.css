@@ -101,6 +101,13 @@
   padding: 10px;
 }
 
+.alertStyle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .submitField {
   margin-top: 1em;
 }
