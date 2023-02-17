@@ -30,10 +30,12 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div className="container">
+    <div>
       <Navbar logout={logout} />
-      <Filters />
-      <Feed />
+      <div className="container">
+        <Filters />
+        <Feed />
+      </div>
     </div>
   );
 };

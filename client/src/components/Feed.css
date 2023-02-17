@@ -2,7 +2,9 @@
 
 .feedContainer {
     height: 93vh;
+    width: 50%;
     margin-top: 64px;
+    padding-left: 2em;
     overflow-y: scroll;
 }
 
