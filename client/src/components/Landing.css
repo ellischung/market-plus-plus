@@ -12,13 +12,13 @@
 }
 
 .appWave {
-  height: 20vh;
+  height: 30vh;
 }
 
 .appForm {
   background-color: #a9a9a9;
   width: 100%;
-  min-height: 45vh;
+  min-height: 35vh;
   text-align: center;
 }
 
