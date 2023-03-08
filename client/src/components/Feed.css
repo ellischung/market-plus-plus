@@ -11,6 +11,7 @@
 .itemContainer {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {

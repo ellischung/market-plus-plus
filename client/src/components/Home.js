@@ -10,7 +10,8 @@ import axios from "axios";
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
-  const [craigslistData, setCraigslistData] = useState({});
+  const [craigslistData, setCraigslistData] = useState([]);
+  const [filters, setFilters] = useState({});
   const location = useLocation();
 
   const API = axios.create({ baseURL: "http://localhost:5000/search" });
@@ -20,13 +21,11 @@ const Home = () => {
 
     API.get(`/craigslistSearch/${input}`)
       .then(({ data }) => {
-        setCraigslistData(JSON.stringify(data));
+        setCraigslistData(Object.entries(data));
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    console.log(craigslistData);
   };
 
   const logout = () => {
@@ -50,14 +49,10 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar
-        setInput={setInput}
-        handleSearch={handleSearch}
-        logout={logout}
-      />
+      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
       <div className="container">
-        <Filters />
-        <Feed craigslistData={craigslistData} />
+        <Filters setFilters={setFilters} />
+        <Feed craigslistData={craigslistData} filters={filters} />
       </div>
     </div>
   );
