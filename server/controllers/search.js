@@ -6,7 +6,7 @@ export const craigslistSearch = async (req, res) => {
 
   // search and price will be fetched from front end
   // const search = req.body.toString();
-  const search = "gaming pc";
+  const search = req.params.id;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
@@ -52,9 +52,9 @@ export const craigslistSearch = async (req, res) => {
     }
   );
 
-  // send results
-  res.send(results);
-
   // close browser
   await browser.close();
+
+  // send results
+  res.send(results);
 };

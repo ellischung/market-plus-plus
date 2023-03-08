@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Navbar.css";
 
-const Navbar = ({ input, setInput, handleSearch, logout }) => {
+const Navbar = ({ setInput, handleSearch, logout }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -24,7 +24,6 @@ const Navbar = ({ input, setInput, handleSearch, logout }) => {
               type="text"
               class="input-search"
               placeholder="Type to Search..."
-              value={input}
               onChange={(e) => setInput(e.target.value)}
             />
           </form>

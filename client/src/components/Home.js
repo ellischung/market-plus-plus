@@ -18,7 +18,7 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    API.get("/craigslistSearch", input)
+    API.get(`/craigslistSearch/${input}`)
       .then(({ data }) => {
         setCraigslistData(JSON.stringify(data));
       })
@@ -51,7 +51,6 @@ const Home = () => {
   return (
     <div>
       <Navbar
-        input={input}
         setInput={setInput}
         handleSearch={handleSearch}
         logout={logout}

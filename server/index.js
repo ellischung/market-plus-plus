@@ -18,7 +18,7 @@ app.use(cors());
 
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
-app.get("/search/craigslistSearch", craigslistSearch);
+app.get("/search/craigslistSearch/:id", craigslistSearch);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");
