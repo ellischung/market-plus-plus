@@ -5,10 +5,29 @@ import Filters from "./Filters";
 import Feed from "./Feed";
 import "./Home.css";
 import decode from "jwt-decode";
+import axios from "axios";
 
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [input, setInput] = useState("");
+  const [craigslistData, setCraigslistData] = useState({});
   const location = useLocation();
+
+  const API = axios.create({ baseURL: "http://localhost:5000/search" });
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    API.get("/craigslistSearch", input)
+      .then(({ data }) => {
+        setCraigslistData(JSON.stringify(data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    console.log(craigslistData);
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -31,10 +50,15 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar logout={logout} />
+      <Navbar
+        input={input}
+        setInput={setInput}
+        handleSearch={handleSearch}
+        logout={logout}
+      />
       <div className="container">
         <Filters />
-        <Feed />
+        <Feed craigslistData={craigslistData} />
       </div>
     </div>
   );

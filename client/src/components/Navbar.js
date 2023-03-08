@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Navbar.css";
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ input, setInput, handleSearch, logout }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -16,7 +16,7 @@ const Navbar = ({ logout }) => {
           src={require("../images/marketpluslogo-nav.png")}
         />
         <Toolbar className="navBar">
-          <div class="navBar-Center">
+          <form class="navBar-Center" onSubmit={handleSearch}>
             <button class="btn-search">
               <SearchIcon />
             </button>
@@ -24,10 +24,14 @@ const Navbar = ({ logout }) => {
               type="text"
               class="input-search"
               placeholder="Type to Search..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
-          </div>
+          </form>
           <div className="navBar-Right">
-            <button className="navBar-Button" onClick = {logout}>Followed</button>
+            <button className="navBar-Button" onClick={logout}>
+              Followed
+            </button>
             <button className="navBar-Button">Liked</button>
             <AccountCircleIcon
               className="avatarIcon"

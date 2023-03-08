@@ -5,7 +5,8 @@ export const craigslistSearch = async (req, res) => {
   const page = await browser.newPage();
 
   // search and price will be fetched from front end
-  const search = "gaming pc"; // temp
+  // const search = req.body.toString();
+  const search = "gaming pc";
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
