@@ -108,12 +108,16 @@ const Filters = () => {
       <TextField label="Ex: New York" />
       <div className="filterTitle">Distance</div>
       <Slider
+        className="filterSlider"
         defaultValue={30}
         valueLabelDisplay="auto"
         step={10}
         min={10}
         max={110}
       />
+      <button className="submitButton" type="submit">
+        Apply Filters
+      </button>
     </div>
   );
 };

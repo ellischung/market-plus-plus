@@ -5,6 +5,7 @@
     width: 50%;
     margin-top: 64px;
     padding-left: 2em;
+    padding-top: 40px;
     overflow-y: scroll;
 }
 
@@ -15,6 +16,12 @@
     height: 400px;
     width: 250px;
     border-style: solid;
+    border-color: #6cbad2;
+}
+
+.itemContainer:hover {
+    transform: scale3d(1.05, 1.05, 1);
+    box-shadow: 0 0 10px #0F52BA;
 }
 
 .cardTitle {
