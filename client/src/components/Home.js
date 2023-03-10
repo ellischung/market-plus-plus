@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Card, CardMedia } from "@mui/material";
 import Navbar from "./Navbar";
 import Filters from "./Filters";
 import Feed from "./Feed";
@@ -32,14 +32,28 @@ const Home = () => {
   const displayResults = (data) => {
     return data.map((listing) => (
       <Grid item>
-        <div
+        <Card
           className="itemContainer"
           onClick={() => window.open(listing.url, "_blank")}
         >
-          <img style={{ width: "250px" }} alt="temp" src={listing.imageUrl} />
-          <Typography style={{ fontSize: "1.4em" }}>{listing.title}</Typography>
-          <Typography style={{ fontSize: "1em" }}>{listing.price}</Typography>
-        </div>
+          <CardMedia
+            component="img"
+            alt="img"
+            height="250"
+            width="250"
+            image={
+              listing.imageUrl
+                ? listing.imageUrl
+                : require("../images/temp.jpg")
+            }
+          />
+          <div className="cardTitle">{listing.title}</div>
+          <br />
+          <div className="cardPrice">
+            {listing.price ? listing.price : "No price listed"}
+          </div>
+          <div className="cardMeta">{listing.dateAndLocation}</div>
+        </Card>
       </Grid>
     ));
   };

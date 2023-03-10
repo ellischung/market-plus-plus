@@ -5,7 +5,6 @@ export const craigslistSearch = async (req, res) => {
   const page = await browser.newPage();
 
   // search and price will be fetched from front end
-  // const search = req.body.toString();
   const search = req.params.id;
   const splitSearch = search.split(" ");
   let searchQuery = "";
@@ -40,11 +39,9 @@ export const craigslistSearch = async (req, res) => {
         properties.title = titleElement.innerText;
         properties.url = titleElement.getAttribute("href");
         const priceElement = row.querySelector(".priceinfo");
-        properties.price = priceElement
-          ? priceElement.innerText
-          : "No price specified";
+        properties.price = priceElement ? priceElement.innerText : "";
         const imageElement = row.querySelector('.swipe [data-index="0"] img');
-        properties.imageUrl = imageElement ? imageElement.src : "No image";
+        properties.imageUrl = imageElement ? imageElement.src : "";
         const metaElement = row.querySelector(".meta");
         properties.dateAndLocation = metaElement.innerText;
         return properties;
