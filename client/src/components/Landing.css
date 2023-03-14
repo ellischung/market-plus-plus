@@ -16,10 +16,18 @@
 }
 
 .appForm {
-  background-color: #a9a9a9;
-  width: 100%;
-  min-height: 35vh;
+  background: transparent;
+  height: 30%;
+  width: 35%;
   text-align: center;
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 20px;
+  border: 2px solid #0fa8ba;
+  border-radius: 15px; 
+  backdrop-filter: blur(15px); */
 }
 
 .formTitle {
@@ -103,13 +111,13 @@
 
 .alertStyle {
   position: fixed;
-  top: 50%;
+  top: 120%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .submitField {
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .submitButton {
@@ -134,4 +142,10 @@
   padding-bottom: 5px;
   font-family: 'Open Sans';
   cursor: pointer;
+}
+
+.emptySpace {
+  background-color: #a9a9a9;
+  height: 35vh;
+  width: 100%;
 }

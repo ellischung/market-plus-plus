@@ -143,6 +143,7 @@ const Landing = () => {
           />
         )}
       </div>
+      <div className="emptySpace"></div>
     </div>
   );
 };
