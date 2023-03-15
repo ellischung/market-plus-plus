@@ -1,20 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .feedContainer {
-    height: 93vh;
-    width: 50%;
-    margin-top: 64px;
-    padding-left: 2em;
-    padding-top: 40px;
-    overflow-y: scroll;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 80%;
 }
 
 .itemContainer {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    height: 400px;
-    width: 250px;
+    height: 25em;
+    width: 15em;
     border-style: solid;
     border-color: #6cbad2;
 }
@@ -44,7 +41,3 @@
     color:  #626262;
     padding: 5px;
 }
-
-/* ::-webkit-scrollbar {
-    display: none;
-} */

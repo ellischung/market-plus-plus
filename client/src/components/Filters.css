@@ -1,11 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+.wrap {
+    position: fixed;
+    top: 25%;
+    left: 1%;
+}
+
 .filterContainer {
     display: flex;
     flex-direction: column;
-    margin-right: 2em;
-    margin-top: 64px;
-    margin-bottom: 2em;
+    height: 70vh;
+    padding: 10px;
+    overflow-y: auto;
+    border: 2px solid #6cbad2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0F52BA;
+}
+
+.filterContainer::-webkit-scrollbar {
+    display: none;
 }
 
 .containerTitle {
@@ -13,7 +26,6 @@
     font-family: 'Open Sans';
     font-weight: bold;
     letter-spacing: .1em;
-    margin-top: 2em;
 }
 
 .filterTitle {

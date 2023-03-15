@@ -39,13 +39,12 @@ const Home = () => {
           <CardMedia
             component="img"
             alt="img"
-            height="250"
-            width="250"
             image={
               listing.imageUrl
                 ? listing.imageUrl
                 : require("../images/temp.jpg")
             }
+            sx={{ height: "15em", width: "15em" }}
           />
           <div className="cardTitle">{listing.title}</div>
           <br />
@@ -78,16 +77,14 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div>
+    <div className="container">
       <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
-      <div className="container">
-        <Filters setFilters={setFilters} />
-        <Feed
-          craigslistData={craigslistData}
-          filters={filters}
-          displayResults={displayResults}
-        />
-      </div>
+      <Filters setFilters={setFilters} />
+      <Feed
+        craigslistData={craigslistData}
+        filters={filters}
+        displayResults={displayResults}
+      />
     </div>
   );
 };
