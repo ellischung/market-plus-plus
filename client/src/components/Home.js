@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Grid, Card, CardMedia } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Navbar from "./Navbar";
 import Filters from "./Filters";
 import Feed from "./Feed";
@@ -48,13 +49,12 @@ const Home = () => {
           <CardMedia
             component="img"
             alt="img"
-            height="250"
-            width="250"
             image={
               listing.imageUrl
                 ? listing.imageUrl
                 : require("../images/temp.jpg")
             }
+            sx={{ height: "15em", width: "15em" }}
           />
           <div className="cardTitle">{listing.title}</div>
           <br />
@@ -62,6 +62,7 @@ const Home = () => {
             {listing.price ? listing.price : "No price listed"}
           </div>
           <div className="cardMeta">{listing.dateAndLocation}</div>
+          <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
         </Card>
       </Grid>
     ));
@@ -87,17 +88,15 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div>
+    <div className="container">
       <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout}/>
-      <div className="container">
-        <Filters setFilters={setFilters} />
-        <Feed
-          craigslistData={craigslistData}
-          ebayData={ebayData}
-          filters={filters}
-          displayResults={displayResults}
-        />
-      </div>
+      <Filters setFilters={setFilters} />
+      <Feed
+        craigslistData={craigslistData}
+        ebayData={ebayData}
+        filters={filters}
+        displayResults={displayResults}
+      />
     </div>
   );
 };

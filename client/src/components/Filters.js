@@ -11,113 +11,119 @@ import "./Filters.css";
 
 const Filters = () => {
   return (
-    <div className="filterContainer">
-      <div className="containerTitle">Filters</div>
-      <div className="filterTitle">Platforms</div>
-      <FormControlLabel
-        control={
-          <Checkbox
-            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
-            type="checkbox"
-            value="facebook"
-            defaultChecked
-          />
-        }
-        label={<div className="filterOption">Facebook Marketplace</div>}
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
-            type="checkbox"
-            value="facebook"
-            defaultChecked
-          />
-        }
-        label={<div className="filterOption">eBay</div>}
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
-            type="checkbox"
-            value="facebook"
-            defaultChecked
-          />
-        }
-        label={<div className="filterOption">OfferUp</div>}
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
-            type="checkbox"
-            value="facebook"
-            defaultChecked
-          />
-        }
-        label={<div className="filterOption">craigslist</div>}
-      />
-      <div className="filterTitle">Sort By</div>
-      <RadioGroup defaultValue="newest">
+    <div className="wrap">
+      <div className="filterContainer">
+        <div className="containerTitle">Filters</div>
+        <div className="filterTitle">Platforms</div>
         <FormControlLabel
-          value="newest"
           control={
-            <Radio
+            <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              type="checkbox"
+              value="facebook"
+              defaultChecked
             />
           }
-          label={<div className="filterOption">Newest first</div>}
+          label={<div className="filterOption">Facebook Marketplace</div>}
         />
         <FormControlLabel
-          value="htol"
           control={
-            <Radio
+            <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              type="checkbox"
+              value="facebook"
+              defaultChecked
             />
           }
-          label={<div className="filterOption">Price - high to low</div>}
+          label={<div className="filterOption">eBay</div>}
         />
         <FormControlLabel
-          value="ltoh"
           control={
-            <Radio
+            <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              type="checkbox"
+              value="facebook"
+              defaultChecked
             />
           }
-          label={<div className="filterOption">Price - low to high</div>}
+          label={<div className="filterOption">OfferUp</div>}
         />
-      </RadioGroup>
-      <div className="filterTitle">Price Range</div>
-      <Box className="priceRangeContainer">
-        <TextField
-          label={<div className="filterOption">Min</div>}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
+        <FormControlLabel
+          control={
+            <Checkbox
+              sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              type="checkbox"
+              value="facebook"
+              defaultChecked
+            />
+          }
+          label={<div className="filterOption">craigslist</div>}
         />
-        <div className="priceRangeSeparator">-</div>
-        <TextField
-          label={<div className="filterOption">Max</div>}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
+        <div className="filterTitle">Sort By</div>
+        <RadioGroup defaultValue="newest">
+          <FormControlLabel
+            value="newest"
+            control={
+              <Radio
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              />
+            }
+            label={<div className="filterOption">Newest first</div>}
+          />
+          <FormControlLabel
+            value="htol"
+            control={
+              <Radio
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              />
+            }
+            label={<div className="filterOption">Price - high to low</div>}
+          />
+          <FormControlLabel
+            value="ltoh"
+            control={
+              <Radio
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              />
+            }
+            label={<div className="filterOption">Price - low to high</div>}
+          />
+        </RadioGroup>
+        <div className="filterTitle">Price Range</div>
+        <Box className="priceRangeContainer">
+          <TextField
+            label={<div className="filterOption">Min</div>}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+          />
+          <div className="priceRangeSeparator">-</div>
+          <TextField
+            label={<div className="filterOption">Max</div>}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+        <div className="filterTitle">Location</div>
+        <TextField label="Ex: New York" />
+        <div className="filterTitle">Distance</div>
+        <Slider
+          className="filterSlider"
+          defaultValue={30}
+          valueLabelDisplay="auto"
+          step={10}
+          min={10}
+          max={110}
         />
-      </Box>
-      <div className="filterTitle">Location</div>
-      <TextField label="Ex: New York" />
-      <div className="filterTitle">Distance</div>
-      <Slider
-        className="filterSlider"
-        defaultValue={30}
-        valueLabelDisplay="auto"
-        step={10}
-        min={10}
-        max={110}
-      />
-      <button className="submitButton" type="submit">
-        Apply Filters
-      </button>
+        <button className="submitButton" type="submit">
+          Apply Filters
+        </button>
+      </div>
     </div>
   );
 };

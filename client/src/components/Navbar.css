@@ -12,7 +12,7 @@
 
 .navBar {
     background-color: white;
-    border-bottom: 1.5px solid #4B9CD3;
+    border-bottom: 3px solid #6cbad2;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -35,7 +35,7 @@
     outline: none;
     border-radius: 25px;
     transition: all .5s ease-in-out;
-    background-color: #4B9CD3;
+    background-color: #6cbad2;
     padding-right: 40px;
 }
 
@@ -91,9 +91,9 @@
     background-color: #FFFFFF;
     color: #4B9CD3;
     font-family: 'Open Sans';
+    font-weight: bold;
     font-size: 1em;
     letter-spacing: .1em;
-    font-weight: bold;
     margin-left: 2em;
     border: 0;
     cursor: pointer;
