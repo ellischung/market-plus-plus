@@ -2,13 +2,17 @@ import React from "react";
 import { Grid } from "@mui/material";
 import "./Feed.css";
 
-const Feed = ({ craigslistData, filters, displayResults }) => {
+const Feed = ({ craigslistData, ebayData, filters, displayResults }) => {
   return (
     <div className="feedContainer">
-      <Grid container spacing={5}>
+      {/* <Grid container spacing={5}>
         {!filters
           ? displayResults(craigslistData)
           : displayResults(craigslistData)}
+      </Grid> */}
+      <Grid container spacing={5}>
+          {displayResults(craigslistData)}
+          {displayResults(ebayData)}
       </Grid>
     </div>
   );

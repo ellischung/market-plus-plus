@@ -12,6 +12,7 @@ const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
   const [craigslistData, setCraigslistData] = useState([]);
+  const [ebayData, setEbayData] = useState([]);
   const [filters, setFilters] = useState({});
   const location = useLocation();
 
@@ -27,6 +28,14 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
+
+    API.get(`/ebaySearch/${input}`)
+      .then(({data}) => {
+        setEbayData(data);
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   };
 
   const displayResults = (data) => {
@@ -79,11 +88,12 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
+      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout}/>
       <div className="container">
         <Filters setFilters={setFilters} />
         <Feed
           craigslistData={craigslistData}
+          ebayData={ebayData}
           filters={filters}
           displayResults={displayResults}
         />
