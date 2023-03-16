@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 // import userRoutes from './routes/users.js'
 import { signin, signup } from "./controllers/user.js";
-import { craigslistSearch } from "./controllers/search.js";
+import { craigslistSearch, ebaySearch } from "./controllers/search.js";
 
 const app = express();
 dotenv.config();
@@ -19,6 +19,7 @@ app.use(cors());
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
 app.get("/search/craigslistSearch/:id", craigslistSearch);
+app.get("/search/ebaySearch/:id", ebaySearch)
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");
