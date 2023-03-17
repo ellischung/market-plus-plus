@@ -1,5 +1,8 @@
 import puppeteer from "puppeteer";
 import fetch from "node-fetch";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const craigslistSearch = async (req, res) => {
   const browser = await puppeteer.launch();
@@ -69,7 +72,7 @@ export const ebaySearch = async (req, res) => {
   let url = "http://svcs.ebay.com/services/search/FindingService/v1";
     url += "?OPERATION-NAME=findItemsByKeywords";
     url += "&SERVICE-VERSION=1.0.0";
-    url += "&SECURITY-APPNAME=EdwardCh-Market-PRD-dcd6d2723-34e542e3";
+    url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
     url += "&GLOBAL-ID=EBAY-US";
     url += "&RESPONSE-DATA-FORMAT=JSON";
     url += "&REST-PAYLOAD";

@@ -2,14 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 
 // import userRoutes from './routes/users.js'
 import { signin, signup } from "./controllers/user.js";
 import { craigslistSearch, ebaySearch } from "./controllers/search.js";
 
 const app = express();
-dotenv.config();
 
 //setting up parser to properly send requests
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
