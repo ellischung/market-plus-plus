@@ -140,7 +140,8 @@ export const facebookSearch = async (req, res) => {
     url: `https://www.facebook.com/marketplace/item/${listing.node.listing.id}`,
     price: listing.node.listing.listing_price.formatted_amount,
     imageUrl: listing.node.listing.primary_listing_photo.image.uri,
-    dateAndLocation: listing.node.listing.location.reverse_geocode.city,
+    dateAndLocation:
+      listing.node.listing.location.reverse_geocode.city_page.display_name,
   }));
 
   // send results back
