@@ -5,7 +5,11 @@ import cors from "cors";
 
 // import userRoutes from './routes/users.js'
 import { signin, signup } from "./controllers/user.js";
-import { craigslistSearch, ebaySearch } from "./controllers/search.js";
+import {
+  craigslistSearch,
+  ebaySearch,
+  facebookSearch,
+} from "./controllers/search.js";
 
 const app = express();
 
@@ -17,7 +21,8 @@ app.use(cors());
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
 app.get("/search/craigslistSearch/:id", craigslistSearch);
-app.get("/search/ebaySearch/:id", ebaySearch)
+app.get("/search/ebaySearch/:id", ebaySearch);
+app.get("/search/facebookSearch/:id", facebookSearch);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");

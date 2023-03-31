@@ -14,6 +14,7 @@ const Home = () => {
   const [input, setInput] = useState("");
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
+  const [facebookData, setFacebookData] = useState([]);
   const [filters, setFilters] = useState({});
   const location = useLocation();
 
@@ -22,6 +23,7 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
+    // search for craigslist
     API.get(`/craigslistSearch/${input}`)
       .then(({ data }) => {
         setCraigslistData(Object.values(data));
@@ -30,13 +32,23 @@ const Home = () => {
         console.log(error);
       });
 
+    // search for ebay
     API.get(`/ebaySearch/${input}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         setEbayData(data);
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error);
+      });
+
+    // search for facebook marketplace
+    API.get(`/facebookSearch/${input}`)
+      .then(({ data }) => {
+        setFacebookData(data);
       })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const displayResults = (data) => {
@@ -89,11 +101,12 @@ const Home = () => {
 
   return (
     <div className="container">
-      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout}/>
+      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
       <Filters setFilters={setFilters} />
       <Feed
         craigslistData={craigslistData}
         ebayData={ebayData}
+        facebookData={facebookData}
         filters={filters}
         displayResults={displayResults}
       />
