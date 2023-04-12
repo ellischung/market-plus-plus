@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .feedContainer {
-    margin-top: 100px;
-    margin-bottom: 100px;
-    width: 80%;
+    margin: 0;
+    padding: 0;
 }
 
 .itemContainer {
@@ -12,13 +11,10 @@
     cursor: pointer;
     height: 25em;
     width: 15em;
-    border-style: solid;
-    border-color: #6cbad2;
 }
 
 .itemContainer:hover {
     transform: scale3d(1.05, 1.05, 1);
-    box-shadow: 0 0 10px #0F52BA;
 }
 
 .cardTitle {

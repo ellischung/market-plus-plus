@@ -1,6 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-.container {
+.container1 {
+    padding-top: 100px;
+}
+
+.filter {
+    width: 15%;
+}
+
+.feed {
+    width: 85%;
+}
+
+.btnContainer {
+    display: none;
+}
+
+.innerContainer {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.filterButton {
+    width: 150px;
+    background-color: #40c705;
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+@media (max-width: 485px) {
+    .btnContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .filter {
+        display: none;
+    }
 }

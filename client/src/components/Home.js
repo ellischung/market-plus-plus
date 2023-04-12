@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Grid, Card, CardMedia } from "@mui/material";
+import { Grid, Card, CardMedia, Container, Box, Divider } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Navbar from "./Navbar";
 import Filters from "./Filters";
 import Feed from "./Feed";
 import decode from "jwt-decode";
 import axios from "axios";
+import LeftModal from "./LeftModal";
 import "./Home.css";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
   const [filters, setFilters] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
 
   const API = axios.create({ baseURL: "http://localhost:5000/search" });
@@ -99,18 +101,43 @@ const Home = () => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="container">
-      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
-      <Filters setFilters={setFilters} />
-      <Feed
-        craigslistData={craigslistData}
-        ebayData={ebayData}
-        facebookData={facebookData}
-        filters={filters}
-        displayResults={displayResults}
-      />
-    </div>
+    <>
+    <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
+      <Container maxWidth="xl" className="container1">
+        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+          <LeftModal isOpen={isModalOpen} onClose={handleCloseModal} />
+          <div className="innerContainer">
+            <div className="btnContainer">
+              <button className="filterButton" onClick={handleOpenModal}>Show Filters</button>
+              <Divider sx={{marginBottom:"10px"}}/>
+            </div>
+            <div className="contentContainer">
+              <div className="filter">
+                <Filters setFilters={setFilters} />
+              </div>
+              <div className="feed">
+                <Feed
+                  craigslistData={craigslistData}
+                  ebayData={ebayData}
+                  facebookData={facebookData}
+                  filters={filters}
+                  displayResults={displayResults}
+                />
+              </div>
+            </div>
+          </div>
+        </Box>
+      </Container>
+    </>
   );
 };
 

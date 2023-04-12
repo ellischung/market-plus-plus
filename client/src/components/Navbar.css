@@ -1,21 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-.appBarLogo {
-    position: fixed;
-    left: 2.75em;
-    top: 1.55em;
-    background: transparent;
-    overflow: hidden;
-    z-index: 1;
-    width: 8em;
+.appBarLogo {  
+    max-height: 75%;
 }
 
 .navBar {
     background-color: white;
-    border-bottom: 3px solid #6cbad2;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
 }
 
 .navBar-Center {
@@ -35,7 +25,7 @@
     outline: none;
     border-radius: 25px;
     transition: all .5s ease-in-out;
-    background-color: #6cbad2;
+    background-color: white;
     padding-right: 40px;
 }
 
@@ -79,17 +69,14 @@
 }
 
 .navBar-Right {
-    position: absolute;
-    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 1em;
 }
 
 .navBar-Button {
     background-color: #FFFFFF;
-    color: #4B9CD3;
+    color: black;
     font-family: 'Open Sans';
     font-weight: bold;
     font-size: 1em;
@@ -104,6 +91,35 @@
 }
 
 .avatarIcon {
-    color: #4B9CD3;
+    color: #40c705;
     margin-left: 1em;
 }
+
+.hamburger {
+    color: black;
+    display: none !important;
+}
+
+@media (max-width: 485px) {
+    .input-search:focus {
+      width: 350px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom: 1px solid black;
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+    .input-search:focus ~ .appBarLogo,
+    .input-search:focus ~ .navBar-Right {
+      display: none;
+    }
+}
+
+@media (max-width: 485px) {
+    .navBar-Button, .avatarIcon {
+        display: none !important;
+    }
+    .hamburger {
+        display: block !important;
+    }
+  }
+

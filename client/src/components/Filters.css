@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .wrap {
-    position: fixed;
-    top: 25%;
-    left: 1%;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .filterContainer {
@@ -12,9 +17,6 @@
     height: 70vh;
     padding: 10px;
     overflow-y: auto;
-    border: 2px solid #6cbad2;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #0F52BA;
 }
 
 .filterContainer::-webkit-scrollbar {
@@ -34,7 +36,6 @@
     font-weight: bold;
     letter-spacing: .1em;
     margin-top: 2em;
-    margin-bottom: 1em;
 }
 
 .filterOption {

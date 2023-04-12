@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
-import Wave from "react-wavify";
+import React, { useState, useEffect, useRef } from "react";
+import { TextField, InputAdornment, IconButton, Alert, Checkbox, Typography, Modal, Box } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import "./Landing.css";
 import axios from "axios";
 
@@ -18,6 +18,22 @@ const Landing = () => {
 
   useEffect(() => setUser(localStorage.getItem("profile")), [user]);
 
+  const myElement = useRef(null);
+
+  const handleSignUp = () => {
+    // Not only changes state to SignUp but also adds classList for animations
+    // Add a class to the element
+    setIsSignup(true);
+    setError("");
+    myElement.current.classList.add("sign-up-mode");
+  }
+
+  const handleSignIn = () => {
+    setIsSignup(false);
+    setError("");
+    myElement.current.classList.remove("sign-up-mode");
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -29,7 +45,7 @@ const Landing = () => {
         .then(({ data }) => {
           localStorage.setItem("profile", JSON.stringify(data));
           window.location.href = "/";
-        })
+        }) 
         .catch(function (error) {
           console.log(error);
         });
@@ -78,73 +94,204 @@ const Landing = () => {
   };
 
   return (
-    <div className="appLanding">
-      <img
-        alt="market-plus-plus"
-        src={require("../images/marketpluslogo.png")}
-        className="appLogo"
-      />
-      <Wave
-        className="appWave"
-        fill="url(#gradient)"
-        paused={false}
-        options={{
-          height: 70,
-          amplitude: 20,
-          speed: 0.4,
-          points: 5,
-        }}
-      >
-        <defs>
-          <linearGradient id="gradient" gradientTransform="rotate(70)">
-            <stop offset="10%" stopColor="#d3d3d3" />
-            <stop offset="90%" stopColor="#a9a9a9" />
-          </linearGradient>
-        </defs>
-      </Wave>
-      <div className="appForm">
-        <div className="formTitle">
-          <div
-            onClick={loginMode}
-            className={loginTitle ? "formTitleLink-Active" : "formTitleLink"}
-          >
-            Log In
-          </div>{" "}
-          or{" "}
-          <div
-            onClick={signUpMode}
-            className={!loginTitle ? "formTitleLink-Active" : "formTitleLink"}
-          >
-            Sign Up
-          </div>
+    <div class="container" ref={myElement}>
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form onSubmit={handleSubmit} class="sign-in-form">
+          <img src={require("../images/marketplace.png")} class="image2" alt="" />
+          <h2 class="title">Sign in</h2>
+          <br/>
+          <TextField
+                    className="input-field"
+                    required
+                    name="email"
+                    label="Email Address"
+                    onChange={(event) => {
+                      handleChange(event);
+                    }}
+                    InputProps={{
+                      sx: {
+                        backgroundColor: "#f0f0f0",
+                        borderRadius: "55px",
+                      },
+                    }}
+          />
+          <br/>
+          <TextField
+                    className="input-field"
+                    required
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    onChange={(event) => {
+                      handleChange(event);
+                    }}
+                    InputProps={{
+                      sx: {
+                        backgroundColor: "#f0f0f0",
+                        borderRadius: "55px",
+                      },
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+            />
+            {error && <><br/> <Alert className="alertStyle" severity="error">{error}</Alert></>}
+            <br/>
+          <button className="btn solid" type="submit">
+                    Log In
+          </button>
+        </form>
+
+        <form onSubmit={handleSubmit} class="sign-up-form">
+          <img src={require("../images/marketplace.png")} class="image2" alt="" />
+          <h2 class="title">Sign up</h2>
+          <br/>
+        <TextField
+          className="input-field"
+          required
+          name="name"
+          label="Full Name"
+          onChange={(event) => {
+            handleChange(event);
+          }}
+          InputProps={{
+            sx: {
+              backgroundColor: "#f0f0f0",
+              borderRadius: "55px",
+            }
+          }}
+        />
+        <br/>
+        <TextField
+          className="input-field"
+          required
+          name="password"
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          onChange={(event) => {
+            handleChange(event);
+          }}
+          InputProps={{
+            sx: {
+              backgroundColor: "#f0f0f0",
+              borderRadius: "55px",
+            },
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <br/>
+        <TextField
+          className="input-field"
+          required
+          name="email"
+          label="Email Address"
+          type="email"
+          onChange={(event) => {
+            handleChange(event);
+          }}
+          InputProps={{
+            sx: {
+              backgroundColor: "#f0f0f0",
+              borderRadius: "55px",
+            }
+          }}
+        />
+        <br/>
+      <div className="inputFields">
+        <div className="checkBoxFields">
+          <Checkbox
+            required
+            onChange={(event) => {
+              handleChange(event);
+            }}
+          />
+          <Typography className="checkBoxText">
+            I agree with all statements in the{" "}
+            <Typography onClick={handleShowModal} className="checkBoxTermsLink">
+              terms of service.
+            </Typography>
+          </Typography>
+          <Modal open={showModal} onClose={handleHideModal}>
+            <Box className="modalBox">
+              <Typography variant="h6" component="h2">
+                Terms & Conditions
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                If you use this site, you are responsible for maintaining the
+                confidentiality of your account and password and for restricting
+                access to your computer, and you agree to accept responsibility
+                for all activities that occur under your account or password.
+                You may not assign or otherwise transfer your account to any
+                other person or entity. You acknowledge that we are not
+                responsible for third party access to your account that results
+                from theft or misappropriation of your account. We reserve the
+                right to refuse or cancel service, terminate accounts, or remove
+                or edit content in our sole discretion.
+              </Typography>
+            </Box>
+          </Modal>
         </div>
-        {isSignup ? (
-          <SignUpForm
-            error={error}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            loginMode={loginMode}
-            handleClickShowPassword={handleClickShowPassword}
-            handleMouseDownPassword={handleMouseDownPassword}
-            handleShowModal={handleShowModal}
-            handleHideModal={handleHideModal}
-            showPassword={showPassword}
-            showModal={showModal}
-          />
-        ) : (
-          <LoginForm
-            error={error}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            signUpMode={signUpMode}
-            handleClickShowPassword={handleClickShowPassword}
-            handleMouseDownPassword={handleMouseDownPassword}
-            showPassword={showPassword}
-          />
-        )}
+        {error && <Alert className="alertStyle" severity="error">{error}</Alert>}
       </div>
-      <div className="emptySpace"></div>
+      <br/>
+      <button className="btn" type="submit">
+          Sign Up
+      </button>
+    </form>
+
+
+
+
+
+
+
+      </div>
     </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>The best shopping experience</h3>
+          <p>
+            All your favorite popular online shopping platforms all in one place. 
+          </p>
+          <button class="btn transparent" id="sign-up-btn" onClick={handleSignUp}>
+            Sign up
+          </button>
+        </div>
+        <img src={require("../images/webshop.svg")} class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>Already signed up ?</h3>
+          <p>
+            Sign in to begin searching!
+          </p>
+          <button class="btn transparent" id="sign-in-btn" onClick={handleSignIn}>
+            Sign in
+          </button>
+        </div>
+        <img src={require("../images/onlineshop.svg")} class="image" alt="" />
+      </div>
+    </div>
+  </div>
   );
 };
 
