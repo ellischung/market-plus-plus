@@ -9,6 +9,7 @@ import {
   craigslistSearch,
   ebaySearch,
   facebookSearch,
+  offerupSearch,
 } from "./controllers/search.js";
 
 const app = express();
@@ -23,6 +24,7 @@ app.post("/user/signup", signup);
 app.get("/search/craigslistSearch/:id", craigslistSearch);
 app.get("/search/ebaySearch/:id", ebaySearch);
 app.get("/search/facebookSearch/:id", facebookSearch);
+app.get("/search/offerupSearch/:id", offerupSearch);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");

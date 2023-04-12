@@ -16,6 +16,7 @@ const Home = () => {
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
+  const [offerupData, setOfferupData] = useState([]);
   const [filters, setFilters] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
@@ -47,6 +48,15 @@ const Home = () => {
     API.get(`/facebookSearch/${input}`)
       .then(({ data }) => {
         setFacebookData(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // search for offerup
+    API.get(`/offerupSearch/${input}`)
+      .then(({ data }) => {
+        setOfferupData(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -129,7 +139,8 @@ const Home = () => {
                   craigslistData={craigslistData}
                   ebayData={ebayData}
                   facebookData={facebookData}
-                  filters={filters}
+                  offerupData={offerupData}
+        filters={filters}
                   displayResults={displayResults}
                 />
               </div>
