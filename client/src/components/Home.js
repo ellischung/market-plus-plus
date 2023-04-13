@@ -86,6 +86,7 @@ const Home = () => {
             {listing.price ? listing.price : "No price listed"}
           </div>
           <div className="cardMeta">{listing.dateAndLocation}</div>
+          <div className="cardMeta">{listing.platform}</div>
           <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
         </Card>
       </Grid>
@@ -121,14 +122,16 @@ const Home = () => {
 
   return (
     <>
-    <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
+      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
       <Container maxWidth="xl" className="container1">
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <LeftModal isOpen={isModalOpen} onClose={handleCloseModal} />
           <div className="innerContainer">
             <div className="btnContainer">
-              <button className="filterButton" onClick={handleOpenModal}>Show Filters</button>
-              <Divider sx={{marginBottom:"10px"}}/>
+              <button className="filterButton" onClick={handleOpenModal}>
+                Show Filters
+              </button>
+              <Divider sx={{ marginBottom: "10px" }} />
             </div>
             <div className="contentContainer">
               <div className="filter">
@@ -140,7 +143,7 @@ const Home = () => {
                   ebayData={ebayData}
                   facebookData={facebookData}
                   offerupData={offerupData}
-        filters={filters}
+                  filters={filters}
                   displayResults={displayResults}
                 />
               </div>

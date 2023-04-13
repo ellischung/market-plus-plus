@@ -48,6 +48,7 @@ export const craigslistSearch = async (req, res) => {
         properties.imageUrl = imageElement ? imageElement.src : "";
         const metaElement = row.querySelector(".meta");
         properties.dateAndLocation = metaElement.innerText;
+        properties.platform = "craigslist";
         return properties;
       });
     }
@@ -87,6 +88,7 @@ export const ebaySearch = async (req, res) => {
     price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
     imageUrl: item.galleryURL[0],
     dateAndLocation: item.location[0],
+    platform: "eBay",
   }));
   res.json(newData);
 };
@@ -139,6 +141,7 @@ export const facebookSearch = async (req, res) => {
     imageUrl: listing.node.listing.primary_listing_photo.image.uri,
     dateAndLocation:
       listing.node.listing.location.reverse_geocode.city_page.display_name,
+    platform: "Facebook Marketplace",
   }));
 
   // send results back
@@ -202,6 +205,7 @@ export const offerupSearch = async (req, res) => {
     price: `$${listing.listing.price}`,
     imageUrl: listing.listing.image.url,
     dateAndLocation: listing.listing.locationName,
+    platform: "OfferUp",
   }));
 
   // send results back
