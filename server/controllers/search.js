@@ -17,10 +17,11 @@ export const craigslistSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  const price = 800; // temp
+  const minPrice = 100; // temp
+  const maxPrice = 800; // temp
 
   // link to search results
-  const url = `https://newyork.craigslist.org/search/sss?max_price=${price}&query=${searchQuery}#search=1~gallery~0~0`;
+  const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&query=${searchQuery}#search=1~gallery~0~0`;
 
   await page.goto(url);
 
@@ -62,35 +63,35 @@ export const craigslistSearch = async (req, res) => {
 };
 
 export const ebaySearch = async (req, res) => {
-  const search = req.params.id;
-  const splitSearch = search.split(" ");
-  let searchQuery = "";
-  for (let i = 0; i < splitSearch.length - 1; i++) {
-    searchQuery += splitSearch[i] + "%20";
-  }
-  searchQuery += splitSearch[splitSearch.length - 1];
-  let url = "http://svcs.ebay.com/services/search/FindingService/v1";
-  url += "?OPERATION-NAME=findItemsByKeywords";
-  url += "&SERVICE-VERSION=1.0.0";
-  url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
-  url += "&GLOBAL-ID=EBAY-US";
-  url += "&RESPONSE-DATA-FORMAT=JSON";
-  url += "&REST-PAYLOAD";
-  url += `&keywords=${searchQuery}`;
-  // url += "&paginationInput.entriesPerPage=3";
-  const response = await fetch(url);
-  const data = await response.json();
-  const extractedData =
-    data.findItemsByKeywordsResponse[0].searchResult[0].item;
-  const newData = extractedData.map((item) => ({
-    title: item.title[0],
-    url: item.viewItemURL[0],
-    price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
-    imageUrl: item.galleryURL[0],
-    dateAndLocation: item.location[0],
-    platform: "eBay",
-  }));
-  res.json(newData);
+  // const search = req.params.id;
+  // const splitSearch = search.split(" ");
+  // let searchQuery = "";
+  // for (let i = 0; i < splitSearch.length - 1; i++) {
+  //   searchQuery += splitSearch[i] + "%20";
+  // }
+  // searchQuery += splitSearch[splitSearch.length - 1];
+  // let url = "http://svcs.ebay.com/services/search/FindingService/v1";
+  // url += "?OPERATION-NAME=findItemsByKeywords";
+  // url += "&SERVICE-VERSION=1.0.0";
+  // url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
+  // url += "&GLOBAL-ID=EBAY-US";
+  // url += "&RESPONSE-DATA-FORMAT=JSON";
+  // url += "&REST-PAYLOAD";
+  // url += `&keywords=${searchQuery}`;
+  // // url += "&paginationInput.entriesPerPage=3";
+  // const response = await fetch(url);
+  // const data = await response.json();
+  // const extractedData =
+  //   data.findItemsByKeywordsResponse[0].searchResult[0].item;
+  // const newData = extractedData.map((item) => ({
+  //   title: item.title[0],
+  //   url: item.viewItemURL[0],
+  //   price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
+  //   imageUrl: item.galleryURL[0],
+  //   dateAndLocation: item.location[0],
+  //   platform: "eBay",
+  // }));
+  // res.json(newData);
 };
 
 export const facebookSearch = async (req, res) => {
@@ -103,6 +104,11 @@ export const facebookSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
+  const distance = 50;
+  const minPrice = 100;
+  const maxPrice = 800;
+  const sortBy = "CREATION_TIME_DESCEND";
+
   // data from graphql api
   const response = await fetch("https://www.facebook.com/api/graphql/", {
     headers: {
@@ -111,20 +117,20 @@ export const facebookSearch = async (req, res) => {
       "content-type": "application/x-www-form-urlencoded",
       "sec-ch-prefers-color-scheme": "light",
       "sec-ch-ua":
-        '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-      "sec-ch-ua-mobile": "?1",
-      "sec-ch-ua-platform": '"Android"',
+        '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"Linux"',
       "sec-fetch-dest": "empty",
       "sec-fetch-mode": "cors",
       "sec-fetch-site": "same-origin",
-      "viewport-width": "716",
+      "viewport-width": "634",
       "x-asbd-id": "198387",
       "x-fb-friendly-name": "CometMarketplaceSearchContentContainerQuery",
-      "x-fb-lsd": "AVrod7bIY4Y",
+      "x-fb-lsd": "AVo4efwbayM",
     },
-    referrer: "https://www.facebook.com/marketplace",
+    referrer: `https://www.facebook.com/marketplace/sanfrancisco/search?minPrice=${minPrice}&maxPrice=${maxPrice}&query=laptop&exact=false`,
     referrerPolicy: "strict-origin-when-cross-origin",
-    body: `av=0&__user=0&__a=1&__dyn=7xeUmwlE7ibwKBWo2vwAxu13wvoKewSwMwNw9G2S0im3y4o0B-q1ew65xO0FE2awt81s8hwGwQw9m1YwBgao6C0Mo5W3S7Udo5q4U2exi4UaEW2C10wNwwwJK2W5olw8Xxm16waCm7-0iK2S3qazo11E2ZwiU8UdUcobUak1xwmo6O&__csr=hO5lbO9OkK8lVSLiGjCiEwytpXjiLUSJfmdCxaHCGXyq-hd8yIzwyAK2bGfgB3UWump5DK9UgBwWG3Ccxm1chHx24U8E-5bzUborU5K6k0aagjw0mxo0RMU03nag6G7tw5xebwCga80ofiwRxGaw5gDDwIw4jwblw50w_xuaDwko0Gq0sy0aawiQ091w7owjoO0ccw4Kg0S63-0wo6W8W80kq0SE2lw2c80Md3E0C15m04lo0smwTw2zE0Yvg6S1Uwq606PUVw1Gm&__req=q&__hs=19446.HYP%3Acomet_loggedout_pkg.2.1..0.0&dpr=2&__ccg=EXCELLENT&__rev=1007215734&__s=xvvawy%3Asim6l5%3A9or5rf&__hsi=7216459443920331969&__comet_req=15&lsd=AVrod7bIY4Y&jazoest=2932&__spin_r=1007215734&__spin_b=trunk&__spin_t=1680212897&qpl_active_flow_ids=931594241&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=CometMarketplaceSearchContentContainerQuery&variables=%7B%22buyLocation%22%3A%7B%22latitude%22%3A37.7793%2C%22longitude%22%3A-122.419%7D%2C%22contextual_data%22%3Anull%2C%22count%22%3A24%2C%22cursor%22%3Anull%2C%22flashSaleEventID%22%3A%22%22%2C%22hasFlashSaleEventID%22%3Afalse%2C%22marketplaceSearchMetadataCardEnabled%22%3Atrue%2C%22params%22%3A%7B%22bqf%22%3A%7B%22callsite%22%3A%22COMMERCE_MKTPLACE_WWW%22%2C%22query%22%3A%22${searchQuery}%22%7D%2C%22browse_request_params%22%3A%7B%22commerce_enable_local_pickup%22%3Atrue%2C%22commerce_enable_shipping%22%3Atrue%2C%22commerce_search_and_rp_available%22%3Atrue%2C%22commerce_search_and_rp_category_id%22%3A%5B%5D%2C%22commerce_search_and_rp_condition%22%3Anull%2C%22commerce_search_and_rp_ctime_days%22%3Anull%2C%22filter_location_latitude%22%3A37.7793%2C%22filter_location_longitude%22%3A-122.419%2C%22filter_price_lower_bound%22%3A0%2C%22filter_price_upper_bound%22%3A214748364700%2C%22filter_radius_km%22%3A65%7D%2C%22custom_request_params%22%3A%7B%22browse_context%22%3Anull%2C%22contextual_filters%22%3A%5B%5D%2C%22referral_code%22%3Anull%2C%22saved_search_strid%22%3Anull%2C%22search_vertical%22%3A%22C2C%22%2C%22seo_url%22%3Anull%2C%22surface%22%3A%22SEARCH%22%2C%22virtual_contextual_filters%22%3A%5B%5D%7D%7D%2C%22savedSearchID%22%3Anull%2C%22savedSearchQuery%22%3A%22${searchQuery}%22%2C%22scale%22%3A2%2C%22shouldIncludePopularSearches%22%3Atrue%2C%22topicPageParams%22%3A%7B%22location_id%22%3A%22sanfrancisco%22%2C%22url%22%3Anull%7D%2C%22vehicleParams%22%3A%22%22%7D&server_timestamps=true&doc_id=5240929566007459`,
+    body: `av=0&__user=0&__a=1&__req=3v&__hs=19461.HYP%3Acomet_loggedout_pkg.2.1..0.0&dpr=1&__ccg=EXCELLENT&__rev=1007316664&__s=ea5ou9%3Aps82fh%3A2mqjgu&__hsi=7221993308227985648&__dyn=7xeUmwlEnwn8K2WnFw9-2i5U4e2O1gyUW3qi2K360CEbo19oe8hw2nVE4W0om782Cw8G1nzUO0n24oaEd82lwv89k2C1Fwc61uwPyovwRwlE-U2exi4UaEW2C10wNwwwJK2W5olw8Xxm16waCm7-0iK2S3qazo11E2ZwiU8UdUcobUak1xwmo6O&__csr=jMxaDlq_9RnrqAASQcyozARXuvnCXCCAGm9hopF6CAFoKEwF-iVpbhqKfWBKi5e9xacyUCmieU-hoG6u5USFE8obF8qxK74ifzo5Si7EC4Ehx24oOcwRw72xGU05Vi0cZaUx008f601hNcFQaDwBgbEAw0PO05F46E7tw9iaDwkUvg7e260dQwe-Uco-E3uw2yU0jnw6Mw8mm04TU0OKGG4A8yU8Euhy04qwdaqh02no3gwhd02VU0qXDw0CIBo2Iw9i055C0XU0g68084hFUgw1tW&__comet_req=15&lsd=AVo4efwbayM&jazoest=21029&__spin_r=1007316664&__spin_b=trunk&__spin_t=1681501350&qpl_active_flow_ids=931594241&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=CometMarketplaceSearchContentContainerQuery&variables=%7B%22buyLocation%22%3A%7B%22latitude%22%3A37.7793%2C%22longitude%22%3A-122.419%7D%2C%22contextual_data%22%3Anull%2C%22count%22%3A24%2C%22cursor%22%3Anull%2C%22flashSaleEventID%22%3A%22%22%2C%22hasFlashSaleEventID%22%3Afalse%2C%22marketplaceSearchMetadataCardEnabled%22%3Atrue%2C%22params%22%3A%7B%22bqf%22%3A%7B%22callsite%22%3A%22COMMERCE_MKTPLACE_WWW%22%2C%22query%22%3A%22laptop%22%7D%2C%22browse_request_params%22%3A%7B%22commerce_enable_local_pickup%22%3Atrue%2C%22commerce_enable_shipping%22%3Atrue%2C%22commerce_search_and_rp_available%22%3Atrue%2C%22commerce_search_and_rp_category_id%22%3A%5B%5D%2C%22commerce_search_and_rp_condition%22%3Anull%2C%22commerce_search_and_rp_ctime_days%22%3Anull%2C%22filter_location_latitude%22%3A37.7793%2C%22filter_location_longitude%22%3A-122.419%2C%22filter_price_lower_bound%22%3A${minPrice}00%2C%22filter_price_upper_bound%22%3A${maxPrice}00%2C%22filter_radius_km%22%3A${distance}%2C%22commerce_search_sort_by%22%3A%22${sortBy}%22%7D%2C%22custom_request_params%22%3A%7B%22browse_context%22%3Anull%2C%22contextual_filters%22%3A%5B%5D%2C%22referral_code%22%3Anull%2C%22saved_search_strid%22%3Anull%2C%22search_vertical%22%3A%22C2C%22%2C%22seo_url%22%3Anull%2C%22surface%22%3A%22SEARCH%22%2C%22virtual_contextual_filters%22%3A%5B%5D%7D%7D%2C%22savedSearchID%22%3Anull%2C%22savedSearchQuery%22%3A%22laptop%22%2C%22scale%22%3A1%2C%22shouldIncludePopularSearches%22%3Atrue%2C%22topicPageParams%22%3A%7B%22location_id%22%3A%22sanfrancisco%22%2C%22url%22%3Anull%7D%7D&server_timestamps=true&doc_id=6190990404299255`,
     method: "POST",
     mode: "cors",
     credentials: "include",
@@ -159,6 +165,8 @@ export const offerupSearch = async (req, res) => {
   searchQuery += splitSearch[splitSearch.length - 1];
 
   const price = 500;
+
+  // store session id and token
 
   // data fetched from offerup graphql api
   const response = await fetch("https://offerup.com/api/graphql", {
