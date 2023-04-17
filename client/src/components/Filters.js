@@ -14,10 +14,8 @@ const Filters = () => {
   return (
     <div className="wrap">
       <div className="filterContainer">
-        <div className="containerTitle">Filters</div>
-        <Divider sx={{marginBottom: "1em"}}/>
         <div className="filterTitle">Platforms</div>
-        <Divider sx={{marginBottom: "1em"}}/>
+        <Divider sx={{ marginBottom: "1em" }} />
         <FormControlLabel
           control={
             <Checkbox
@@ -63,7 +61,7 @@ const Filters = () => {
           label={<div className="filterOption">craigslist</div>}
         />
         <div className="filterTitle">Sort By</div>
-        <Divider sx={{marginBottom: "1em"}}/>
+        <Divider sx={{ marginBottom: "1em" }} />
         <RadioGroup defaultValue="newest">
           <FormControlLabel
             value="newest"
@@ -94,7 +92,7 @@ const Filters = () => {
           />
         </RadioGroup>
         <div className="filterTitle">Price Range</div>
-        <Divider sx={{marginBottom: "1em"}}/>
+        <Divider sx={{ marginBottom: "1em" }} />
         <Box className="priceRangeContainer">
           <TextField
             label={<div className="filterOption">Min</div>}
@@ -115,11 +113,11 @@ const Filters = () => {
           />
         </Box>
         <div className="filterTitle">Location</div>
-        <Divider sx={{marginBottom: "1em"}}/>
+        <Divider sx={{ marginBottom: "1em" }} />
         <TextField label="Ex: New York" />
         <div className="filterTitle">Distance</div>
-        <Divider/>
-        <br/>
+        <Divider />
+        <br />
         <Slider
           className="filterSlider"
           defaultValue={30}

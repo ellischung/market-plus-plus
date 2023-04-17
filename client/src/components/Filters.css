@@ -2,13 +2,13 @@
 
 .wrap {
     position: sticky;
-    top: 0;
+    top: 100px;
     height: 100vh;
     padding-right: 50px;
     overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
+.wrap::-webkit-scrollbar {
     display: none;
 }
 
@@ -22,13 +22,6 @@
 
 .filterContainer::-webkit-scrollbar {
     display: none;
-}
-
-.containerTitle {
-    font-size: 1em;
-    font-family: 'Open Sans';
-    font-weight: bold;
-    letter-spacing: .1em;
 }
 
 .filterTitle {
