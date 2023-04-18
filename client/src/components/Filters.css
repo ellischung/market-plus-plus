@@ -3,7 +3,7 @@
 .wrap {
     position: sticky;
     top: 100px;
-    height: 100vh;
+    height: 70vh;
     padding-right: 50px;
     overflow-y: scroll;
 }
