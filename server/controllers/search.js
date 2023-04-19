@@ -226,6 +226,36 @@ export const offerupSearch = async (req, res) => {
   res.json(results);
 };
 
+export const etsySearch = async (req, res) => {
+  const search = req.params.id;
+  const splitSearch = search.split(" ");
+  let searchQuery = "";
+  for (let i = 0; i < splitSearch.length - 1; i++) {
+    searchQuery += splitSearch[i] + "%20";
+  }
+  searchQuery += splitSearch[splitSearch.length - 1];
+  let url = "https://openapi.etsy.com/v3/application/listings/active";
+  url += `?keywords=${searchQuery}`
+
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type":"application/json",
+      "x-api-key":process.env.X_API_KEY
+    },
+  });
+
+  const data = await response.json();
+  const extractedData = data.results;
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.url,
+    price: `${item.price.amount / item.price.divisor} ${item.price.currency_code}`,
+    platform: "Etsy",
+  }))
+  res.json(newData);
+};
+
+
 const getCoords = async (postalCode) => {
   const apiKey = process.env.API_KEY;
 

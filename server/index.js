@@ -10,6 +10,7 @@ import {
   ebaySearch,
   facebookSearch,
   offerupSearch,
+  etsySearch,
 } from "./controllers/search.js";
 
 const app = express();
@@ -25,6 +26,7 @@ app.get("/search/craigslistSearch/:id", craigslistSearch);
 app.get("/search/ebaySearch/:id", ebaySearch);
 app.get("/search/facebookSearch/:id", facebookSearch);
 app.get("/search/offerupSearch/:id", offerupSearch);
+app.get("/search/etsySearch/:id", etsySearch);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");
