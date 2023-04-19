@@ -21,10 +21,11 @@ export const craigslistSearch = async (req, res) => {
   const distance = 30; // in miles
   const minPrice = 100;
   const maxPrice = 800;
+  const sortBy = "priceasc";
   const postalCode = 10012; // zip
 
   // go to link with filtered search results
-  const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&postal=${postalCode}&query=${searchQuery}&search_distance=${distance}#search=1~gallery~0~0`;
+  const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&postal=${postalCode}&query=${searchQuery}&search_distance=${distance}&sort=${sortBy}#search=1~gallery~0~0`;
   await page.goto(url);
 
   // set viewport to load all content
