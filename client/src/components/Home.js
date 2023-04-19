@@ -17,6 +17,7 @@ const Home = () => {
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
   const [offerupData, setOfferupData] = useState([]);
+  const [etsyData, setEtsyData] = useState([]);
   const [filters, setFilters] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
@@ -57,6 +58,15 @@ const Home = () => {
     API.get(`/offerupSearch/${input}`)
       .then(({ data }) => {
         setOfferupData(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // search for etsy
+    API.get(`/etsySearch/${input}`)
+      .then(({ data }) => {
+        setEtsyData(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -143,6 +153,7 @@ const Home = () => {
                   ebayData={ebayData}
                   facebookData={facebookData}
                   offerupData={offerupData}
+                  etsyData={etsyData}
                   filters={filters}
                   displayResults={displayResults}
                 />

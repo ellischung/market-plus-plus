@@ -7,6 +7,7 @@ const Feed = ({
   ebayData,
   facebookData,
   offerupData,
+  etsyData,
   filters,
   displayResults,
 }) => {
@@ -22,6 +23,7 @@ const Feed = ({
         {displayResults(ebayData)}
         {displayResults(facebookData)}
         {displayResults(offerupData)}
+        {displayResults(etsyData)}
       </Grid>
     </div>
   );
