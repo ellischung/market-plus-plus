@@ -5,24 +5,24 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const craigslistSearch = async (req, res) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-
-  // search and price will be fetched from front end
-  const search = req.params.id;
+  // search input and filter options from frontend
+  // const search = req.params.id;
+  const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
     searchQuery += splitSearch[i] + "%20";
   }
   searchQuery += splitSearch[splitSearch.length - 1];
+  const sortBy = req.query.sortBy;
+  const minPrice = req.query.minPrice;
+  const maxPrice = req.query.maxPrice;
+  const postalCode = req.query.postalCode;
+  const distance = req.query.distance;
 
-  // temp values
-  const distance = 30; // in miles
-  const minPrice = 100;
-  const maxPrice = 800;
-  const sortBy = "priceasc";
-  const postalCode = 10012; // zip
+  // launch headless browser
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
   // go to link with filtered search results
   const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&postal=${postalCode}&query=${searchQuery}&search_distance=${distance}&sort=${sortBy}#search=1~gallery~0~0`;

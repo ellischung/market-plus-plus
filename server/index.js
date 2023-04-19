@@ -22,7 +22,7 @@ app.use(cors());
 
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
-app.get("/search/craigslistSearch/:id", craigslistSearch);
+app.get("/search/craigslistSearch/", craigslistSearch);
 app.get("/search/ebaySearch/:id", ebaySearch);
 app.get("/search/facebookSearch/:id", facebookSearch);
 app.get("/search/offerupSearch/:id", offerupSearch);
