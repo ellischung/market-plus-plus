@@ -30,7 +30,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
         <img
           className="appBarLogo"
           alt="market-plus-plus"
-          src={require("../images/marketplace2.png")}
+          src={require("../images/marketplacelogo3.png")}
         />
         <form class="navBar-Center" onSubmit={handleSearch}>
           <button class="btn-search">

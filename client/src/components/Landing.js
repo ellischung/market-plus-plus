@@ -98,7 +98,7 @@ const Landing = () => {
     <div class="forms-container">
       <div class="signin-signup">
         <form onSubmit={handleSubmit} class="sign-in-form">
-          <img src={require("../images/marketplace.png")} class="image2" alt="" />
+          <img src={require("../images/marketplacev1.png")} class="image2" alt="" />
           <h2 class="title">Sign in</h2>
           <br/>
           <TextField
@@ -151,7 +151,7 @@ const Landing = () => {
         </form>
 
         <form onSubmit={handleSubmit} class="sign-up-form">
-          <img src={require("../images/marketplace.png")} class="image2" alt="" />
+          <img src={require("../images/marketplacev1.png")} class="image2" alt="" />
           <h2 class="title">Sign up</h2>
           <br/>
         <TextField
