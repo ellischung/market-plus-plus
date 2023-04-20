@@ -32,7 +32,7 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="facebook"
+              value="eBay"
               defaultChecked
             />
           }
@@ -43,7 +43,7 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="facebook"
+              value="offerup"
               defaultChecked
             />
           }
@@ -54,11 +54,22 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="facebook"
+              value="craigslist"
               defaultChecked
             />
           }
           label={<div className="filterOption">craigslist</div>}
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              type="checkbox"
+              value="etsy"
+              defaultChecked
+            />
+          }
+          label={<div className="filterOption">Etsy</div>}
         />
         <div className="filterTitle">Sort By</div>
         <Divider sx={{ marginBottom: "1em" }} />
