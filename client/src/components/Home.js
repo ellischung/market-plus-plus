@@ -60,7 +60,16 @@ const Home = () => {
       });
 
     // search for facebook marketplace
-    API.get(`/facebookSearch/${input}`)
+    API.get("/facebookSearch", {
+      params: {
+        input: input,
+        sortBy: sortBy,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        postalCode: postalCode,
+        distance: distance,
+      },
+    })
       .then(({ data }) => {
         setFacebookData(data);
       })
@@ -69,7 +78,16 @@ const Home = () => {
       });
 
     // search for offerup
-    API.get(`/offerupSearch/${input}`)
+    API.get("/offerupSearch", {
+      params: {
+        input: input,
+        sortBy: sortBy,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        postalCode: postalCode,
+        distance: distance,
+      },
+    })
       .then(({ data }) => {
         setOfferupData(data);
       })

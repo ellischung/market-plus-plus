@@ -6,7 +6,6 @@ dotenv.config();
 
 export const craigslistSearch = async (req, res) => {
   // search input and filter options from frontend
-  // const search = req.params.id;
   const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
@@ -14,10 +13,15 @@ export const craigslistSearch = async (req, res) => {
     searchQuery += splitSearch[i] + "%20";
   }
   searchQuery += splitSearch[splitSearch.length - 1];
+
   const sortBy = req.query.sortBy;
+
   const minPrice = req.query.minPrice;
+
   const maxPrice = req.query.maxPrice;
+
   const postalCode = req.query.postalCode;
+
   const distance = req.query.distance;
 
   // launch headless browser
@@ -99,7 +103,7 @@ export const ebaySearch = async (req, res) => {
 
 export const facebookSearch = async (req, res) => {
   // search query and price filter from client
-  const search = req.params.id;
+  const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
@@ -107,14 +111,16 @@ export const facebookSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  // helper method to retrieve coordinates from postal code
-  const { lat, lng } = await getCoords(10012);
-
-  // temp values
-  const distance = 50; // in kilometers, needs to be changed from miles
-  const minPrice = 100;
-  const maxPrice = 800;
   const sortBy = "CREATION_TIME_DESCEND";
+
+  const minPrice = req.query.minPrice;
+
+  const maxPrice = req.query.maxPrice;
+
+  // helper method to retrieve coordinates from postal code
+  const { lat, lng } = await getCoords(req.query.postalCode);
+
+  const distance = Math.floor(req.query.distance * 1.60934); // convert miles to km
 
   // data from graphql api
   const response = await fetch("https://www.facebook.com/api/graphql/", {
@@ -163,7 +169,7 @@ export const facebookSearch = async (req, res) => {
 
 export const offerupSearch = async (req, res) => {
   // search query and price filter from client
-  const search = req.params.id;
+  const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
@@ -171,12 +177,16 @@ export const offerupSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  // temp values
-  const distance = 30;
-  const minPrice = 100;
-  const maxPrice = 800;
   const sortBy = "price";
-  const { lat, lng } = await getCoords(10012);
+
+  const minPrice = req.query.minPrice;
+
+  const maxPrice = req.query.maxPrice;
+
+  // helper method to retrieve coordinates from postal code
+  const { lat, lng } = await getCoords(req.query.postalCode);
+
+  const distance = req.query.distance;
 
   // data fetched from offerup graphql api
   const response = await fetch("https://offerup.com/api/graphql", {
@@ -238,12 +248,12 @@ export const etsySearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
   let url = "https://openapi.etsy.com/v3/application/listings/active";
-  url += `?keywords=${searchQuery}`
+  url += `?keywords=${searchQuery}`;
 
   const response = await fetch(url, {
     headers: {
-      "Content-Type":"application/json",
-      "x-api-key":process.env.X_API_KEY
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
     },
   });
 
@@ -252,12 +262,13 @@ export const etsySearch = async (req, res) => {
   const newData = extractedData.map((item) => ({
     title: item.title,
     url: item.url,
-    price: `${item.price.amount / item.price.divisor} ${item.price.currency_code}`,
+    price: `${item.price.amount / item.price.divisor} ${
+      item.price.currency_code
+    }`,
     platform: "Etsy",
-  }))
+  }));
   res.json(newData);
 };
-
 
 const getCoords = async (postalCode) => {
   const apiKey = process.env.API_KEY;
