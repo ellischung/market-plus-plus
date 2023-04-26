@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TextField, InputAdornment, IconButton, Alert, Checkbox, Typography, Modal, Box } from "@mui/material";
+import webshopv1 from '../images/webshopv1.svg'
+import onlineshopv1 from '../images/onlineshopv1.svg'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import "./Landing.css";
@@ -98,7 +100,7 @@ const Landing = () => {
     <div class="forms-container">
       <div class="signin-signup">
         <form onSubmit={handleSubmit} class="sign-in-form">
-          <img src={require("../images/marketplacev1.png")} class="image2" alt="" />
+          <img src={require("../images/marketplacev5.png")} class="image2" alt="" />
           <h2 class="title">Sign in</h2>
           <br/>
           <TextField
@@ -151,7 +153,7 @@ const Landing = () => {
         </form>
 
         <form onSubmit={handleSubmit} class="sign-up-form">
-          <img src={require("../images/marketplacev1.png")} class="image2" alt="" />
+          <img src={require("../images/marketplacev5.png")} class="image2" alt="" />
           <h2 class="title">Sign up</h2>
           <br/>
         <TextField
@@ -276,7 +278,7 @@ const Landing = () => {
             Sign up
           </button>
         </div>
-        <img src={require("../images/webshop.svg")} class="image" alt="" />
+        <img src={webshopv1} class="image" alt="" />
       </div>
       <div class="panel right-panel">
         <div class="content">
@@ -288,7 +290,7 @@ const Landing = () => {
             Sign in
           </button>
         </div>
-        <img src={require("../images/onlineshop.svg")} class="image" alt="" />
+        <img src={onlineshopv1} class="image" alt="" />
       </div>
     </div>
   </div>
