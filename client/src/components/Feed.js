@@ -13,9 +13,11 @@ const Feed = ({
   checkedFilters,
   displayResults,
 }) => {
-  const numTabs = Object.values(checkedFilters).filter(
-    (checked) => checked
-  ).length;
+  const activeFilterNames = Object.keys(checkedFilters).filter(
+    (filterName) => checkedFilters[filterName]
+  );
+
+  const numTabs = activeFilterNames.length;
 
   const handleTabClick = (index) => {
     if (index >= numTabs) {
@@ -24,7 +26,7 @@ const Feed = ({
     setActiveTab(index);
   };
 
-  const activeFilterName = Object.keys(checkedFilters)[activeTab];
+  const activeFilterName = activeFilterNames[activeTab];
 
   const activeFilterData = {
     "Facebook Marketplace": facebookData,
@@ -49,10 +51,7 @@ const Feed = ({
         {displayResults(etsyData)}
       </Grid> */}
       <div className="feed-tabs">
-        {Object.entries(checkedFilters).map(([filterName, checked], index) => {
-          if (!checked) {
-            return null;
-          }
+        {activeFilterNames.map((filterName, index) => {
           const isActive = index === activeTab;
           return (
             <div
