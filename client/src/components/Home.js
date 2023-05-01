@@ -23,7 +23,14 @@ const Home = () => {
   const [facebookData, setFacebookData] = useState([]);
   const [offerupData, setOfferupData] = useState([]);
   const [etsyData, setEtsyData] = useState([]);
-  const [filters, setFilters] = useState({});
+  const [activeTab, setActiveTab] = useState(0);
+  const [checkedFilters, setCheckedFilters] = useState({
+    "Facebook Marketplace": true,
+    eBay: true,
+    OfferUp: true,
+    craigslist: true,
+    Etsy: true,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
 
@@ -105,6 +112,13 @@ const Home = () => {
       });
   };
 
+  const handleCheckboxChange = (filterName, isChecked) => {
+    setCheckedFilters((prevCheckedFilters) => ({
+      ...prevCheckedFilters,
+      [filterName]: isChecked,
+    }));
+  };
+
   const displayResults = (data) => {
     return data.map((listing) => (
       <Grid item>
@@ -177,7 +191,12 @@ const Home = () => {
             </div>
             <div className="contentContainer">
               <div className="filter">
-                <Filters setFilters={setFilters} />
+                <Filters
+                  checkedFilters={checkedFilters}
+                  onCheckboxChange={handleCheckboxChange}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                />
               </div>
               <div className="feed">
                 <Feed
@@ -186,7 +205,9 @@ const Home = () => {
                   facebookData={facebookData}
                   offerupData={offerupData}
                   etsyData={etsyData}
-                  filters={filters}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  checkedFilters={checkedFilters}
                   displayResults={displayResults}
                 />
               </div>

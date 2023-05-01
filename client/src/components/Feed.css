@@ -37,3 +37,31 @@
     color:  #626262;
     padding: 5px;
 }
+
+.feed-tabs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.feed-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: normal;
+    color: black;
+    background-color: white;
+}
+
+.feed-tab.active {
+    font-weight: bold;
+    border-bottom: 2px solid blue;
+}
+
+.feed-content {
+    background-color: white;
+    padding: 10px 20px;
+}
