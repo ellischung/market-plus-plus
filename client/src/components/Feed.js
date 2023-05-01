@@ -28,13 +28,15 @@ const Feed = ({
 
   const activeFilterName = activeFilterNames[activeTab];
 
-  const activeFilterData = {
-    "Facebook Marketplace": facebookData,
-    eBay: ebayData,
-    OfferUp: offerupData,
-    craigslist: craigslistData,
-    Etsy: etsyData,
-  }[activeFilterName];
+  const activeFilterData = checkedFilters[activeFilterName]
+    ? {
+        "Facebook Marketplace": facebookData,
+        eBay: ebayData,
+        OfferUp: offerupData,
+        craigslist: craigslistData,
+        Etsy: etsyData,
+      }[activeFilterName]
+    : null;
 
   return (
     <div>
@@ -66,7 +68,7 @@ const Feed = ({
       </div>
       <div className="feed-content">
         {/* Render the content for the active tab */}
-        {displayResults(activeFilterData)}
+        {activeFilterData && displayResults(activeFilterData)}
       </div>
     </div>
   );
