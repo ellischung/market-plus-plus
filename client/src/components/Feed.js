@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Grid } from "@mui/material";
+import React from "react";
 import "./Feed.css";
 
 const Feed = ({
@@ -39,19 +38,7 @@ const Feed = ({
     : null;
 
   return (
-    <div>
-      {/* <Grid container spacing={5}>
-        {!filters
-          ? displayResults(craigslistData)
-          : displayResults(craigslistData)}
-      </Grid> */}
-      {/* <Grid container spacing={5}>
-        {displayResults(craigslistData)}
-        {displayResults(ebayData)}
-        {displayResults(facebookData)}
-        {displayResults(offerupData)}
-        {displayResults(etsyData)}
-      </Grid> */}
+    <div className="feed-container">
       <div className="feed-tabs">
         {activeFilterNames.map((filterName, index) => {
           const isActive = index === activeTab;
