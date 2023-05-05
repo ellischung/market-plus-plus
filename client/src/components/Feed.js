@@ -18,12 +18,10 @@ const Feed = ({
 
   const numTabs = activeFilterNames.length;
 
-  const handleTabClick = (index) => {
-    if (index >= numTabs) {
-      return;
-    }
-    setActiveTab(index);
-  };
+  // Set a default value for activeTab
+  if (activeTab === null || activeTab >= numTabs) {
+    setActiveTab(0);
+  }
 
   const activeFilterName = activeFilterNames[activeTab];
 
@@ -45,7 +43,7 @@ const Feed = ({
           return (
             <div
               key={filterName}
-              onClick={() => handleTabClick(index)}
+              onClick={() => setActiveTab(index)}
               className={`feed-tab${isActive ? " active" : ""}`}
             >
               {filterName}
