@@ -35,21 +35,29 @@ const Feed = ({
       }[activeFilterName]
     : null;
 
+  const showTabs =
+    facebookData != "" ||
+    ebayData != "" ||
+    offerupData != "" ||
+    craigslistData != "" ||
+    etsyData != "";
+
   return (
     <div className="feed-container">
       <div className="feed-tabs">
-        {activeFilterNames.map((filterName, index) => {
-          const isActive = index === activeTab;
-          return (
-            <div
-              key={filterName}
-              onClick={() => setActiveTab(index)}
-              className={`feed-tab${isActive ? " active" : ""}`}
-            >
-              {filterName}
-            </div>
-          );
-        })}
+        {showTabs &&
+          activeFilterNames.map((filterName, index) => {
+            const isActive = index === activeTab;
+            return (
+              <div
+                key={filterName}
+                onClick={() => setActiveTab(index)}
+                className={`feed-tab${isActive ? " active" : ""}`}
+              >
+                {filterName}
+              </div>
+            );
+          })}
       </div>
       <div className="feed-content">
         {/* Render the content for the active tab */}
