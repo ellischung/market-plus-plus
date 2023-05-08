@@ -1,8 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-.feedContainer {
-    margin: 0;
-    padding: 0;
+.feed-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.feed-tabs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.feed-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-family: 'Open Sans';
+    letter-spacing: .1em;
+    padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: normal;
+    color: black;
+    position: relative; /* add position relative to allow absolute positioning */
+  }
+  
+.feed-tab::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 0;
+    height: 2px;
+    background-color: #0079FF;
+    transition: transform 0.2s ease, width 0.2s ease;
+}
+    
+.feed-tab:hover::before {
+    transform: translateX(-50%) scaleX(1);
+    width: 100%;
+}
+  
+.feed-tab.active {
+    font-weight: bold;
+}
+
+.feed-tab.active::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(1);
+    width: 100%;
+    height: 2px;
+    background-color: #0079FF;
+}
+
+.feed-content {
+    padding: 10px 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .itemContainer {
@@ -11,6 +73,8 @@
     cursor: pointer;
     height: 25em;
     width: 15em;
+    margin-right: 15px;
+    margin-bottom: 20px;
 }
 
 .itemContainer:hover {

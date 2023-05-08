@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { Divider } from "@mui/material";
@@ -10,19 +10,57 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Slider from "@mui/material/Slider";
 import "./Filters.css";
 
-const Filters = () => {
+const Filters = ({
+  checkedFilters,
+  onCheckboxChange,
+  activeTab,
+  setActiveTab,
+}) => {
+  const handleCheckboxChange = (event) => {
+    const filterName = event.target.name;
+    const isChecked = event.target.checked;
+    onCheckboxChange(filterName, isChecked);
+
+    // If the unchecked tab is currently active, activate the next checked tab
+    if (!isChecked && filterName === Object.keys(checkedFilters)[activeTab]) {
+      const checkedFiltersArray = Object.entries(checkedFilters);
+      const activeFilterIndex = checkedFiltersArray.findIndex(
+        ([filter, isChecked]) => filter === filterName && isChecked
+      );
+
+      // Find the next active tab
+      let nextActiveTab = activeTab;
+      for (let i = activeFilterIndex + 1; i < checkedFiltersArray.length; i++) {
+        if (checkedFiltersArray[i][1]) {
+          nextActiveTab = i;
+          break;
+        }
+      }
+      if (!checkedFiltersArray[nextActiveTab][1]) {
+        for (let i = activeFilterIndex - 1; i >= 0; i--) {
+          if (checkedFiltersArray[i][1]) {
+            nextActiveTab = i;
+            break;
+          }
+        }
+      }
+      setActiveTab(nextActiveTab);
+    }
+  };
+
   return (
     <div className="wrap">
       <div className="filterContainer">
         <div className="filterTitle">Platforms</div>
         <Divider sx={{ marginBottom: "1em" }} />
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="facebook"
-              defaultChecked
+              name="Facebook Marketplace"
+              checked={checkedFilters["Facebook Marketplace"]}
+              onChange={handleCheckboxChange}
             />
           }
           label={<div className="filterOption">Facebook Marketplace</div>}
@@ -32,8 +70,9 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="eBay"
-              defaultChecked
+              name="eBay"
+              checked={checkedFilters.eBay}
+              onChange={handleCheckboxChange}
             />
           }
           label={<div className="filterOption">eBay</div>}
@@ -43,8 +82,9 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="offerup"
-              defaultChecked
+              name="OfferUp"
+              checked={checkedFilters.OfferUp}
+              onChange={handleCheckboxChange}
             />
           }
           label={<div className="filterOption">OfferUp</div>}
@@ -54,8 +94,9 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="craigslist"
-              defaultChecked
+              name="craigslist"
+              checked={checkedFilters.craigslist}
+              onChange={handleCheckboxChange}
             />
           }
           label={<div className="filterOption">craigslist</div>}
@@ -65,12 +106,28 @@ const Filters = () => {
             <Checkbox
               sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               type="checkbox"
-              value="etsy"
-              defaultChecked
+              name="Etsy"
+              checked={checkedFilters.Etsy}
+              onChange={handleCheckboxChange}
             />
           }
           label={<div className="filterOption">Etsy</div>}
-        />
+        /> */}
+        {Object.entries(checkedFilters).map(([filterName, checked], index) => (
+          <FormControlLabel
+            key={filterName}
+            control={
+              <Checkbox
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+                type="checkbox"
+                name={filterName}
+                checked={checked}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label={<div className="filterOption">{filterName}</div>}
+          />
+        ))}
         <div className="filterTitle">Sort By</div>
         <Divider sx={{ marginBottom: "1em" }} />
         <RadioGroup defaultValue="newest">
@@ -137,9 +194,9 @@ const Filters = () => {
           min={10}
           max={110}
         />
-        <button className="submitButton" type="submit">
+        {/* <button className="submitButton" type="submit">
           Apply Filters
-        </button>
+        </button> */}
       </div>
     </div>
   );
