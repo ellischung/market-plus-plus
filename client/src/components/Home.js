@@ -112,11 +112,28 @@ const Home = () => {
       });
   };
 
-  const handleCheckboxChange = (filterName, isChecked) => {
-    setCheckedFilters((prevCheckedFilters) => ({
-      ...prevCheckedFilters,
-      [filterName]: isChecked,
-    }));
+  const onCheckboxChange = (filterName, isChecked) => {
+    const newCheckedFilters = { ...checkedFilters, [filterName]: isChecked };
+
+    if (!isChecked) {
+      const checkedFilterNames = Object.keys(checkedFilters).filter(
+        (name) => checkedFilters[name]
+      );
+
+      const currentActiveFilterName = checkedFilterNames[activeTab];
+      const newCheckedFilterNames = Object.keys(newCheckedFilters).filter(
+        (name) => newCheckedFilters[name]
+      );
+      const newActiveTabIndex = newCheckedFilterNames.indexOf(
+        currentActiveFilterName
+      );
+
+      if (newActiveTabIndex !== -1 && newActiveTabIndex !== activeTab) {
+        setActiveTab(newActiveTabIndex);
+      }
+    }
+
+    setCheckedFilters(newCheckedFilters);
   };
 
   const displayResults = (data) => {
@@ -193,7 +210,7 @@ const Home = () => {
               <div className="filter">
                 <Filters
                   checkedFilters={checkedFilters}
-                  onCheckboxChange={handleCheckboxChange}
+                  onCheckboxChange={onCheckboxChange}
                 />
               </div>
               <div className="feed">
