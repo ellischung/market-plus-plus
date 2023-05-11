@@ -12,18 +12,19 @@ const Feed = ({
   checkedFilters,
   displayResults,
 }) => {
-  const activeFilterNames = Object.keys(checkedFilters).filter(
+  // Grab all of the names of filters that are checked
+  const checkedFilterNames = Object.keys(checkedFilters).filter(
     (filterName) => checkedFilters[filterName]
   );
 
-  const numTabs = activeFilterNames.length;
+  const numTabs = checkedFilterNames.length;
 
   // Set a default value for activeTab
   if (activeTab === null || activeTab >= numTabs) {
     setActiveTab(0);
   }
 
-  const activeFilterName = activeFilterNames[activeTab];
+  const activeFilterName = checkedFilterNames[activeTab];
 
   const activeFilterData = checkedFilters[activeFilterName]
     ? {
@@ -46,7 +47,7 @@ const Feed = ({
     <div className="feed-container">
       <div className="feed-tabs">
         {showTabs &&
-          activeFilterNames.map((filterName, index) => {
+          checkedFilterNames.map((filterName, index) => {
             const isActive = index === activeTab;
             return (
               <div

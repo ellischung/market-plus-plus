@@ -194,8 +194,6 @@ const Home = () => {
                 <Filters
                   checkedFilters={checkedFilters}
                   onCheckboxChange={handleCheckboxChange}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
                 />
               </div>
               <div className="feed">
