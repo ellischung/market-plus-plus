@@ -14,7 +14,18 @@ export const craigslistSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  const sortBy = req.query.sortBy;
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "newest_first":
+      sortBy = "date";
+      break;
+    case "low_to_high":
+      sortBy = "priceasc";
+      break;
+    case "high_to_low":
+      sortBy = "pricedsc";
+      break;
+  }
 
   const minPrice = req.query.minPrice;
 
@@ -111,7 +122,18 @@ export const facebookSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  const sortBy = "CREATION_TIME_DESCEND";
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "newest_first":
+      sortBy = "CREATION_TIME_DESCEND";
+      break;
+    case "low_to_high":
+      sortBy = "PRICE_ASCEND";
+      break;
+    case "high_to_low":
+      sortBy = "PRICE_DESCEND";
+      break;
+  }
 
   const minPrice = req.query.minPrice;
 
@@ -177,7 +199,18 @@ export const offerupSearch = async (req, res) => {
   }
   searchQuery += splitSearch[splitSearch.length - 1];
 
-  const sortBy = "price";
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "newest_first":
+      sortBy = "-posted";
+      break;
+    case "low_to_high":
+      sortBy = "price";
+      break;
+    case "high_to_low":
+      sortBy = "-price";
+      break;
+  }
 
   const minPrice = req.query.minPrice;
 

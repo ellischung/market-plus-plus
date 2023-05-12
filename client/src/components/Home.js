@@ -13,11 +13,18 @@ import "./Home.css";
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
-  const [sortBy, setSortBy] = useState("priceasc");
+  const [sortBy, setSortBy] = useState("newest_first");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(800);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
+  const [filters, setFilters] = useState({
+    sortBy,
+    minPrice,
+    maxPrice,
+    postalCode,
+    distance,
+  });
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
