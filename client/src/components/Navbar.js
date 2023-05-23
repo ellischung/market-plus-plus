@@ -36,7 +36,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
             <div className="navbar-td">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="type to search..."
                 required
                 onChange={(e) => setInput(e.target.value)}
               />
