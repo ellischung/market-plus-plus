@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./Navbar.css";
@@ -32,16 +31,23 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
           alt="market-plus-plus"
           src={require("../images/marketplacev4.png")}
         />
-        <form class="navBar-Center" onSubmit={handleSearch}>
-          <button class="btn-search">
-            <SearchIcon />
-          </button>
-          <input
-            type="text"
-            class="input-search"
-            placeholder="Type to Search..."
-            onChange={(e) => setInput(e.target.value)}
-          />
+        <form onSubmit={handleSearch} className="navbar-search-form">
+          <div className="navbar-tb">
+            <div className="navbar-td">
+              <input
+                type="text"
+                placeholder="Search"
+                required
+                onChange={(e) => setInput(e.target.value)}
+              />
+            </div>
+            <div className="navbar-td navbar-search-cover">
+              <button type="submit">
+                <div className="navbar-search-circle"></div>
+                <span></span>
+              </button>
+            </div>
+          </div>
         </form>
         <div className="navBar-Right">
           <button className="navBar-Button" onClick={logout}>
@@ -49,7 +55,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
           </button>
           <button className="navBar-Button">Liked</button>
           <AccountCircleIcon className="avatarIcon" sx={{ fontSize: "50px" }} />
-          <MenuIcon className="hamburger"/>
+          <MenuIcon className="hamburger" />
         </div>
       </Toolbar>
     </AppBar>
