@@ -16,14 +16,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
     setIsModalOpen(false);
   };
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        height: "8%",
-        zIndex: 1,
-        boxShadow: "1px 1px 6px 1.5px rgba(70, 130, 180)",
-      }}
-    >
+    <AppBar position="fixed" sx={{ height: "8%", boxShadow: "none" }}>
       <Toolbar
         sx={{
           backgroundColor: "white",
