@@ -143,25 +143,14 @@
     align-items: center;
 }
 
-.navBar-Button {
-    background-color: #498bd6;
-    color: black;
-    font-family: 'Open Sans';
-    font-weight: bold;
-    font-size: 1em;
-    letter-spacing: .1em;
-    margin-left: 2em;
-    border: 0;
+.navbar-icon {
+    color: #0079FF;
+    margin-left: 1em;
     cursor: pointer;
 }
 
-.navBar-Button:hover {
+.navbar-icon:hover {
     color: black;
-}
-
-.avatarIcon {
-    color: #0079FF;
-    margin-left: 1em;
 }
 
 .hamburger {

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import MenuIcon from "@mui/icons-material/Menu";
+import Tooltip from "@mui/material/Tooltip";
 import "./Navbar.css";
 
 const Navbar = ({ setInput, handleSearch, logout }) => {
@@ -50,11 +53,20 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
           </div>
         </form>
         <div className="navBar-Right">
-          <button className="navBar-Button" onClick={logout}>
-            Followed
-          </button>
-          <button className="navBar-Button">Liked</button>
-          <AccountCircleIcon className="avatarIcon" sx={{ fontSize: "50px" }} />
+          <Tooltip title="Followed searches">
+            <BookmarkIcon
+              className="navbar-icon"
+              sx={{ fontSize: "35px" }}
+              onClick={logout}
+            />
+          </Tooltip>
+          <Tooltip title="Favorites">
+            <FavoriteIcon className="navbar-icon" sx={{ fontSize: "35px" }} />
+          </Tooltip>
+          <AccountCircleIcon
+            className="navbar-icon"
+            sx={{ fontSize: "50px" }}
+          />
           <MenuIcon className="hamburger" />
         </div>
       </Toolbar>
