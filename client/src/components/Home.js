@@ -165,7 +165,7 @@ const Home = () => {
           <div className="cardPrice">
             {listing.price ? listing.price : "No price listed"}
           </div>
-          <div className="cardMeta">{listing.dateAndLocation}</div>
+          <div className="cardMeta">{listing.location}</div>
           <div className="cardMeta">{listing.platform}</div>
           <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
         </Card>

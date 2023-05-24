@@ -66,7 +66,9 @@ export const craigslistSearch = async (req, res) => {
         const imageElement = row.querySelector('.swipe [data-index="0"] img');
         properties.imageUrl = imageElement ? imageElement.src : "";
         const metaElement = row.querySelector(".meta");
-        properties.dateAndLocation = metaElement.innerText;
+        const startingIndex = metaElement.innerText.indexOf("·") + 1;
+        const location = metaElement.innerText.substring(startingIndex);
+        properties.location = location != "" ? location : "No location listed";
         properties.platform = "craigslist";
         return properties;
       });
@@ -106,7 +108,7 @@ export const ebaySearch = async (req, res) => {
     url: item.viewItemURL[0],
     price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
     imageUrl: item.galleryURL[0],
-    dateAndLocation: item.location[0],
+    location: item.location[0],
     platform: "eBay",
   }));
   res.json(newData);
@@ -180,7 +182,7 @@ export const facebookSearch = async (req, res) => {
     url: `https://www.facebook.com/marketplace/item/${listing.node.listing.id}`,
     price: listing.node.listing.listing_price.formatted_amount,
     imageUrl: listing.node.listing.primary_listing_photo.image.uri,
-    dateAndLocation:
+    location:
       listing.node.listing.location.reverse_geocode.city_page.display_name,
     platform: "Facebook Marketplace",
   }));
@@ -264,7 +266,7 @@ export const offerupSearch = async (req, res) => {
     url: `https://offerup.com/item/detail/${listing.listing.listingId}`,
     price: `$${listing.listing.price}`,
     imageUrl: listing.listing.image.url,
-    dateAndLocation: listing.listing.locationName,
+    location: listing.listing.locationName,
     platform: "OfferUp",
   }));
 
