@@ -16,6 +16,9 @@ export const craigslistSearch = async (req, res) => {
 
   let sortBy = "";
   switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "rel";
+      break;
     case "newest_first":
       sortBy = "date";
       break;
@@ -126,6 +129,9 @@ export const facebookSearch = async (req, res) => {
 
   let sortBy = "";
   switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "BEST_MATCH";
+      break;
     case "newest_first":
       sortBy = "CREATION_TIME_DESCEND";
       break;
@@ -203,6 +209,9 @@ export const offerupSearch = async (req, res) => {
 
   let sortBy = "";
   switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "-posted";
+      break;
     case "newest_first":
       sortBy = "-posted";
       break;

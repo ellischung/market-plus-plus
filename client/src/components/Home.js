@@ -13,7 +13,7 @@ import "./Home.css";
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
-  const [sortBy, setSortBy] = useState("newest_first");
+  const [sortBy, setSortBy] = useState("relevance");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(800);
   const [postalCode, setPostalCode] = useState(10012);
@@ -190,7 +190,10 @@ const Home = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+
+    // for any filter changes
+    input != "" && handleSearch(event);
+  }, [location, sortBy]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -218,6 +221,8 @@ const Home = () => {
                 <Filters
                   checkedFilters={checkedFilters}
                   onCheckboxChange={onCheckboxChange}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
                 />
               </div>
               <div className="feed">

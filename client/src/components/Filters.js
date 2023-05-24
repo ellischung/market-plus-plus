@@ -10,11 +10,15 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Slider from "@mui/material/Slider";
 import "./Filters.css";
 
-const Filters = ({ checkedFilters, onCheckboxChange }) => {
+const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
   const handleCheckboxChange = (event) => {
     const filterName = event.target.name;
     const isChecked = event.target.checked;
     onCheckboxChange(filterName, isChecked);
+  };
+
+  const handleSortByChange = (event) => {
+    setSortBy(event.target.value);
   };
 
   return (
@@ -39,9 +43,18 @@ const Filters = ({ checkedFilters, onCheckboxChange }) => {
         ))}
         <div className="filterTitle">Sort By</div>
         <Divider sx={{ marginBottom: "1em" }} />
-        <RadioGroup defaultValue="newest">
+        <RadioGroup value={sortBy} onChange={handleSortByChange}>
           <FormControlLabel
-            value="newest"
+            value="relevance"
+            control={
+              <Radio
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              />
+            }
+            label={<div className="filterOption">Relevance</div>}
+          />
+          <FormControlLabel
+            value="newest_first"
             control={
               <Radio
                 sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
@@ -50,22 +63,22 @@ const Filters = ({ checkedFilters, onCheckboxChange }) => {
             label={<div className="filterOption">Newest first</div>}
           />
           <FormControlLabel
-            value="htol"
-            control={
-              <Radio
-                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
-              />
-            }
-            label={<div className="filterOption">Price - high to low</div>}
-          />
-          <FormControlLabel
-            value="ltoh"
+            value="low_to_high"
             control={
               <Radio
                 sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
               />
             }
             label={<div className="filterOption">Price - low to high</div>}
+          />
+          <FormControlLabel
+            value="high_to_low"
+            control={
+              <Radio
+                sx={{ padding: 0, marginRight: "0.5em", marginLeft: "0.5em" }}
+              />
+            }
+            label={<div className="filterOption">Price - high to low</div>}
           />
         </RadioGroup>
         <div className="filterTitle">Price Range</div>
