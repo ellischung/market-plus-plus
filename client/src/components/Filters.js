@@ -102,9 +102,9 @@ const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
             }}
           />
         </Box>
-        <div className="filterTitle">Location</div>
+        <div className="filterTitle">Postal Code</div>
         <Divider sx={{ marginBottom: "1em" }} />
-        <TextField label="Ex: New York" />
+        <TextField label="Ex: 10012 (New York, NY)" />
         <div className="filterTitle">Distance</div>
         <Divider />
         <br />
@@ -116,9 +116,6 @@ const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
           min={10}
           max={110}
         />
-        {/* <button className="submitButton" type="submit">
-          Apply Filters
-        </button> */}
       </div>
     </div>
   );
