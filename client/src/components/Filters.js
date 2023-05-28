@@ -19,6 +19,7 @@ const Filters = ({
   setMinPrice,
   maxPrice,
   setMaxPrice,
+  setPostalCode,
 }) => {
   const handleCheckboxChange = (event) => {
     const filterName = event.target.name;
@@ -40,6 +41,11 @@ const Filters = ({
     if (!event.target.value) return;
     const value = parseInt(event.target.value, 10); // convert the string to an integer
     if (minPrice < value) setMaxPrice(value);
+  };
+
+  const handlePostalCodeChange = (event) => {
+    if (/^\d{5}(-\d{4})?$/.test(event.target.value))
+      setPostalCode(event.target.value);
   };
 
   return (
@@ -127,7 +133,10 @@ const Filters = ({
         </Box>
         <div className="filterTitle">Postal Code</div>
         <Divider sx={{ marginBottom: "1em" }} />
-        <TextField label="Ex: 10012 (New York, NY)" />
+        <TextField
+          label="Ex: 10012 (New York, NY)"
+          onChange={handlePostalCodeChange}
+        />
         <div className="filterTitle">Distance</div>
         <Divider />
         <br />

@@ -193,7 +193,7 @@ const Home = () => {
 
     // for any filter changes
     input != "" && handleSearch(event);
-  }, [location, sortBy, minPrice, maxPrice]);
+  }, [location, sortBy, minPrice, maxPrice, postalCode]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -227,6 +227,7 @@ const Home = () => {
                   setMinPrice={setMinPrice}
                   maxPrice={maxPrice}
                   setMaxPrice={setMaxPrice}
+                  setPostalCode={setPostalCode}
                 />
               </div>
               <div className="feed">

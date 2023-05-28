@@ -323,5 +323,7 @@ const getCoords = async (postalCode) => {
 
   const data = await response.json();
 
-  return data.results[0].geometry.location;
+  return data.results[0]
+    ? data.results[0].geometry.location
+    : { lat: 40.7250632, lng: -73.9976946 }; // return default New York, NY 10012 coords if ZIP code invalid;
 };
