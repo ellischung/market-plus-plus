@@ -10,7 +10,16 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Slider from "@mui/material/Slider";
 import "./Filters.css";
 
-const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
+const Filters = ({
+  checkedFilters,
+  onCheckboxChange,
+  sortBy,
+  setSortBy,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+}) => {
   const handleCheckboxChange = (event) => {
     const filterName = event.target.name;
     const isChecked = event.target.checked;
@@ -19,6 +28,18 @@ const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
 
   const handleSortByChange = (event) => {
     setSortBy(event.target.value);
+  };
+
+  const handleMinPriceChange = (event) => {
+    if (!event.target.value || event.target.value == 0) return;
+    const value = parseInt(event.target.value, 10); // convert the string to an integer
+    if (maxPrice > value) setMinPrice(event.target.value);
+  };
+
+  const handleMaxPriceChange = (event) => {
+    if (!event.target.value) return;
+    const value = parseInt(event.target.value, 10); // convert the string to an integer
+    if (minPrice < value) setMaxPrice(value);
   };
 
   return (
@@ -91,6 +112,7 @@ const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
                 <InputAdornment position="start">$</InputAdornment>
               ),
             }}
+            onChange={handleMinPriceChange}
           />
           <div className="priceRangeSeparator">-</div>
           <TextField
@@ -100,6 +122,7 @@ const Filters = ({ checkedFilters, onCheckboxChange, sortBy, setSortBy }) => {
                 <InputAdornment position="start">$</InputAdornment>
               ),
             }}
+            onChange={handleMaxPriceChange}
           />
         </Box>
         <div className="filterTitle">Postal Code</div>
