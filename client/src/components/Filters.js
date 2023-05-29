@@ -20,6 +20,7 @@ const Filters = ({
   maxPrice,
   setMaxPrice,
   setPostalCode,
+  setDistance,
 }) => {
   const handleCheckboxChange = (event) => {
     const filterName = event.target.name;
@@ -46,6 +47,10 @@ const Filters = ({
   const handlePostalCodeChange = (event) => {
     if (/^\d{5}(-\d{4})?$/.test(event.target.value))
       setPostalCode(event.target.value);
+  };
+
+  const handleDistanceChange = (event) => {
+    setDistance(event.target.value);
   };
 
   return (
@@ -147,6 +152,7 @@ const Filters = ({
           step={10}
           min={10}
           max={110}
+          onChange={handleDistanceChange}
         />
       </div>
     </div>
