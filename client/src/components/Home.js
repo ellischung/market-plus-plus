@@ -14,8 +14,8 @@ const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
-  const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(1000000);
+  const [minPrice, setMinPrice] = useState(100);
+  const [maxPrice, setMaxPrice] = useState(800);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
   const [filters, setFilters] = useState({
@@ -46,17 +46,17 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
+    const params = {
+      input: input,
+      sortBy: sortBy,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      postalCode: postalCode,
+      distance: distance,
+    };
+
     // search for craigslist
-    API.get("/craigslistSearch", {
-      params: {
-        input: input,
-        sortBy: sortBy,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        postalCode: postalCode,
-        distance: distance,
-      },
-    })
+    API.get("/craigslistSearch", { params })
       .then(({ data }) => {
         setCraigslistData(Object.values(data));
       })
@@ -65,7 +65,7 @@ const Home = () => {
       });
 
     // search for ebay
-    API.get(`/ebaySearch/${input}`)
+    API.get("/ebaySearch", { params })
       .then(({ data }) => {
         setEbayData(data);
       })
@@ -74,16 +74,7 @@ const Home = () => {
       });
 
     // search for facebook marketplace
-    API.get("/facebookSearch", {
-      params: {
-        input: input,
-        sortBy: sortBy,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        postalCode: postalCode,
-        distance: distance,
-      },
-    })
+    API.get("/facebookSearch", { params })
       .then(({ data }) => {
         setFacebookData(data);
       })
@@ -92,16 +83,7 @@ const Home = () => {
       });
 
     // search for offerup
-    API.get("/offerupSearch", {
-      params: {
-        input: input,
-        sortBy: sortBy,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        postalCode: postalCode,
-        distance: distance,
-      },
-    })
+    API.get("/offerupSearch", { params })
       .then(({ data }) => {
         setOfferupData(data);
       })
@@ -110,7 +92,7 @@ const Home = () => {
       });
 
     // search for etsy
-    API.get(`/etsySearch/${input}`)
+    API.get("/etsySearch", { params })
       .then(({ data }) => {
         setEtsyData(data);
       })

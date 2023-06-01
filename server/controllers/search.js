@@ -86,13 +86,38 @@ export const craigslistSearch = async (req, res) => {
 };
 
 export const ebaySearch = async (req, res) => {
-  const search = req.params.id;
+  const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
     searchQuery += splitSearch[i] + "%20";
   }
   searchQuery += splitSearch[splitSearch.length - 1];
+
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "BestMatch";
+      break;
+    case "newest_first":
+      sortBy = "StartTimeNewest";
+      break;
+    case "low_to_high":
+      sortBy = "PricePlusShippingLowest";
+      break;
+    case "high_to_low":
+      sortBy = "PricePlusShippingHighest";
+      break;
+  }
+
+  const minPrice = req.query.minPrice;
+
+  const maxPrice = req.query.maxPrice;
+
+  const postalCode = req.query.postalCode;
+
+  const distance = req.query.distance;
+
   let url = "http://svcs.ebay.com/services/search/FindingService/v1";
   url += "?OPERATION-NAME=findItemsByKeywords";
   url += "&SERVICE-VERSION=1.0.0";
@@ -101,6 +126,11 @@ export const ebaySearch = async (req, res) => {
   url += "&RESPONSE-DATA-FORMAT=JSON";
   url += "&REST-PAYLOAD";
   url += `&keywords=${searchQuery}`;
+  url += `&buyerPostalCode=${postalCode}`;
+  url += `&itemFilter(0).name=MaxDistance&itemFilter(0).value=${distance}`;
+  url += `&itemFilter(1).name=MinPrice&itemFilter(1).value=${minPrice}`;
+  url += `&itemFilter(2).name=MaxPrice&itemFilter(2).value=${maxPrice}`;
+  url += `&sortOrder=${sortBy}`;
   // url += "&paginationInput.entriesPerPage=3";
   const response = await fetch(url);
   const data = await response.json();
@@ -284,15 +314,40 @@ export const offerupSearch = async (req, res) => {
 };
 
 export const etsySearch = async (req, res) => {
-  const search = req.params.id;
+  const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
   for (let i = 0; i < splitSearch.length - 1; i++) {
     searchQuery += splitSearch[i] + "%20";
   }
   searchQuery += splitSearch[splitSearch.length - 1];
+
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "score";
+      break;
+    case "newest_first":
+      sortBy = "created";
+      break;
+    case "low_to_high":
+      sortBy = "price&sort_order=asc";
+      break;
+    case "high_to_low":
+      sortBy = "price&sort_order=desc";
+      break;
+  }
+
+  const minPrice = req.query.minPrice;
+
+  const maxPrice = req.query.maxPrice;
+
   let url = "https://openapi.etsy.com/v3/application/listings/active";
   url += `?keywords=${searchQuery}`;
+  url += `&sort_on=${sortBy}`;
+  url += `&min_price=${minPrice}`;
+  url += `&max_price=${maxPrice}`;
+  url += "&limit=50";
 
   const response = await fetch(url, {
     headers: {
@@ -303,6 +358,8 @@ export const etsySearch = async (req, res) => {
 
   const data = await response.json();
   const extractedData = data.results;
+
+  // Array for main res data
   const newData = extractedData.map((item) => ({
     title: item.title,
     url: item.url,
@@ -311,7 +368,37 @@ export const etsySearch = async (req, res) => {
     }`,
     platform: "Etsy",
   }));
-  res.json(newData);
+
+  // Array for listingids to use for second API call
+  const listingIds = extractedData.map((item) => item.listing_id);
+
+  const listingIdsStr = listingIds.join(',');
+
+  // Insert the string into the URL
+  const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
+
+  const imgResponse = await fetch(imageUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
+
+  // extract and map an array of just listing images from second API call
+  const imgData = await imgResponse.json();
+  const extractedImgData = imgData.results;
+  const newImgData = extractedImgData.map((item) => item.images[0].url_fullxfull);
+
+  // map new array that combines newData and the listing images
+  const newArray = newData.map((item, index) => {
+    return {
+      ...item,
+      imageUrl: newImgData[index]
+    }
+  })
+  
+
+  res.json(newArray);
 };
 
 const getCoords = async (postalCode) => {

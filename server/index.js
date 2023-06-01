@@ -23,10 +23,10 @@ app.use(cors());
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
 app.get("/search/craigslistSearch", craigslistSearch);
-app.get("/search/ebaySearch/:id", ebaySearch);
+app.get("/search/ebaySearch", ebaySearch);
 app.get("/search/facebookSearch", facebookSearch);
 app.get("/search/offerupSearch", offerupSearch);
-app.get("/search/etsySearch/:id", etsySearch);
+app.get("/search/etsySearch", etsySearch);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");
