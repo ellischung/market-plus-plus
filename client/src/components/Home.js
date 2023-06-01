@@ -16,8 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(800);
-  const [postalCode, setPostalCode] = useState(98105);
-  //10012
+  const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
   const [filters, setFilters] = useState({
     sortBy,
@@ -176,7 +175,7 @@ const Home = () => {
 
     // for any filter changes
     input != "" && handleSearch(event);
-  }, [location, sortBy]);
+  }, [location, sortBy, minPrice, maxPrice, postalCode, distance]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -206,6 +205,12 @@ const Home = () => {
                   onCheckboxChange={onCheckboxChange}
                   sortBy={sortBy}
                   setSortBy={setSortBy}
+                  minPrice={minPrice}
+                  setMinPrice={setMinPrice}
+                  maxPrice={maxPrice}
+                  setMaxPrice={setMaxPrice}
+                  setPostalCode={setPostalCode}
+                  setDistance={setDistance}
                 />
               </div>
               <div className="feed">
