@@ -86,65 +86,59 @@ export const craigslistSearch = async (req, res) => {
 };
 
 export const ebaySearch = async (req, res) => {
-  const search = req.query.input;
-  const splitSearch = search.split(" ");
-  let searchQuery = "";
-  for (let i = 0; i < splitSearch.length - 1; i++) {
-    searchQuery += splitSearch[i] + "%20";
-  }
-  searchQuery += splitSearch[splitSearch.length - 1];
-
-  let sortBy = "";
-  switch (req.query.sortBy) {
-    case "relevance":
-      sortBy = "BestMatch";
-      break;
-    case "newest_first":
-      sortBy = "StartTimeNewest";
-      break;
-    case "low_to_high":
-      sortBy = "PricePlusShippingLowest";
-      break;
-    case "high_to_low":
-      sortBy = "PricePlusShippingHighest";
-      break;
-  }
-
-  const minPrice = req.query.minPrice;
-
-  const maxPrice = req.query.maxPrice;
-
-  const postalCode = req.query.postalCode;
-
-  const distance = req.query.distance;
-
-  let url = "http://svcs.ebay.com/services/search/FindingService/v1";
-  url += "?OPERATION-NAME=findItemsByKeywords";
-  url += "&SERVICE-VERSION=1.0.0";
-  url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
-  url += "&GLOBAL-ID=EBAY-US";
-  url += "&RESPONSE-DATA-FORMAT=JSON";
-  url += "&REST-PAYLOAD";
-  url += `&keywords=${searchQuery}`;
-  url += `&buyerPostalCode=${postalCode}`;
-  url += `&itemFilter(0).name=MaxDistance&itemFilter(0).value=${distance}`;
-  url += `&itemFilter(1).name=MinPrice&itemFilter(1).value=${minPrice}`;
-  url += `&itemFilter(2).name=MaxPrice&itemFilter(2).value=${maxPrice}`;
-  url += `&sortOrder=${sortBy}`;
-  // url += "&paginationInput.entriesPerPage=3";
-  const response = await fetch(url);
-  const data = await response.json();
-  const extractedData =
-    data.findItemsByKeywordsResponse[0].searchResult[0].item;
-  const newData = extractedData.map((item) => ({
-    title: item.title[0],
-    url: item.viewItemURL[0],
-    price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
-    imageUrl: item.galleryURL[0],
-    location: item.location[0],
-    platform: "eBay",
-  }));
-  res.json(newData);
+  // const search = req.query.input;
+  // const splitSearch = search.split(" ");
+  // let searchQuery = "";
+  // for (let i = 0; i < splitSearch.length - 1; i++) {
+  //   searchQuery += splitSearch[i] + "%20";
+  // }
+  // searchQuery += splitSearch[splitSearch.length - 1];
+  // let sortBy = "";
+  // switch (req.query.sortBy) {
+  //   case "relevance":
+  //     sortBy = "BestMatch";
+  //     break;
+  //   case "newest_first":
+  //     sortBy = "StartTimeNewest";
+  //     break;
+  //   case "low_to_high":
+  //     sortBy = "PricePlusShippingLowest";
+  //     break;
+  //   case "high_to_low":
+  //     sortBy = "PricePlusShippingHighest";
+  //     break;
+  // }
+  // const minPrice = req.query.minPrice;
+  // const maxPrice = req.query.maxPrice;
+  // const postalCode = req.query.postalCode;
+  // const distance = req.query.distance;
+  // let url = "http://svcs.ebay.com/services/search/FindingService/v1";
+  // url += "?OPERATION-NAME=findItemsByKeywords";
+  // url += "&SERVICE-VERSION=1.0.0";
+  // url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
+  // url += "&GLOBAL-ID=EBAY-US";
+  // url += "&RESPONSE-DATA-FORMAT=JSON";
+  // url += "&REST-PAYLOAD";
+  // url += `&keywords=${searchQuery}`;
+  // url += `&buyerPostalCode=${postalCode}`;
+  // url += `&itemFilter(0).name=MaxDistance&itemFilter(0).value=${distance}`;
+  // url += `&itemFilter(1).name=MinPrice&itemFilter(1).value=${minPrice}`;
+  // url += `&itemFilter(2).name=MaxPrice&itemFilter(2).value=${maxPrice}`;
+  // url += `&sortOrder=${sortBy}`;
+  // // url += "&paginationInput.entriesPerPage=3";
+  // const response = await fetch(url);
+  // const data = await response.json();
+  // const extractedData =
+  //   data.findItemsByKeywordsResponse[0].searchResult[0].item;
+  // const newData = extractedData.map((item) => ({
+  //   title: item.title[0],
+  //   url: item.viewItemURL[0],
+  //   price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
+  //   imageUrl: item.galleryURL[0],
+  //   location: item.location[0],
+  //   platform: "eBay",
+  // }));
+  // res.json(newData);
 };
 
 export const facebookSearch = async (req, res) => {
@@ -372,7 +366,7 @@ export const etsySearch = async (req, res) => {
   // Array for listingids to use for second API call
   const listingIds = extractedData.map((item) => item.listing_id);
 
-  const listingIdsStr = listingIds.join(',');
+  const listingIdsStr = listingIds.join(",");
 
   // Insert the string into the URL
   const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
@@ -387,16 +381,17 @@ export const etsySearch = async (req, res) => {
   // extract and map an array of just listing images from second API call
   const imgData = await imgResponse.json();
   const extractedImgData = imgData.results;
-  const newImgData = extractedImgData.map((item) => item.images[0].url_fullxfull);
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
 
   // map new array that combines newData and the listing images
   const newArray = newData.map((item, index) => {
     return {
       ...item,
-      imageUrl: newImgData[index]
-    }
-  })
-  
+      imageUrl: newImgData[index],
+    };
+  });
 
   res.json(newArray);
 };

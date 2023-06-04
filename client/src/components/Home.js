@@ -230,6 +230,9 @@ const Home = () => {
           </div>
         </Box>
       </Container>
+      <footer className="home-footer">
+        <p>© 2023 market++</p>
+      </footer>
     </>
   );
 };

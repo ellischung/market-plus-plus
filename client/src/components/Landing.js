@@ -1,7 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { TextField, InputAdornment, IconButton, Alert, Checkbox, Typography, Modal, Box } from "@mui/material";
-import webshopv1 from '../images/webshopv1.svg'
-import onlineshopv1 from '../images/onlineshopv1.svg'
+import {
+  TextField,
+  InputAdornment,
+  IconButton,
+  Alert,
+  Checkbox,
+  Typography,
+  Modal,
+  Box,
+} from "@mui/material";
+import webshopv1 from "../images/webshopv1.svg";
+import onlineshopv1 from "../images/onlineshopv1.svg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import "./Landing.css";
@@ -28,13 +37,13 @@ const Landing = () => {
     setIsSignup(true);
     setError("");
     myElement.current.classList.add("sign-up-mode");
-  }
+  };
 
   const handleSignIn = () => {
     setIsSignup(false);
     setError("");
     myElement.current.classList.remove("sign-up-mode");
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +56,7 @@ const Landing = () => {
         .then(({ data }) => {
           localStorage.setItem("profile", JSON.stringify(data));
           window.location.href = "/";
-        }) 
+        })
         .catch(function (error) {
           console.log(error);
         });
@@ -97,203 +106,237 @@ const Landing = () => {
 
   return (
     <div class="container" ref={myElement}>
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form onSubmit={handleSubmit} class="sign-in-form">
-          <img src={require("../images/marketplacev5.png")} class="image2" alt="" />
-          <h2 class="title">Sign in</h2>
-          <br/>
-          <TextField
-                    className="input-field"
-                    required
-                    name="email"
-                    label="Email Address"
-                    onChange={(event) => {
-                      handleChange(event);
-                    }}
-                    InputProps={{
-                      sx: {
-                        backgroundColor: "#f0f0f0",
-                        borderRadius: "55px",
-                      },
-                    }}
-          />
-          <br/>
-          <TextField
-                    className="input-field"
-                    required
-                    name="password"
-                    label="Password"
-                    type={showPassword ? "text" : "password"}
-                    onChange={(event) => {
-                      handleChange(event);
-                    }}
-                    InputProps={{
-                      sx: {
-                        backgroundColor: "#f0f0f0",
-                        borderRadius: "55px",
-                      },
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form onSubmit={handleSubmit} class="sign-in-form">
+            <img
+              src={require("../images/marketplacev5.png")}
+              class="image2"
+              alt=""
             />
-            {error && <><br/> <Alert className="alertStyle" severity="error">{error}</Alert></>}
-            <br/>
-          <button className="btn solid" type="submit">
-                    Log In
-          </button>
-        </form>
+            <h2 class="title">Sign in</h2>
+            <br />
+            <TextField
+              className="input-field"
+              required
+              name="email"
+              label="Email Address"
+              onChange={(event) => {
+                handleChange(event);
+              }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "55px",
+                },
+              }}
+            />
+            <br />
+            <TextField
+              className="input-field"
+              required
+              name="password"
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              onChange={(event) => {
+                handleChange(event);
+              }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "55px",
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {error && (
+              <>
+                <br />{" "}
+                <Alert className="alertStyle" severity="error">
+                  {error}
+                </Alert>
+              </>
+            )}
+            <br />
+            <button className="btn solid" type="submit">
+              Log In
+            </button>
+          </form>
 
-        <form onSubmit={handleSubmit} class="sign-up-form">
-          <img src={require("../images/marketplacev5.png")} class="image2" alt="" />
-          <h2 class="title">Sign up</h2>
-          <br/>
-        <TextField
-          className="input-field"
-          required
-          name="name"
-          label="Full Name"
-          onChange={(event) => {
-            handleChange(event);
-          }}
-          InputProps={{
-            sx: {
-              backgroundColor: "#f0f0f0",
-              borderRadius: "55px",
-            }
-          }}
-        />
-        <br/>
-        <TextField
-          className="input-field"
-          required
-          name="password"
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          onChange={(event) => {
-            handleChange(event);
-          }}
-          InputProps={{
-            sx: {
-              backgroundColor: "#f0f0f0",
-              borderRadius: "55px",
-            },
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <br/>
-        <TextField
-          className="input-field"
-          required
-          name="email"
-          label="Email Address"
-          type="email"
-          onChange={(event) => {
-            handleChange(event);
-          }}
-          InputProps={{
-            sx: {
-              backgroundColor: "#f0f0f0",
-              borderRadius: "55px",
-            }
-          }}
-        />
-        <br/>
-      <div className="inputFields">
-        <div className="checkBoxFields">
-          <Checkbox
-            required
-            onChange={(event) => {
-              handleChange(event);
-            }}
-          />
-          <Typography className="checkBoxText">
-            I agree with all statements in the{" "}
-            <Typography onClick={handleShowModal} className="checkBoxTermsLink">
-              terms of service.
-            </Typography>
-          </Typography>
-          <Modal open={showModal} onClose={handleHideModal}>
-            <Box className="modalBox">
-              <Typography variant="h6" component="h2">
-                Terms & Conditions
-              </Typography>
-              <Typography sx={{ mt: 2 }}>
-                If you use this site, you are responsible for maintaining the
-                confidentiality of your account and password and for restricting
-                access to your computer, and you agree to accept responsibility
-                for all activities that occur under your account or password.
-                You may not assign or otherwise transfer your account to any
-                other person or entity. You acknowledge that we are not
-                responsible for third party access to your account that results
-                from theft or misappropriation of your account. We reserve the
-                right to refuse or cancel service, terminate accounts, or remove
-                or edit content in our sole discretion.
-              </Typography>
-            </Box>
-          </Modal>
+          <form onSubmit={handleSubmit} class="sign-up-form">
+            <img
+              src={require("../images/marketplacev5.png")}
+              class="image2"
+              alt=""
+            />
+            <h2 class="title">Sign up</h2>
+            <br />
+            <TextField
+              className="input-field"
+              required
+              name="name"
+              label="Full Name"
+              onChange={(event) => {
+                handleChange(event);
+              }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "55px",
+                },
+              }}
+            />
+            <br />
+            <TextField
+              className="input-field"
+              required
+              name="password"
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              onChange={(event) => {
+                handleChange(event);
+              }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "55px",
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <br />
+            <TextField
+              className="input-field"
+              required
+              name="email"
+              label="Email Address"
+              type="email"
+              onChange={(event) => {
+                handleChange(event);
+              }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "55px",
+                },
+              }}
+            />
+            <br />
+            <div className="inputFields">
+              <div className="checkBoxFields">
+                <Checkbox
+                  required
+                  onChange={(event) => {
+                    handleChange(event);
+                  }}
+                />
+                <Typography className="checkBoxText">
+                  I agree with all statements in the{" "}
+                  <Typography
+                    onClick={handleShowModal}
+                    className="checkBoxTermsLink"
+                  >
+                    terms of service.
+                  </Typography>
+                </Typography>
+                <Modal open={showModal} onClose={handleHideModal}>
+                  <Box className="modalBox">
+                    <Typography variant="h6" component="h2">
+                      Terms & Conditions
+                    </Typography>
+                    <Typography sx={{ mt: 2 }}>
+                      If you use this site, you are responsible for maintaining
+                      the confidentiality of your account and password and for
+                      restricting access to your computer, and you agree to
+                      accept responsibility for all activities that occur under
+                      your account or password. You may not assign or otherwise
+                      transfer your account to any other person or entity. You
+                      acknowledge that we are not responsible for third party
+                      access to your account that results from theft or
+                      misappropriation of your account. We reserve the right to
+                      refuse or cancel service, terminate accounts, or remove or
+                      edit content in our sole discretion.
+                    </Typography>
+                  </Box>
+                </Modal>
+              </div>
+              {error && (
+                <Alert className="alertStyle" severity="error">
+                  {error}
+                </Alert>
+              )}
+            </div>
+            <br />
+            <button className="btn" type="submit">
+              Sign Up
+            </button>
+          </form>
         </div>
-        {error && <Alert className="alertStyle" severity="error">{error}</Alert>}
       </div>
-      <br/>
-      <button className="btn" type="submit">
-          Sign Up
-      </button>
-    </form>
 
-
-
-
-
-
-
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>The best shopping experience</h3>
+            <p>
+              All your favorite popular online shopping platforms all in one
+              place.
+            </p>
+            <button
+              class="btn transparent"
+              id="sign-up-btn"
+              onClick={handleSignUp}
+            >
+              Sign up
+            </button>
+          </div>
+          <img src={webshopv1} class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>Already signed up ?</h3>
+            <p>Sign in to begin searching!</p>
+            <button
+              class="btn transparent"
+              id="sign-in-btn"
+              onClick={handleSignIn}
+            >
+              Sign in
+            </button>
+          </div>
+          <img src={onlineshopv1} class="image" alt="" />
+        </div>
       </div>
+      <footer className="landing-footer">
+        <p>© 2023 market++</p>
+      </footer>
     </div>
-
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>The best shopping experience</h3>
-          <p>
-            All your favorite popular online shopping platforms all in one place. 
-          </p>
-          <button class="btn transparent" id="sign-up-btn" onClick={handleSignUp}>
-            Sign up
-          </button>
-        </div>
-        <img src={webshopv1} class="image" alt="" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>Already signed up ?</h3>
-          <p>
-            Sign in to begin searching!
-          </p>
-          <button class="btn transparent" id="sign-in-btn" onClick={handleSignIn}>
-            Sign in
-          </button>
-        </div>
-        <img src={onlineshopv1} class="image" alt="" />
-      </div>
-    </div>
-  </div>
   );
 };
 
