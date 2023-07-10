@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Grid, Card, CardMedia, Container, Box, Divider } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Navbar from "./Navbar";
 import Filters from "./Filters";
 import Feed from "./Feed";
@@ -41,7 +42,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
 
-  const API = axios.create({ baseURL: "http://localhost:5000/search" });
+  const API = axios.create({ baseURL: "http://localhost:5000" });
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ const Home = () => {
     };
 
     // search for craigslist
-    API.get("/craigslistSearch", { params })
+    API.get("/search/craigslistSearch", { params })
       .then(({ data }) => {
         setCraigslistData(Object.values(data));
       })
@@ -65,7 +66,7 @@ const Home = () => {
       });
 
     // search for ebay
-    API.get("/ebaySearch", { params })
+    API.get("/search/ebaySearch", { params })
       .then(({ data }) => {
         setEbayData(data);
       })
@@ -74,7 +75,7 @@ const Home = () => {
       });
 
     // search for facebook marketplace
-    API.get("/facebookSearch", { params })
+    API.get("/search/facebookSearch", { params })
       .then(({ data }) => {
         setFacebookData(data);
       })
@@ -83,7 +84,7 @@ const Home = () => {
       });
 
     // search for offerup
-    API.get("/offerupSearch", { params })
+    API.get("/search/offerupSearch", { params })
       .then(({ data }) => {
         setOfferupData(data);
       })
@@ -92,7 +93,7 @@ const Home = () => {
       });
 
     // search for etsy
-    API.get("/etsySearch", { params })
+    API.get("/search/etsySearch", { params })
       .then(({ data }) => {
         setEtsyData(data);
       })
@@ -125,35 +126,94 @@ const Home = () => {
     setCheckedFilters(newCheckedFilters);
   };
 
+  const ListingCard = ({ listing }) => {
+     // calculate the hash of the listing based on stable properties
+    const id = `${listing.url}-${listing.title}`
+    const [isFavorite, setIsFavorite] = useState(user.result.liked_listings.includes(id));
+
+    const handleIconClick = (e) => {
+      e.stopPropagation(); // to prevent the card click event from firing
+      console.log(user.result.liked_listings);
+      const newFavoriteStatus = !isFavorite;
+      setIsFavorite(newFavoriteStatus);
+
+      // call the API to add/remove from favorites
+      try {
+        API.patch("/user/updateFavorite", { userId: user.result._id, listingHash: id, isFavorite: newFavoriteStatus });
+      } catch (err) {
+        console.error(err);
+        setIsFavorite(!newFavoriteStatus); // revert the favorite state if the API call fails
+      }
+    };
+
+    return (
+      <Card
+        className="itemContainer"
+        onClick={() => window.open(listing.url, "_blank")}
+      >
+        <CardMedia
+          component="img"
+          alt="img"
+          image={
+            listing.imageUrl ? listing.imageUrl : require("../images/temp.jpg")
+          }
+          sx={{ height: "15em", width: "15em" }}
+        />
+        <div className="cardTitle">{listing.title}</div>
+        <br />
+        <div className="cardPrice">
+          {listing.price ? listing.price : "No price listed"}
+        </div>
+        <div className="cardMeta">{listing.location}</div>
+        <div className="cardMeta">{listing.platform}</div>
+        <div onClick={handleIconClick}>
+          {isFavorite ? (
+            <FavoriteIcon sx={{ color: "#6cbad2" }} />
+          ) : (
+            <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
+          )}
+        </div>
+      </Card>
+    );
+  }
+
   const displayResults = (data) => {
     return data.map((listing) => (
       <Grid item>
-        <Card
-          className="itemContainer"
-          onClick={() => window.open(listing.url, "_blank")}
-        >
-          <CardMedia
-            component="img"
-            alt="img"
-            image={
-              listing.imageUrl
-                ? listing.imageUrl
-                : require("../images/temp.jpg")
-            }
-            sx={{ height: "15em", width: "15em" }}
-          />
-          <div className="cardTitle">{listing.title}</div>
-          <br />
-          <div className="cardPrice">
-            {listing.price ? listing.price : "No price listed"}
-          </div>
-          <div className="cardMeta">{listing.location}</div>
-          <div className="cardMeta">{listing.platform}</div>
-          <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
-        </Card>
+        <ListingCard listing={listing} />
       </Grid>
     ));
   };
+
+  // const displayResults = (data) => {
+  //   return data.map((listing) => (
+  //     <Grid item>
+  //       <Card
+  //         className="itemContainer"
+  //         onClick={() => window.open(listing.url, "_blank")}
+  //       >
+  //         <CardMedia
+  //           component="img"
+  //           alt="img"
+  //           image={
+  //             listing.imageUrl
+  //               ? listing.imageUrl
+  //               : require("../images/temp.jpg")
+  //           }
+  //           sx={{ height: "15em", width: "15em" }}
+  //         />
+  //         <div className="cardTitle">{listing.title}</div>
+  //         <br />
+  //         <div className="cardPrice">
+  //           {listing.price ? listing.price : "No price listed"}
+  //         </div>
+  //         <div className="cardMeta">{listing.location}</div>
+  //         <div className="cardMeta">{listing.platform}</div>
+  //         <FavoriteBorderIcon sx={{ color: "#6cbad2" }} />
+  //       </Card>
+  //     </Grid>
+  //   ));
+  // };
 
   const logout = () => {
     localStorage.clear();
@@ -162,6 +222,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log(user);
     const token = user.token;
 
     if (token) {
