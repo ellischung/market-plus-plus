@@ -73,12 +73,11 @@ export const signup = async (req, res) => {
 
 export const updateFavorite = async (req, res) => {
   const { userId, listingHash, isFavorite } = req.body;
-  console.log(userId, listingHash, isFavorite)
 
   try {
     // find the user and update their liked_listing, this might be different based on your User schema
     const user = await User.findById(userId);
-    console.log(user);
+
     if (isFavorite) {
       if (!user.liked_listings.includes(listingHash)) {
         user.liked_listings.push(listingHash);
