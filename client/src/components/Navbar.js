@@ -12,6 +12,8 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openHome = () => window.location.href = "/";
+  
   const openProfile = () => window.location.href = `/favorites/${user?.result?.given_name.replace(/\s/g, '')}`;
 
   const handleOpenModal = () => {
@@ -36,6 +38,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
           className="appBarLogo"
           alt="market-plus-plus"
           src={require("../images/marketplacev4.png")}
+          onClick={openHome}
         />
         <form onSubmit={handleSearch} className="navbar-search-form">
           <div className="navbar-tb">

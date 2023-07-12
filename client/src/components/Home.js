@@ -127,7 +127,7 @@ const Home = () => {
   };
 
   const ListingCard = ({ listing }) => {
-     // create unique id for listing
+    // create unique id for listing
     const id = `${listing.url}$-filler-$${listing.title}$-filler-$${listing.imageUrl}`
     const [isFavorite, setIsFavorite] = useState(user.result.liked_listings.includes(id));
 
