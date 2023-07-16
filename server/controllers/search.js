@@ -48,35 +48,38 @@ export const craigslistSearch = async (req, res) => {
 
   // set viewport to load all content
   await page.setViewport({
-    width: 5000,
-    height: 5000,
+    width: 10000,
+    height: 10000,
   });
 
   // selector for search results list
-  await page.waitForSelector(".cl-search-result.cl-search-view-mode-gallery");
+  await page.waitForSelector(
+    ".results.cl-results-page.cl-search-view-mode-gallery li.cl-search-result"
+  );
 
   // add all results to properties object and return it
-  const results = await page.$$eval(
-    ".cl-search-result.cl-search-view-mode-gallery",
-    (rows) => {
-      return rows.map((row) => {
-        const properties = {};
-        const titleElement = row.querySelector(".titlestring");
-        properties.title = titleElement.innerText;
-        properties.url = titleElement.getAttribute("href");
-        const priceElement = row.querySelector(".priceinfo");
-        properties.price = priceElement ? priceElement.innerText : "";
-        const imageElement = row.querySelector('.swipe [data-index="0"] img');
-        properties.imageUrl = imageElement ? imageElement.src : "";
-        const metaElement = row.querySelector(".meta");
-        const startingIndex = metaElement.innerText.indexOf("·") + 1;
-        const location = metaElement.innerText.substring(startingIndex);
-        properties.location = location != "" ? location : "No location listed";
-        properties.platform = "craigslist";
-        return properties;
-      });
-    }
-  );
+  const results = await page.$$eval("li.cl-search-result", (rows) => {
+    return rows.map((row) => {
+      const properties = {};
+      const titleElement = row.querySelector("a.posting-title span.label");
+      properties.title = titleElement ? titleElement.innerText : "";
+      properties.url = titleElement ? titleElement.closest("a").href : "";
+      const priceElement = row.querySelector(".priceinfo");
+      properties.price = priceElement ? priceElement.innerText : "";
+      const imageElement = row.querySelector('.swipe [data-index="0"] img');
+      properties.imageUrl = imageElement ? imageElement.src : "";
+      const metaElement = row.querySelector(".meta");
+      const startingIndex = metaElement
+        ? metaElement.innerText.indexOf("·") + 1
+        : 0;
+      const location = metaElement
+        ? metaElement.innerText.substring(startingIndex).trim()
+        : "";
+      properties.location = location != "" ? location : "No location listed";
+      properties.platform = "craigslist";
+      return properties;
+    });
+  });
 
   // close browser
   await browser.close();
