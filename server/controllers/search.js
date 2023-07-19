@@ -5,84 +5,87 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const craigslistSearch = async (req, res) => {
-  // // search input and filter options from frontend
-  // const search = req.query.input;
-  // const splitSearch = search.split(" ");
-  // let searchQuery = "";
-  // for (let i = 0; i < splitSearch.length - 1; i++) {
-  //   searchQuery += splitSearch[i] + "%20";
-  // }
-  // searchQuery += splitSearch[splitSearch.length - 1];
+  // search input and filter options from frontend
+  const search = req.query.input;
+  const splitSearch = search.split(" ");
+  let searchQuery = "";
+  for (let i = 0; i < splitSearch.length - 1; i++) {
+    searchQuery += splitSearch[i] + "%20";
+  }
+  searchQuery += splitSearch[splitSearch.length - 1];
 
-  // let sortBy = "";
-  // switch (req.query.sortBy) {
-  //   case "relevance":
-  //     sortBy = "rel";
-  //     break;
-  //   case "newest_first":
-  //     sortBy = "date";
-  //     break;
-  //   case "low_to_high":
-  //     sortBy = "priceasc";
-  //     break;
-  //   case "high_to_low":
-  //     sortBy = "pricedsc";
-  //     break;
-  // }
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "rel";
+      break;
+    case "newest_first":
+      sortBy = "date";
+      break;
+    case "low_to_high":
+      sortBy = "priceasc";
+      break;
+    case "high_to_low":
+      sortBy = "pricedsc";
+      break;
+  }
 
-  // const minPrice = req.query.minPrice;
+  const minPrice = req.query.minPrice;
 
-  // const maxPrice = req.query.maxPrice;
+  const maxPrice = req.query.maxPrice;
 
-  // const postalCode = req.query.postalCode;
+  const postalCode = req.query.postalCode;
 
-  // const distance = req.query.distance;
+  const distance = req.query.distance;
 
-  // // launch headless browser
-  // const browser = await puppeteer.launch();
-  // const page = await browser.newPage();
+  // launch headless browser
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-  // // go to link with filtered search results
-  // const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&postal=${postalCode}&query=${searchQuery}&search_distance=${distance}&sort=${sortBy}#search=1~gallery~0~0`;
-  // await page.goto(url);
+  // go to link with filtered search results
+  const url = `https://newyork.craigslist.org/search/sss?max_price=${maxPrice}&min_price=${minPrice}&postal=${postalCode}&query=${searchQuery}&search_distance=${distance}&sort=${sortBy}#search=1~gallery~0~0`;
+  await page.goto(url);
 
-  // // set viewport to load all content
-  // await page.setViewport({
-  //   width: 5000,
-  //   height: 5000,
-  // });
+  // set viewport to load all content
+  await page.setViewport({
+    width: 10000,
+    height: 10000,
+  });
 
-  // // selector for search results list
-  // await page.waitForSelector(".cl-search-result.cl-search-view-mode-gallery");
+  // selector for search results list
+  await page.waitForSelector(
+    ".results.cl-results-page.cl-search-view-mode-gallery li.cl-search-result"
+  );
 
-  // // add all results to properties object and return it
-  // const results = await page.$$eval(
-  //   ".cl-search-result.cl-search-view-mode-gallery",
-  //   (rows) => {
-  //     return rows.map((row) => {
-  //       const properties = {};
-  //       const titleElement = row.querySelector(".titlestring");
-  //       properties.title = titleElement.innerText;
-  //       properties.url = titleElement.getAttribute("href");
-  //       const priceElement = row.querySelector(".priceinfo");
-  //       properties.price = priceElement ? priceElement.innerText : "";
-  //       const imageElement = row.querySelector('.swipe [data-index="0"] img');
-  //       properties.imageUrl = imageElement ? imageElement.src : "";
-  //       const metaElement = row.querySelector(".meta");
-  //       const startingIndex = metaElement.innerText.indexOf("·") + 1;
-  //       const location = metaElement.innerText.substring(startingIndex);
-  //       properties.location = location != "" ? location : "No location listed";
-  //       properties.platform = "craigslist";
-  //       return properties;
-  //     });
-  //   }
-  // );
+  // add all results to properties object and return it
+  const results = await page.$$eval("li.cl-search-result", (rows) => {
+    return rows.map((row) => {
+      const properties = {};
+      const titleElement = row.querySelector("a.posting-title span.label");
+      properties.title = titleElement ? titleElement.innerText : "";
+      properties.url = titleElement ? titleElement.closest("a").href : "";
+      const priceElement = row.querySelector(".priceinfo");
+      properties.price = priceElement ? priceElement.innerText : "";
+      const imageElement = row.querySelector('.swipe [data-index="0"] img');
+      properties.imageUrl = imageElement ? imageElement.src : "";
+      const metaElement = row.querySelector(".meta");
+      const startingIndex = metaElement
+        ? metaElement.innerText.indexOf("·") + 1
+        : 0;
+      const location = metaElement
+        ? metaElement.innerText.substring(startingIndex).trim()
+        : "";
+      properties.location = location != "" ? location : "No location listed";
+      properties.platform = "craigslist";
+      return properties;
+    });
+  });
 
-  // // close browser
-  // await browser.close();
+  // close browser
+  await browser.close();
 
-  // // send results
-  // res.send(results);
+  // send results
+  res.send(results);
 };
 
 export const ebaySearch = async (req, res) => {
@@ -372,7 +375,7 @@ export const etsySearch = async (req, res) => {
   // Array for listingids to use for second API call
   const listingIds = extractedData.map((item) => item.listing_id);
 
-  const listingIdsStr = listingIds.join(',');
+  const listingIdsStr = listingIds.join(",");
 
   // Insert the string into the URL
   const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
@@ -387,16 +390,17 @@ export const etsySearch = async (req, res) => {
   // extract and map an array of just listing images from second API call
   const imgData = await imgResponse.json();
   const extractedImgData = imgData.results;
-  const newImgData = extractedImgData.map((item) => item.images[0].url_fullxfull);
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
 
   // map new array that combines newData and the listing images
   const newArray = newData.map((item, index) => {
     return {
       ...item,
-      imageUrl: newImgData[index]
-    }
-  })
-  
+      imageUrl: newImgData[index],
+    };
+  });
 
   res.json(newArray);
 };
