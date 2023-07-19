@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 // import userRoutes from './routes/users.js'
-import { signin, signup } from "./controllers/user.js";
+import { signin, signup, updateFavorite } from "./controllers/user.js";
 import {
   craigslistSearch,
   ebaySearch,
@@ -22,6 +22,7 @@ app.use(cors());
 
 app.post("/user/signin", signin);
 app.post("/user/signup", signup);
+app.patch("/user/updateFavorite", updateFavorite);
 app.get("/search/craigslistSearch", craigslistSearch);
 app.get("/search/ebaySearch", ebaySearch);
 app.get("/search/facebookSearch", facebookSearch);

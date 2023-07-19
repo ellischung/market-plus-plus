@@ -9,7 +9,12 @@ import Tooltip from "@mui/material/Tooltip";
 import "./Navbar.css";
 
 const Navbar = ({ setInput, handleSearch, logout }) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openHome = () => window.location.href = "/";
+  
+  const openProfile = () => window.location.href = `/favorites/${user?.result?.given_name.replace(/\s/g, '')}`;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -33,6 +38,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
           className="appBarLogo"
           alt="market-plus-plus"
           src={require("../images/marketplacev4.png")}
+          onClick={openHome}
         />
         <form onSubmit={handleSearch} className="navbar-search-form">
           <div className="navbar-tb">
@@ -61,7 +67,7 @@ const Navbar = ({ setInput, handleSearch, logout }) => {
             />
           </Tooltip>
           <Tooltip title="Favorites">
-            <FavoriteIcon className="navbar-icon" sx={{ fontSize: "35px" }} />
+            <FavoriteIcon className="navbar-icon" sx={{ fontSize: "35px" }} onClick={openProfile}/>
           </Tooltip>
           <AccountCircleIcon
             className="navbar-icon"
