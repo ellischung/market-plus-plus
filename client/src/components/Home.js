@@ -15,8 +15,8 @@ const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
-  const [minPrice, setMinPrice] = useState(100);
-  const [maxPrice, setMaxPrice] = useState(800);
+  const [minPrice, setMinPrice] = useState(1);
+  const [maxPrice, setMaxPrice] = useState(1000);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
   const [filters, setFilters] = useState({
@@ -40,18 +40,22 @@ const Home = () => {
     Etsy: true,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // other initializations
   const location = useLocation();
+  const debouncedMinPrice = useDebounce(minPrice, 500);
+  const debouncedMaxPrice = useDebounce(maxPrice, 500);
 
   const API = axios.create({ baseURL: "http://localhost:5000" });
 
   const handleSearch = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
 
     const params = {
       input: input,
       sortBy: sortBy,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
+      minPrice: debouncedMinPrice,
+      maxPrice: debouncedMaxPrice,
       postalCode: postalCode,
       distance: distance,
     };
@@ -128,8 +132,10 @@ const Home = () => {
 
   const ListingCard = ({ listing }) => {
     // create unique id for listing
-    const id = `${listing.url}$-filler-$${listing.title}$-filler-$${listing.imageUrl}`
-    const [isFavorite, setIsFavorite] = useState(user.result.liked_listings.includes(id));
+    const id = `${listing.url}$-filler-$${listing.title}$-filler-$${listing.imageUrl}`;
+    const [isFavorite, setIsFavorite] = useState(
+      user.result.liked_listings.includes(id)
+    );
 
     const handleIconClick = (e) => {
       e.stopPropagation(); // to prevent the card click event from firing
@@ -138,7 +144,11 @@ const Home = () => {
 
       // call the API to add/remove from favorites
       try {
-        API.patch("/user/updateFavorite", { userId: user.result._id, listingHash: id, isFavorite: newFavoriteStatus });
+        API.patch("/user/updateFavorite", {
+          userId: user.result._id,
+          listingHash: id,
+          isFavorite: newFavoriteStatus,
+        });
         // copy current user data
         let updatedUser = JSON.parse(JSON.stringify(user));
 
@@ -147,14 +157,16 @@ const Home = () => {
           updatedUser.result.liked_listings.push(id);
         } else {
           // if the listing was removed from favorites, remove it from the liked_listings array
-          updatedUser.result.liked_listings = updatedUser.result.liked_listings.filter(listingId => listingId !== id);
+          updatedUser.result.liked_listings =
+            updatedUser.result.liked_listings.filter(
+              (listingId) => listingId !== id
+            );
         }
 
         // update the user state with the updated user data
         setUser(updatedUser);
         // update the user data in local storage
         localStorage.setItem("profile", JSON.stringify(updatedUser));
-
       } catch (err) {
         console.error(err);
         setIsFavorite(!newFavoriteStatus); // revert the favorite state if the API call fails
@@ -190,7 +202,7 @@ const Home = () => {
         </div>
       </Card>
     );
-  }
+  };
 
   const displayResults = (data) => {
     return data.map((listing) => (
@@ -206,23 +218,6 @@ const Home = () => {
     setUser(null);
   };
 
-  useEffect(() => {
-    console.log(user);
-    const token = user.token;
-
-    if (token) {
-      const decodedToken = decode(token);
-
-      //if expired date
-      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-    }
-
-    setUser(JSON.parse(localStorage.getItem("profile")));
-
-    // for any filter changes
-    input != "" && handleSearch(event);
-  }, [location, sortBy, minPrice, maxPrice, postalCode, distance]);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -230,6 +225,30 @@ const Home = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    console.log(user);
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      //if token expired
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+
+    // for any filter changes
+    input != "" && handleSearch(event);
+  }, [
+    location,
+    sortBy,
+    debouncedMinPrice,
+    debouncedMaxPrice,
+    postalCode,
+    distance,
+  ]);
 
   return (
     <>
@@ -282,5 +301,21 @@ const Home = () => {
     </>
   );
 };
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 export default Home;
