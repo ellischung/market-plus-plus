@@ -14,18 +14,12 @@ import "./Home.css";
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [input, setInput] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
   const [minPrice, setMinPrice] = useState(1);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
-  const [filters, setFilters] = useState({
-    sortBy,
-    minPrice,
-    maxPrice,
-    postalCode,
-    distance,
-  });
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
@@ -252,48 +246,59 @@ const Home = () => {
 
   return (
     <>
-      <Navbar setInput={setInput} handleSearch={handleSearch} logout={logout} />
+      <Navbar
+        setInput={setInput}
+        handleSearch={handleSearch}
+        setHasSearched={setHasSearched}
+        logout={logout}
+      />
       <Container maxWidth="xl" className="container1">
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-          <LeftModal isOpen={isModalOpen} onClose={handleCloseModal} />
-          <div className="innerContainer">
-            <div className="btnContainer">
-              <button className="filterButton" onClick={handleOpenModal}>
-                Show Filters
-              </button>
-              <Divider sx={{ marginBottom: "10px" }} />
-            </div>
-            <div className="contentContainer">
-              <div className="filter">
-                <Filters
-                  checkedFilters={checkedFilters}
-                  onCheckboxChange={onCheckboxChange}
-                  sortBy={sortBy}
-                  setSortBy={setSortBy}
-                  minPrice={minPrice}
-                  setMinPrice={setMinPrice}
-                  maxPrice={maxPrice}
-                  setMaxPrice={setMaxPrice}
-                  setPostalCode={setPostalCode}
-                  setDistance={setDistance}
-                />
+        {hasSearched ? (
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+            <LeftModal isOpen={isModalOpen} onClose={handleCloseModal} />
+            <div className="innerContainer">
+              <div className="btnContainer">
+                <button className="filterButton" onClick={handleOpenModal}>
+                  Show Filters
+                </button>
+                <Divider sx={{ marginBottom: "10px" }} />
               </div>
-              <div className="feed">
-                <Feed
-                  craigslistData={craigslistData}
-                  ebayData={ebayData}
-                  facebookData={facebookData}
-                  offerupData={offerupData}
-                  etsyData={etsyData}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                  checkedFilters={checkedFilters}
-                  displayResults={displayResults}
-                />
+              <div className="contentContainer">
+                <div className="filter">
+                  <Filters
+                    checkedFilters={checkedFilters}
+                    onCheckboxChange={onCheckboxChange}
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    minPrice={minPrice}
+                    setMinPrice={setMinPrice}
+                    maxPrice={maxPrice}
+                    setMaxPrice={setMaxPrice}
+                    setPostalCode={setPostalCode}
+                    setDistance={setDistance}
+                  />
+                </div>
+                <div className="feed">
+                  <Feed
+                    craigslistData={craigslistData}
+                    ebayData={ebayData}
+                    facebookData={facebookData}
+                    offerupData={offerupData}
+                    etsyData={etsyData}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    checkedFilters={checkedFilters}
+                    displayResults={displayResults}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </Box>
+          </Box>
+        ) : (
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+            <div className="innerContainer">Homepage</div>
+          </Box>
+        )}
       </Container>
       <footer className="home-footer">
         <p>© 2023 market++</p>
@@ -302,6 +307,7 @@ const Home = () => {
   );
 };
 
+// to delay handleSearch when user is editing price range
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
