@@ -11,6 +11,7 @@ import {
   facebookSearch,
   offerupSearch,
   etsySearch,
+  craigslistHomeFeed,
 } from "./controllers/search.js";
 
 const app = express();
@@ -28,6 +29,7 @@ app.get("/search/ebaySearch", ebaySearch);
 app.get("/search/facebookSearch", facebookSearch);
 app.get("/search/offerupSearch", offerupSearch);
 app.get("/search/etsySearch", etsySearch);
+app.get("/search/craigslistHomeFeed", craigslistHomeFeed);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");

@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Navbar from "./Navbar";
 import Filters from "./Filters";
 import Feed from "./Feed";
+import HomeFeed from "./HomeFeed";
 import decode from "jwt-decode";
 import axios from "axios";
 import LeftModal from "./LeftModal";
@@ -17,15 +18,16 @@ const Home = () => {
   const [hasSearched, setHasSearched] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
   const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(100000);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
+  const [activeTab, setActiveTab] = useState(0);
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
   const [offerupData, setOfferupData] = useState([]);
   const [etsyData, setEtsyData] = useState([]);
-  const [activeTab, setActiveTab] = useState(0);
+  const [craigslistHomeFeedData, setCraigslistHomeFeedData] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({
     "Facebook Marketplace": true,
     eBay: true,
@@ -42,8 +44,21 @@ const Home = () => {
 
   const API = axios.create({ baseURL: "http://localhost:5000" });
 
+  const handleHomeFeed = (e) => {
+    if (e) e.preventDefault();
+
+    API.get("/search/craigslistHomeFeed")
+      .then(({ data }) => {
+        setCraigslistHomeFeedData(Object.values(data).slice(0, 20));
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const handleSearch = (e) => {
-    e?.preventDefault();
+    if (e) e.preventDefault();
 
     const params = {
       input: input,
@@ -220,6 +235,11 @@ const Home = () => {
     setIsModalOpen(false);
   };
 
+  // first useEffect to populate the home feed once
+  useEffect(() => {
+    handleHomeFeed();
+  }, []); // empty dependency array => run once only on mount
+
   useEffect(() => {
     console.log(user);
     const token = user?.token;
@@ -296,12 +316,17 @@ const Home = () => {
           </Box>
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <div className="innerContainer">Homepage</div>
+            <div className="contentContainer">
+              <HomeFeed
+                craigslistHomeFeedData={craigslistHomeFeedData}
+                displayResults={displayResults}
+              />
+            </div>
           </Box>
         )}
       </Container>
       <footer className="home-footer">
-        <p>© 2023 market++</p>
+        <p>Market++ | © 2023</p>
       </footer>
     </>
   );
