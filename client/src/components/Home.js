@@ -28,6 +28,8 @@ const Home = () => {
   const [offerupData, setOfferupData] = useState([]);
   const [etsyData, setEtsyData] = useState([]);
   const [craigslistHomeFeedData, setCraigslistHomeFeedData] = useState([]);
+  const [facebookHomeFeedData, setFacebookHomeFeedData] = useState([]);
+  const [offerupHomeFeedData, setOfferupHomeFeedData] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({
     "Facebook Marketplace": true,
     eBay: true,
@@ -50,6 +52,24 @@ const Home = () => {
     API.get("/search/craigslistHomeFeed")
       .then(({ data }) => {
         setCraigslistHomeFeedData(Object.values(data).slice(0, 20));
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    API.get("/search/facebookHomeFeed")
+      .then(({ data }) => {
+        setFacebookHomeFeedData(Object.values(data).slice(0, 20));
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    API.get("/search/offerupHomeFeed")
+      .then(({ data }) => {
+        setOfferupHomeFeedData(Object.values(data).slice(0, 20));
         console.log(data);
       })
       .catch(function (error) {
@@ -319,6 +339,8 @@ const Home = () => {
             <div className="contentContainer">
               <HomeFeed
                 craigslistHomeFeedData={craigslistHomeFeedData}
+                facebookHomeFeedData={facebookHomeFeedData}
+                offerupHomeFeedData={offerupHomeFeedData}
                 displayResults={displayResults}
               />
             </div>

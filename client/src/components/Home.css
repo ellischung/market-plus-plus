@@ -27,10 +27,6 @@
     flex-direction: row;
 }
 
-.home-feed {
-    width: 100%;
-}
-
 .filterButton {
     width: 150px;
     background-color: #0079FF;
