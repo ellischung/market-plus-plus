@@ -28,6 +28,7 @@ const Home = () => {
   const [offerupData, setOfferupData] = useState([]);
   const [etsyData, setEtsyData] = useState([]);
   const [craigslistHomeFeedData, setCraigslistHomeFeedData] = useState([]);
+  const [ebayHomeFeedData, setEbayHomeFeedData] = useState([]);
   const [facebookHomeFeedData, setFacebookHomeFeedData] = useState([]);
   const [offerupHomeFeedData, setOfferupHomeFeedData] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({
@@ -57,6 +58,15 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
+
+    API.get("/search/ebayHomeFeed")
+      .then(({ data }) => {
+        setEbayHomeFeedData(data);
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
 
     API.get("/search/facebookHomeFeed")
       .then(({ data }) => {
@@ -339,6 +349,7 @@ const Home = () => {
             <div className="contentContainer">
               <HomeFeed
                 craigslistHomeFeedData={craigslistHomeFeedData}
+                ebayHomeFeedData={ebayHomeFeedData}
                 facebookHomeFeedData={facebookHomeFeedData}
                 offerupHomeFeedData={offerupHomeFeedData}
                 displayResults={displayResults}

@@ -2,6 +2,7 @@ import React from "react";
 
 const HomeFeed = ({
   craigslistHomeFeedData,
+  ebayHomeFeedData,
   facebookHomeFeedData,
   offerupHomeFeedData,
   displayResults,
@@ -10,6 +11,7 @@ const HomeFeed = ({
   const combinedFeed = React.useMemo(() => {
     let feeds = [
       ...craigslistHomeFeedData,
+      ...ebayHomeFeedData,
       ...facebookHomeFeedData,
       ...offerupHomeFeedData,
     ];
@@ -36,7 +38,7 @@ const HomeFeed = ({
     };
 
     return shuffleFeed(feeds);
-  }, [craigslistHomeFeedData, facebookHomeFeedData, offerupHomeFeedData]);
+  }, [craigslistHomeFeedData, ebayHomeFeedData, facebookHomeFeedData, offerupHomeFeedData]);
 
   return <div className="feed-container">{displayResults(combinedFeed)}</div>;
 };
