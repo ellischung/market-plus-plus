@@ -461,6 +461,33 @@ export const craigslistHomeFeed = async (req, res) => {
   res.send(results);
 };
 
+export const ebayHomeFeed = async (req, res) => {
+  let url = "https://svcs.ebay.com/services/search/FindingService/v1";
+  url += "?OPERATION-NAME=findItemsByKeywords";
+  url += "&SERVICE-VERSION=1.0.0";
+  url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
+  url += "&GLOBAL-ID=EBAY-US";
+  url += "&RESPONSE-DATA-FORMAT=JSON";
+  url += "&REST-PAYLOAD";
+  url += "&keywords=electronics";
+  url += "&paginationInput.entriesPerPage=20";
+
+  const response = await fetch(url);
+  const data = await response.json();
+  const extractedData =
+    data.findItemsByKeywordsResponse[0].searchResult[0].item;
+  const newData = extractedData.map((item) => ({
+    title: item.title[0],
+    url: item.viewItemURL[0],
+    price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
+    imageUrl: item.galleryURL[0],
+    location: item.location[0],
+    platform: "eBay",
+  }));
+
+  res.json(newData);
+};
+
 export const facebookHomeFeed = async (req, res) => {
   // data from graphql api
   const response = await fetch("https://www.facebook.com/api/graphql/", {

@@ -12,6 +12,7 @@ import {
   offerupSearch,
   etsySearch,
   craigslistHomeFeed,
+  ebayHomeFeed,
   facebookHomeFeed,
   offerupHomeFeed,
 } from "./controllers/search.js";
@@ -32,6 +33,7 @@ app.get("/search/facebookSearch", facebookSearch);
 app.get("/search/offerupSearch", offerupSearch);
 app.get("/search/etsySearch", etsySearch);
 app.get("/search/craigslistHomeFeed", craigslistHomeFeed);
+app.get("/search/ebayHomeFeed", ebayHomeFeed)
 app.get("/search/facebookHomeFeed", facebookHomeFeed);
 app.get("/search/offerupHomeFeed", offerupHomeFeed);
 
