@@ -590,6 +590,64 @@ export const offerupHomeFeed = async (req, res) => {
   // res.json(results);
 };
 
+export const etsyHomeFeed = async (req, res) => {
+  let url = "https://openapi.etsy.com/v3/application/listings/active";
+  url += "?keywords=electronics";
+  url += "&limit=20";
+
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
+
+  const data = await response.json();
+  const extractedData = data.results;
+
+  // Array for main res data
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.url,
+    price: `${item.price.amount / item.price.divisor} ${
+      item.price.currency_code
+    }`,
+    platform: "Etsy",
+  }));
+
+  // Array for listingids to use for second API call
+  const listingIds = extractedData.map((item) => item.listing_id);
+
+  const listingIdsStr = listingIds.join(",");
+
+  // Insert the string into the URL
+  const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
+
+  const imgResponse = await fetch(imageUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
+
+  // extract and map an array of just listing images from second API call
+  const imgData = await imgResponse.json();
+  const extractedImgData = imgData.results;
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
+
+  // map new array that combines newData and the listing images
+  const newArray = newData.map((item, index) => {
+    return {
+      ...item,
+      imageUrl: newImgData[index],
+    };
+  });
+
+  res.json(newArray);
+};
+
 const getCoords = async (postalCode) => {
   const apiKey = process.env.API_KEY;
 

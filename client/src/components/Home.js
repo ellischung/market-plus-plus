@@ -31,6 +31,7 @@ const Home = () => {
   const [ebayHomeFeedData, setEbayHomeFeedData] = useState([]);
   const [facebookHomeFeedData, setFacebookHomeFeedData] = useState([]);
   const [offerupHomeFeedData, setOfferupHomeFeedData] = useState([]);
+  const [etsyHomeFeedData, setEtsyHomeFeedData] = useState([]);
   const [checkedFilters, setCheckedFilters] = useState({
     "Facebook Marketplace": true,
     eBay: true,
@@ -66,7 +67,7 @@ const Home = () => {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
 
     API.get("/search/facebookHomeFeed")
       .then(({ data }) => {
@@ -80,6 +81,15 @@ const Home = () => {
     API.get("/search/offerupHomeFeed")
       .then(({ data }) => {
         setOfferupHomeFeedData(Object.values(data).slice(0, 20));
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    API.get("/search/etsyHomeFeed")
+      .then(({ data }) => {
+        setEtsyHomeFeedData(data);
         console.log(data);
       })
       .catch(function (error) {
@@ -352,6 +362,7 @@ const Home = () => {
                 ebayHomeFeedData={ebayHomeFeedData}
                 facebookHomeFeedData={facebookHomeFeedData}
                 offerupHomeFeedData={offerupHomeFeedData}
+                etsyHomeFeedData={etsyHomeFeedData}
                 displayResults={displayResults}
               />
             </div>

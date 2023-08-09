@@ -15,6 +15,7 @@ import {
   ebayHomeFeed,
   facebookHomeFeed,
   offerupHomeFeed,
+  etsyHomeFeed,
 } from "./controllers/search.js";
 
 const app = express();
@@ -36,6 +37,7 @@ app.get("/search/craigslistHomeFeed", craigslistHomeFeed);
 app.get("/search/ebayHomeFeed", ebayHomeFeed)
 app.get("/search/facebookHomeFeed", facebookHomeFeed);
 app.get("/search/offerupHomeFeed", offerupHomeFeed);
+app.get("/search/etsyHomeFeed", etsyHomeFeed);
 
 app.get("/", (req, res) => {
   res.send("APP IS RUNNING.");
