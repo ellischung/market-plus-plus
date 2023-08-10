@@ -592,7 +592,7 @@ export const offerupHomeFeed = async (req, res) => {
 
 export const etsyHomeFeed = async (req, res) => {
   let url = "https://openapi.etsy.com/v3/application/listings/active";
-  url += "?keywords=electronics";
+  url += "?sort_on=score";
   url += "&limit=20";
 
   const response = await fetch(url, {
