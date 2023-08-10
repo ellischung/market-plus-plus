@@ -42,23 +42,6 @@ const Favorites = () => {
             const listingData = listing.split("$-filler-$");
             return (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                {/* <Card
-                    className="itemContainer"
-                    onClick={() => window.open(listingData[0], "_blank")}
-                >
-                    <CardMedia
-                    component="img"
-                    alt="img"
-                    image={
-                        listingData[2]
-                        ? listingData[2]
-                        : require("../images/temp.jpg")
-                    }
-                    sx={{ height: "15em", width: "15em" }}
-                    />
-                    <div className="cardTitle">{listingData[1]}</div>
-                    <br />
-                </Card> */}
                 <Card
                   className="itemContainer"
                   onClick={() => window.open(listingData[0], "_blank")}
