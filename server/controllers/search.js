@@ -595,7 +595,7 @@ export const etsyHomeFeed = async (req, res) => {
   // grab all Etsy listings sorted by score
   let url = "https://openapi.etsy.com/v3/application/listings/active";
   url += "?sort_on=score";
-  url += "&limit=20";
+  url += "&limit=10";
 
   const response = await fetch(url, {
     headers: {
