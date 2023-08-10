@@ -9,7 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 import "./Navbar.css";
 
 const Navbar = ({ setInput, handleSearch, setHasSearched, logout }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openHome = () => (window.location.href = "/");
