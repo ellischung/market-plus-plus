@@ -470,7 +470,7 @@ export const ebayHomeFeed = async (req, res) => {
   url += `&CONSUMER-ID=${process.env.CLIENT_ID}`;
   url += "&RESPONSE-DATA-FORMAT=JSON";
   url += "&REST-PAYLOAD";
-  url += "&maxResult=20";
+  url += "&maxResult=10";
 
   const response = await fetch(url);
   const data = await response.json();
@@ -595,7 +595,7 @@ export const etsyHomeFeed = async (req, res) => {
   // grab all Etsy listings sorted by score
   let url = "https://openapi.etsy.com/v3/application/listings/active";
   url += "?sort_on=score";
-  url += "&limit=20";
+  url += "&limit=10";
 
   const response = await fetch(url, {
     headers: {

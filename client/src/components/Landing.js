@@ -105,16 +105,16 @@ const Landing = () => {
   };
 
   return (
-    <div class="container" ref={myElement}>
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form onSubmit={handleSubmit} class="sign-in-form">
+    <div className="container" ref={myElement}>
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form onSubmit={handleSubmit} className="sign-in-form">
             <img
               src={require("../images/marketplacev5.png")}
-              class="image2"
+              className="image2"
               alt=""
             />
-            <h2 class="title">Sign in</h2>
+            <h2 className="title">Sign in</h2>
             <br />
             <TextField
               className="input-field"
@@ -176,13 +176,13 @@ const Landing = () => {
             </button>
           </form>
 
-          <form onSubmit={handleSubmit} class="sign-up-form">
+          <form onSubmit={handleSubmit} className="sign-up-form">
             <img
               src={require("../images/marketplacev5.png")}
-              class="image2"
+              className="image2"
               alt=""
             />
-            <h2 class="title">Sign up</h2>
+            <h2 className="title">Sign up</h2>
             <br />
             <TextField
               className="input-field"
@@ -261,6 +261,7 @@ const Landing = () => {
                   <Typography
                     onClick={handleShowModal}
                     className="checkBoxTermsLink"
+                    component="span"
                   >
                     terms of service.
                   </Typography>
@@ -300,37 +301,37 @@ const Landing = () => {
         </div>
       </div>
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
+      <div className="panels-container">
+        <div className="panel left-panel">
+          <div className="content">
             <h3>The best shopping experience</h3>
             <p>
               All your favorite popular online shopping platforms all in one
               place.
             </p>
             <button
-              class="btn transparent"
+              className="btn transparent"
               id="sign-up-btn"
               onClick={handleSignUp}
             >
               Sign up
             </button>
           </div>
-          <img src={webshopv1} class="image" alt="" />
+          <img src={webshopv1} className="image" alt="" />
         </div>
-        <div class="panel right-panel">
-          <div class="content">
+        <div className="panel right-panel">
+          <div className="content">
             <h3>Already signed up ?</h3>
             <p>Sign in to begin searching!</p>
             <button
-              class="btn transparent"
+              className="btn transparent"
               id="sign-in-btn"
               onClick={handleSignIn}
             >
               Sign in
             </button>
           </div>
-          <img src={onlineshopv1} class="image" alt="" />
+          <img src={onlineshopv1} className="image" alt="" />
         </div>
       </div>
       <footer className="landing-footer">
