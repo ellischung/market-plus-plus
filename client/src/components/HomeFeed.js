@@ -2,16 +2,20 @@ import React from "react";
 
 const HomeFeed = ({
   craigslistHomeFeedData,
+  ebayHomeFeedData,
   facebookHomeFeedData,
   offerupHomeFeedData,
+  etsyHomeFeedData,
   displayResults,
 }) => {
   // combine all home feed data to one to be shuffled later
   const combinedFeed = React.useMemo(() => {
     let feeds = [
       ...craigslistHomeFeedData,
+      ...ebayHomeFeedData,
       ...facebookHomeFeedData,
       ...offerupHomeFeedData,
+      ...etsyHomeFeedData,
     ];
 
     // Knuth shuffle algorithm
@@ -36,7 +40,7 @@ const HomeFeed = ({
     };
 
     return shuffleFeed(feeds);
-  }, [craigslistHomeFeedData, facebookHomeFeedData, offerupHomeFeedData]);
+  }, [craigslistHomeFeedData, ebayHomeFeedData, facebookHomeFeedData, offerupHomeFeedData, etsyHomeFeedData]);
 
   return <div className="feed-container">{displayResults(combinedFeed)}</div>;
 };

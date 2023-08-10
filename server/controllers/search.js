@@ -461,6 +461,34 @@ export const craigslistHomeFeed = async (req, res) => {
   res.send(results);
 };
 
+export const ebayHomeFeed = async (req, res) => {
+  // grab all eBay listings by most watched
+  let url = "https://svcs.ebay.com/MerchandisingService";
+  url += "?OPERATION-NAME=getMostWatchedItems";
+  url += "&SERVICE-NAME=MerchandisingService";
+  url += "&SERVICE-VERSION=1.1.0";
+  url += `&CONSUMER-ID=${process.env.CLIENT_ID}`;
+  url += "&RESPONSE-DATA-FORMAT=JSON";
+  url += "&REST-PAYLOAD";
+  url += "&maxResult=20";
+
+  const response = await fetch(url);
+  const data = await response.json();
+  const extractedData =
+    data.getMostWatchedItemsResponse.itemRecommendations.item;
+
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.viewItemURL,
+    price: `$${item.buyItNowPrice.__value__}`,
+    imageUrl: item.imageURL,
+    location: item.country,
+    platform: "eBay",
+  }));
+
+  res.json(newData);
+};
+
 export const facebookHomeFeed = async (req, res) => {
   // data from graphql api
   const response = await fetch("https://www.facebook.com/api/graphql/", {
@@ -561,6 +589,65 @@ export const offerupHomeFeed = async (req, res) => {
 
   // send results back
   res.json(results);
+};
+
+export const etsyHomeFeed = async (req, res) => {
+  // grab all Etsy listings sorted by score
+  let url = "https://openapi.etsy.com/v3/application/listings/active";
+  url += "?sort_on=score";
+  url += "&limit=20";
+
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
+
+  const data = await response.json();
+  const extractedData = data.results;
+
+  // Array for main res data
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.url,
+    price: `${item.price.amount / item.price.divisor} ${
+      item.price.currency_code
+    }`,
+    platform: "Etsy",
+  }));
+
+  // Array for listingids to use for second API call
+  const listingIds = extractedData.map((item) => item.listing_id);
+
+  const listingIdsStr = listingIds.join(",");
+
+  // Insert the string into the URL
+  const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
+
+  const imgResponse = await fetch(imageUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
+
+  // extract and map an array of just listing images from second API call
+  const imgData = await imgResponse.json();
+  const extractedImgData = imgData.results;
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
+
+  // map new array that combines newData and the listing images
+  const newArray = newData.map((item, index) => {
+    return {
+      ...item,
+      imageUrl: newImgData[index],
+    };
+  });
+
+  res.json(newArray);
 };
 
 const getCoords = async (postalCode) => {
