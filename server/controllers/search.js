@@ -470,7 +470,7 @@ export const ebayHomeFeed = async (req, res) => {
   url += `&CONSUMER-ID=${process.env.CLIENT_ID}`;
   url += "&RESPONSE-DATA-FORMAT=JSON";
   url += "&REST-PAYLOAD";
-  url += "&maxResult=10";
+  url += "&maxResults=10";
 
   const response = await fetch(url);
   const data = await response.json();
