@@ -462,6 +462,7 @@ export const craigslistHomeFeed = async (req, res) => {
 };
 
 export const ebayHomeFeed = async (req, res) => {
+  // grab all eBay listings by most watched
   let url = "https://svcs.ebay.com/MerchandisingService";
   url += "?OPERATION-NAME=getMostWatchedItems";
   url += "&SERVICE-NAME=MerchandisingService";
@@ -591,6 +592,7 @@ export const offerupHomeFeed = async (req, res) => {
 };
 
 export const etsyHomeFeed = async (req, res) => {
+  // grab all Etsy listings sorted by score
   let url = "https://openapi.etsy.com/v3/application/listings/active";
   url += "?sort_on=score";
   url += "&limit=20";
