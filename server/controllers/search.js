@@ -432,7 +432,7 @@ export const craigslistHomeFeed = async (req, res) => {
 
   // add all results to properties object and return it
   const results = await page.$$eval("li.cl-search-result", (rows) => {
-    return rows.map((row) => {
+    return rows.slice(0, 20).map((row) => {
       const properties = {};
       const titleElement = row.querySelector("a.posting-title span.label");
       properties.title = titleElement ? titleElement.innerText : "";
@@ -522,7 +522,7 @@ export const facebookHomeFeed = async (req, res) => {
 
   const data = await response.json();
 
-  const listings = data.data.marketplace_search.feed_units.edges;
+  const listings = data.data.marketplace_search.feed_units.edges.slice(0, 20);
 
   const results = listings.map((listing) => ({
     title: listing.node.listing.marketplace_listing_title,
@@ -576,7 +576,7 @@ export const offerupHomeFeed = async (req, res) => {
 
   const data = await response.json();
 
-  const listings = data.data.modularFeed.looseTiles;
+  const listings = data.data.modularFeed.looseTiles.slice(0, 20);
 
   const results = listings.map((listing) => ({
     title: listing.listing.title,

@@ -52,8 +52,7 @@ const Home = () => {
 
     API.get("/search/craigslistHomeFeed")
       .then(({ data }) => {
-        setCraigslistHomeFeedData(Object.values(data).slice(0, 20));
-        console.log(data);
+        setCraigslistHomeFeedData(Object.values(data));
       })
       .catch(function (error) {
         console.log(error);
@@ -62,7 +61,6 @@ const Home = () => {
     API.get("/search/ebayHomeFeed")
       .then(({ data }) => {
         setEbayHomeFeedData(data);
-        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -70,8 +68,7 @@ const Home = () => {
 
     API.get("/search/facebookHomeFeed")
       .then(({ data }) => {
-        setFacebookHomeFeedData(Object.values(data).slice(0, 20));
-        console.log(data);
+        setFacebookHomeFeedData(Object.values(data));
       })
       .catch(function (error) {
         console.log(error);
@@ -79,8 +76,7 @@ const Home = () => {
 
     API.get("/search/offerupHomeFeed")
       .then(({ data }) => {
-        setOfferupHomeFeedData(Object.values(data).slice(0, 20));
-        console.log(data);
+        setOfferupHomeFeedData(Object.values(data));
       })
       .catch(function (error) {
         console.log(error);
@@ -89,7 +85,6 @@ const Home = () => {
     API.get("/search/etsyHomeFeed")
       .then(({ data }) => {
         setEtsyHomeFeedData(data);
-        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -200,11 +195,7 @@ const Home = () => {
     setIsModalOpen(false);
   };
 
-  // first useEffect to populate the home feed once
-  useEffect(() => {
-    handleHomeFeed();
-  }, []); // empty dependency array => run once only on mount
-
+  // set user + populate home feed on mount
   useEffect(() => {
     console.log(user);
     const token = user?.token;
@@ -218,7 +209,11 @@ const Home = () => {
 
     setUser(JSON.parse(localStorage.getItem("profile")));
 
-    // for any filter changes
+    handleHomeFeed();
+  }, []); // empty dependency array => run once only on mount
+
+  // run on filter changes
+  useEffect(() => {
     input != "" && handleSearch(event);
   }, [
     location,
