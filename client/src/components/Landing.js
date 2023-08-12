@@ -335,7 +335,7 @@ const Landing = () => {
         </div>
       </div>
       <footer className="landing-footer">
-        <p>© 2023 market++</p>
+        <p>Market++ | © 2023</p>
       </footer>
     </div>
   );

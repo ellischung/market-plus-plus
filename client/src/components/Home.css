@@ -42,6 +42,20 @@
     transition: 0.5s;
 }
 
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.loading div {
+    color: #1976D2;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
 .home-footer {
     left: 0;
     bottom: 0;

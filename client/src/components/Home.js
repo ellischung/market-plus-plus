@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Grid, Container, Box, Divider } from "@mui/material";
+import { Grid, Container, Box, Divider, CircularProgress } from "@mui/material";
 import Navbar from "./Navbar";
 import ListingCard from "./ListingCard";
 import Filters from "./Filters";
@@ -20,7 +20,15 @@ const Home = () => {
   const [maxPrice, setMaxPrice] = useState(100000);
   const [postalCode, setPostalCode] = useState(10012);
   const [distance, setDistance] = useState(30);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [checkedFilters, setCheckedFilters] = useState({
+    "Facebook Marketplace": true,
+    eBay: true,
+    OfferUp: true,
+    craigslist: true,
+    Etsy: true,
+  });
   const [craigslistData, setCraigslistData] = useState([]);
   const [ebayData, setEbayData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
@@ -31,14 +39,7 @@ const Home = () => {
   const [facebookHomeFeedData, setFacebookHomeFeedData] = useState([]);
   const [offerupHomeFeedData, setOfferupHomeFeedData] = useState([]);
   const [etsyHomeFeedData, setEtsyHomeFeedData] = useState([]);
-  const [checkedFilters, setCheckedFilters] = useState({
-    "Facebook Marketplace": true,
-    eBay: true,
-    OfferUp: true,
-    craigslist: true,
-    Etsy: true,
-  });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // other initializations
   const location = useLocation();
@@ -50,44 +51,29 @@ const Home = () => {
   const handleHomeFeed = (e) => {
     if (e) e.preventDefault();
 
-    API.get("/search/craigslistHomeFeed")
-      .then(({ data }) => {
-        setCraigslistHomeFeedData(Object.values(data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    setIsLoading(true);
 
-    API.get("/search/ebayHomeFeed")
-      .then(({ data }) => {
-        setEbayHomeFeedData(data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    Promise.all([
+      API.get("/search/craigslistHomeFeed"),
+      API.get("/search/ebayHomeFeed"),
+      API.get("/search/facebookHomeFeed"),
+      API.get("/search/offerupHomeFeed"),
+      API.get("/search/etsyHomeFeed"),
+    ])
+      .then(([craigslist, ebay, facebook, offerup, etsy]) => {
+        setCraigslistHomeFeedData(Object.values(craigslist.data));
+        setEbayHomeFeedData(ebay.data);
+        setFacebookHomeFeedData(Object.values(facebook.data));
+        setOfferupHomeFeedData(Object.values(offerup.data));
+        setEtsyHomeFeedData(etsy.data);
 
-    API.get("/search/facebookHomeFeed")
-      .then(({ data }) => {
-        setFacebookHomeFeedData(Object.values(data));
+        // once all data is fetched, loading can be set false
+        setIsLoading(false);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    API.get("/search/offerupHomeFeed")
-      .then(({ data }) => {
-        setOfferupHomeFeedData(Object.values(data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    API.get("/search/etsyHomeFeed")
-      .then(({ data }) => {
-        setEtsyHomeFeedData(data);
-      })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.error(error);
+        // loading still false on error
+        setIsLoading(false);
       });
   };
 
@@ -274,6 +260,11 @@ const Home = () => {
               </div>
             </div>
           </Box>
+        ) : isLoading ? (
+          <div className="loading">
+            <div>Generating your Home Feed</div>
+            <CircularProgress />
+          </div>
         ) : (
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             <div className="contentContainer">
