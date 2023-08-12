@@ -8,7 +8,7 @@ const HomeFeed = ({
   etsyHomeFeedData,
   displayResults,
 }) => {
-  // combine all home feed data to one to be shuffled later
+  // memoize the feed to avoid reshuffling from parent component re-rendering
   const combinedFeed = React.useMemo(() => {
     let feeds = [
       ...craigslistHomeFeedData,
@@ -39,8 +39,15 @@ const HomeFeed = ({
       return array;
     };
 
-    return shuffleFeed(feeds);
-  }, [craigslistHomeFeedData, ebayHomeFeedData, facebookHomeFeedData, offerupHomeFeedData, etsyHomeFeedData]);
+    // trim results to 80
+    return shuffleFeed(feeds.slice(0, 80));
+  }, [
+    craigslistHomeFeedData,
+    ebayHomeFeedData,
+    facebookHomeFeedData,
+    offerupHomeFeedData,
+    etsyHomeFeedData,
+  ]);
 
   return <div className="feed-container">{displayResults(combinedFeed)}</div>;
 };

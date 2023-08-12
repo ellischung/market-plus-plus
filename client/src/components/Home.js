@@ -262,22 +262,18 @@ const Home = () => {
           </Box>
         ) : isLoading ? (
           <div className="loading">
-            <div>Generating your Home Feed</div>
+            <div>Generating your feed</div>
             <CircularProgress />
           </div>
         ) : (
-          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-            <div className="contentContainer">
-              <HomeFeed
-                craigslistHomeFeedData={craigslistHomeFeedData}
-                ebayHomeFeedData={ebayHomeFeedData}
-                facebookHomeFeedData={facebookHomeFeedData}
-                offerupHomeFeedData={offerupHomeFeedData}
-                etsyHomeFeedData={etsyHomeFeedData}
-                displayResults={displayResults}
-              />
-            </div>
-          </Box>
+          <HomeFeed
+            craigslistHomeFeedData={craigslistHomeFeedData}
+            ebayHomeFeedData={ebayHomeFeedData}
+            facebookHomeFeedData={facebookHomeFeedData}
+            offerupHomeFeedData={offerupHomeFeedData}
+            etsyHomeFeedData={etsyHomeFeedData}
+            displayResults={displayResults}
+          />
         )}
       </Container>
       <footer className="home-footer">
