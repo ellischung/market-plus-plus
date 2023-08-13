@@ -162,7 +162,7 @@ const Home = () => {
   const displayResults = (data) => {
     return data.map((listing, index) => (
       <Grid item key={`${listing.title}${listing.platform}${index}`}>
-        <ListingCard listing={listing} user={user} />
+        <ListingCard listing={listing} user={user} setUser={setUser} api={API}/>
       </Grid>
     ));
   };

@@ -3,7 +3,8 @@ import { Card, CardMedia } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const ListingCard = ({ listing, user }) => {
+const ListingCard = ({ listing, user, setUser, api }) => {
+    const API = api;
     // create unique id for listing
     const id = `${listing.url}$-filler-$${listing.title}$-filler-$${listing.imageUrl}$-filler-$${listing.price}$-filler-$${listing.platform}`;
     const [isFavorite, setIsFavorite] = useState(
