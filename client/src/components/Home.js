@@ -53,28 +53,28 @@ const Home = () => {
 
     setIsLoading(true);
 
-    Promise.all([
-      API.get("/search/craigslistHomeFeed"),
-      API.get("/search/ebayHomeFeed"),
-      API.get("/search/facebookHomeFeed"),
-      API.get("/search/offerupHomeFeed"),
-      API.get("/search/etsyHomeFeed"),
-    ])
-      .then(([craigslist, ebay, facebook, offerup, etsy]) => {
-        setCraigslistHomeFeedData(Object.values(craigslist.data));
-        setEbayHomeFeedData(ebay.data);
-        setFacebookHomeFeedData(Object.values(facebook.data));
-        setOfferupHomeFeedData(Object.values(offerup.data));
-        setEtsyHomeFeedData(etsy.data);
+    // Promise.all([
+    //   API.get("/search/craigslistHomeFeed"),
+    //   API.get("/search/ebayHomeFeed"),
+    //   API.get("/search/facebookHomeFeed"),
+    //   API.get("/search/offerupHomeFeed"),
+    //   API.get("/search/etsyHomeFeed"),
+    // ])
+    //   .then(([craigslist, ebay, facebook, offerup, etsy]) => {
+    //     setCraigslistHomeFeedData(Object.values(craigslist.data));
+    //     setEbayHomeFeedData(ebay.data);
+    //     setFacebookHomeFeedData(Object.values(facebook.data));
+    //     setOfferupHomeFeedData(Object.values(offerup.data));
+    //     setEtsyHomeFeedData(etsy.data);
 
-        // once all data is fetched, loading can be set false
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        // loading still false on error
-        setIsLoading(false);
-      });
+    //     // once all data is fetched, loading can be set false
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     // loading still false on error
+    //     setIsLoading(false);
+    //   });
   };
 
   const handleSearch = (e) => {
