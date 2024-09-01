@@ -411,53 +411,53 @@ export const etsySearch = async (req, res) => {
 
 export const craigslistHomeFeed = async (req, res) => {
   // launch headless browser
-  // const browser = await puppeteer.launch();
-  // const page = await browser.newPage();
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-  // // go to link with filtered search results
-  // const url = `https://newyork.craigslist.org/search/sss#search=1~gallery~0~0`;
-  // await page.goto(url);
+  // go to link with filtered search results
+  const url = `https://newyork.craigslist.org/search/sss#search=1~gallery~0~0`;
+  await page.goto(url);
 
-  // // set viewport to load all content
-  // await page.setViewport({
-  //   width: 10000,
-  //   height: 10000,
-  // });
+  // set viewport to load all content
+  await page.setViewport({
+    width: 10000,
+    height: 10000,
+  });
 
-  // // selector for search results list
-  // await page.waitForSelector(
-  //   ".results.cl-results-page.cl-search-view-mode-gallery li.cl-search-result"
-  // );
+  // selector for search results list
+  await page.waitForSelector(
+    ".gallery-card"
+  );
 
-  // // add all results to properties object and return it
-  // const results = await page.$$eval("li.cl-search-result", (rows) => {
-  //   return rows.slice(0, 20).map((row) => {
-  //     const properties = {};
-  //     const titleElement = row.querySelector("a.posting-title span.label");
-  //     properties.title = titleElement ? titleElement.innerText : "";
-  //     properties.url = titleElement ? titleElement.closest("a").href : "";
-  //     const priceElement = row.querySelector(".priceinfo");
-  //     properties.price = priceElement ? priceElement.innerText : "";
-  //     const imageElement = row.querySelector('.swipe [data-index="0"] img');
-  //     properties.imageUrl = imageElement ? imageElement.src : "";
-  //     const metaElement = row.querySelector(".meta");
-  //     const startingIndex = metaElement
-  //       ? metaElement.innerText.indexOf("·") + 1
-  //       : 0;
-  //     const location = metaElement
-  //       ? metaElement.innerText.substring(startingIndex).trim()
-  //       : "";
-  //     properties.location = location != "" ? location : "No location listed";
-  //     properties.platform = "craigslist";
-  //     return properties;
-  //   });
-  // });
+  // add all results to properties object and return it
+  const results = await page.$$eval(".gallery-card", (rows) => {
+    return rows.slice(0, 20).map((row) => {
+      const properties = {};
+      const titleElement = row.querySelector("a.posting-title span.label");
+      properties.title = titleElement ? titleElement.innerText : "";
+      properties.url = titleElement ? titleElement.closest("a").href : "";
+      const priceElement = row.querySelector(".priceinfo");
+      properties.price = priceElement ? priceElement.innerText : "";
+      const imageElement = row.querySelector('.swipe [data-index="0"] img');
+      properties.imageUrl = imageElement ? imageElement.src : "";
+      const metaElement = row.querySelector(".meta");
+      const startingIndex = metaElement
+        ? metaElement.innerText.indexOf("·") + 1
+        : 0;
+      const location = metaElement
+        ? metaElement.innerText.substring(startingIndex).trim()
+        : "";
+      properties.location = location != "" ? location : "No location listed";
+      properties.platform = "craigslist";
+      return properties;
+    });
+  });
 
-  // // close browser
-  // await browser.close();
+  // close browser
+  await browser.close();
 
-  // // send results
-  // res.send(results);
+  // send results
+  res.send(results);
 };
 
 export const ebayHomeFeed = async (req, res) => {
