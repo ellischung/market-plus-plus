@@ -91,67 +91,67 @@ export const craigslistSearch = async (req, res) => {
 };
 
 export const ebaySearch = async (req, res) => {
-  // const search = req.query.input;
-  // const splitSearch = search.split(" ");
-  // let searchQuery = "";
-  // for (let i = 0; i < splitSearch.length - 1; i++) {
-  //   searchQuery += splitSearch[i] + "%20";
-  // }
-  // searchQuery += splitSearch[splitSearch.length - 1];
+  const search = req.query.input;
+  const splitSearch = search.split(" ");
+  let searchQuery = "";
+  for (let i = 0; i < splitSearch.length - 1; i++) {
+    searchQuery += splitSearch[i] + "%20";
+  }
+  searchQuery += splitSearch[splitSearch.length - 1];
 
-  // let sortBy = "";
-  // switch (req.query.sortBy) {
-  //   case "relevance":
-  //     sortBy = "BestMatch";
-  //     break;
-  //   case "newest_first":
-  //     sortBy = "StartTimeNewest";
-  //     break;
-  //   case "low_to_high":
-  //     sortBy = "PricePlusShippingLowest";
-  //     break;
-  //   case "high_to_low":
-  //     sortBy = "PricePlusShippingHighest";
-  //     break;
-  // }
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "BestMatch";
+      break;
+    case "newest_first":
+      sortBy = "StartTimeNewest";
+      break;
+    case "low_to_high":
+      sortBy = "PricePlusShippingLowest";
+      break;
+    case "high_to_low":
+      sortBy = "PricePlusShippingHighest";
+      break;
+  }
 
-  // const minPrice = req.query.minPrice;
+  const minPrice = req.query.minPrice;
 
-  // const maxPrice = req.query.maxPrice;
+  const maxPrice = req.query.maxPrice;
 
-  // const postalCode = req.query.postalCode;
+  const postalCode = req.query.postalCode;
 
-  // const distance = req.query.distance;
+  const distance = req.query.distance;
 
-  // let url = "https://svcs.ebay.com/services/search/FindingService/v1";
-  // url += "?OPERATION-NAME=findItemsByKeywords";
-  // url += "&SERVICE-VERSION=1.0.0";
-  // url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
-  // url += "&GLOBAL-ID=EBAY-US";
-  // url += "&RESPONSE-DATA-FORMAT=JSON";
-  // url += "&REST-PAYLOAD";
-  // url += `&keywords=${searchQuery}`;
-  // url += `&buyerPostalCode=${postalCode}`;
-  // url += `&itemFilter(0).name=MaxDistance&itemFilter(0).value=${distance}`;
-  // url += `&itemFilter(1).name=MinPrice&itemFilter(1).value=${minPrice}`;
-  // url += `&itemFilter(2).name=MaxPrice&itemFilter(2).value=${maxPrice}`;
-  // url += `&sortOrder=${sortBy}`;
-  // // url += "&paginationInput.entriesPerPage=3";
+  let url = "https://svcs.ebay.com/services/search/FindingService/v1";
+  url += "?OPERATION-NAME=findItemsByKeywords";
+  url += "&SERVICE-VERSION=1.0.0";
+  url += `&SECURITY-APPNAME=${process.env.CLIENT_ID}`;
+  url += "&GLOBAL-ID=EBAY-US";
+  url += "&RESPONSE-DATA-FORMAT=JSON";
+  url += "&REST-PAYLOAD";
+  url += `&keywords=${searchQuery}`;
+  url += `&buyerPostalCode=${postalCode}`;
+  url += `&itemFilter(0).name=MaxDistance&itemFilter(0).value=${distance}`;
+  url += `&itemFilter(1).name=MinPrice&itemFilter(1).value=${minPrice}`;
+  url += `&itemFilter(2).name=MaxPrice&itemFilter(2).value=${maxPrice}`;
+  url += `&sortOrder=${sortBy}`;
+  // url += "&paginationInput.entriesPerPage=3";
 
-  // const response = await fetch(url);
-  // const data = await response.json();
-  // const extractedData =
-  //   data.findItemsByKeywordsResponse[0].searchResult[0].item;
-  // const newData = extractedData.map((item) => ({
-  //   title: item.title[0],
-  //   url: item.viewItemURL[0],
-  //   price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
-  //   imageUrl: item.galleryURL[0],
-  //   location: item.location[0],
-  //   platform: "eBay",
-  // }));
+  const response = await fetch(url);
+  const data = await response.json();
+  const extractedData =
+    data.findItemsByKeywordsResponse[0].searchResult[0].item;
+  const newData = extractedData.map((item) => ({
+    title: item.title[0],
+    url: item.viewItemURL[0],
+    price: `$${item.sellingStatus[0].currentPrice[0].__value__}`,
+    imageUrl: item.galleryURL[0],
+    location: item.location[0],
+    platform: "eBay",
+  }));
 
-  // res.json(newData);
+  res.json(newData);
 };
 
 export const facebookSearch = async (req, res) => {
@@ -319,92 +319,92 @@ export const offerupSearch = async (req, res) => {
 };
 
 export const etsySearch = async (req, res) => {
-  // const search = req.query.input;
-  // const splitSearch = search.split(" ");
-  // let searchQuery = "";
-  // for (let i = 0; i < splitSearch.length - 1; i++) {
-  //   searchQuery += splitSearch[i] + "%20";
-  // }
-  // searchQuery += splitSearch[splitSearch.length - 1];
+  const search = req.query.input;
+  const splitSearch = search.split(" ");
+  let searchQuery = "";
+  for (let i = 0; i < splitSearch.length - 1; i++) {
+    searchQuery += splitSearch[i] + "%20";
+  }
+  searchQuery += splitSearch[splitSearch.length - 1];
 
-  // let sortBy = "";
-  // switch (req.query.sortBy) {
-  //   case "relevance":
-  //     sortBy = "score";
-  //     break;
-  //   case "newest_first":
-  //     sortBy = "created";
-  //     break;
-  //   case "low_to_high":
-  //     sortBy = "price&sort_order=asc";
-  //     break;
-  //   case "high_to_low":
-  //     sortBy = "price&sort_order=desc";
-  //     break;
-  // }
+  let sortBy = "";
+  switch (req.query.sortBy) {
+    case "relevance":
+      sortBy = "score";
+      break;
+    case "newest_first":
+      sortBy = "created";
+      break;
+    case "low_to_high":
+      sortBy = "price&sort_order=asc";
+      break;
+    case "high_to_low":
+      sortBy = "price&sort_order=desc";
+      break;
+  }
 
-  // const minPrice = req.query.minPrice;
+  const minPrice = req.query.minPrice;
 
-  // const maxPrice = req.query.maxPrice;
+  const maxPrice = req.query.maxPrice;
 
-  // let url = "https://openapi.etsy.com/v3/application/listings/active";
-  // url += `?keywords=${searchQuery}`;
-  // url += `&sort_on=${sortBy}`;
-  // url += `&min_price=${minPrice}`;
-  // url += `&max_price=${maxPrice}`;
-  // url += "&limit=50";
+  let url = "https://openapi.etsy.com/v3/application/listings/active";
+  url += `?keywords=${searchQuery}`;
+  url += `&sort_on=${sortBy}`;
+  url += `&min_price=${minPrice}`;
+  url += `&max_price=${maxPrice}`;
+  url += "&limit=50";
 
-  // const response = await fetch(url, {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-api-key": process.env.X_API_KEY,
-  //   },
-  // });
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
 
-  // const data = await response.json();
-  // const extractedData = data.results;
+  const data = await response.json();
+  const extractedData = data.results;
 
-  // // Array for main res data
-  // const newData = extractedData.map((item) => ({
-  //   title: item.title,
-  //   url: item.url,
-  //   price: `${item.price.amount / item.price.divisor} ${
-  //     item.price.currency_code
-  //   }`,
-  //   platform: "Etsy",
-  // }));
+  // Array for main res data
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.url,
+    price: `${item.price.amount / item.price.divisor} ${
+      item.price.currency_code
+    }`,
+    platform: "Etsy",
+  }));
 
-  // // Array for listingids to use for second API call
-  // const listingIds = extractedData.map((item) => item.listing_id);
+  // Array for listingids to use for second API call
+  const listingIds = extractedData.map((item) => item.listing_id);
 
-  // const listingIdsStr = listingIds.join(",");
+  const listingIdsStr = listingIds.join(",");
 
-  // // Insert the string into the URL
-  // const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
+  // Insert the string into the URL
+  const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
 
-  // const imgResponse = await fetch(imageUrl, {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-api-key": process.env.X_API_KEY,
-  //   },
-  // });
+  const imgResponse = await fetch(imageUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
 
-  // // extract and map an array of just listing images from second API call
-  // const imgData = await imgResponse.json();
-  // const extractedImgData = imgData.results;
-  // const newImgData = extractedImgData.map(
-  //   (item) => item.images[0].url_fullxfull
-  // );
+  // extract and map an array of just listing images from second API call
+  const imgData = await imgResponse.json();
+  const extractedImgData = imgData.results;
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
 
-  // // map new array that combines newData and the listing images
-  // const newArray = newData.map((item, index) => {
-  //   return {
-  //     ...item,
-  //     imageUrl: newImgData[index],
-  //   };
-  // });
+  // map new array that combines newData and the listing images
+  const newArray = newData.map((item, index) => {
+    return {
+      ...item,
+      imageUrl: newImgData[index],
+    };
+  });
 
-  // res.json(newArray);
+  res.json(newArray);
 };
 
 /* METHODS TO GET EACH PLATFORM'S HOME FEED */
@@ -462,79 +462,79 @@ export const craigslistHomeFeed = async (req, res) => {
 
 export const ebayHomeFeed = async (req, res) => {
   // grab all eBay listings by most watched
-  // let url = "https://svcs.ebay.com/MerchandisingService";
-  // url += "?OPERATION-NAME=getMostWatchedItems";
-  // url += "&SERVICE-NAME=MerchandisingService";
-  // url += "&SERVICE-VERSION=1.1.0";
-  // url += `&CONSUMER-ID=${process.env.CLIENT_ID}`;
-  // url += "&RESPONSE-DATA-FORMAT=JSON";
-  // url += "&REST-PAYLOAD";
-  // url += "&maxResults=20";
+  let url = "https://svcs.ebay.com/MerchandisingService";
+  url += "?OPERATION-NAME=getMostWatchedItems";
+  url += "&SERVICE-NAME=MerchandisingService";
+  url += "&SERVICE-VERSION=1.1.0";
+  url += `&CONSUMER-ID=${process.env.CLIENT_ID}`;
+  url += "&RESPONSE-DATA-FORMAT=JSON";
+  url += "&REST-PAYLOAD";
+  url += "&maxResults=20";
 
-  // const response = await fetch(url);
-  // const data = await response.json();
-  // const extractedData =
-  //   data.getMostWatchedItemsResponse.itemRecommendations.item;
+  const response = await fetch(url);
+  const data = await response.json();
+  const extractedData =
+    data.getMostWatchedItemsResponse.itemRecommendations.item;
 
-  // const newData = extractedData.map((item) => ({
-  //   title: item.title,
-  //   url: item.viewItemURL,
-  //   price: `$${item.buyItNowPrice.__value__}`,
-  //   imageUrl: item.imageURL,
-  //   location: item.country,
-  //   platform: "eBay",
-  // }));
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.viewItemURL,
+    price: `$${item.buyItNowPrice.__value__}`,
+    imageUrl: item.imageURL,
+    location: item.country,
+    platform: "eBay",
+  }));
 
-  // res.json(newData);
+  res.json(newData);
 };
 
 export const facebookHomeFeed = async (req, res) => {
   // data from graphql api
-  // const response = await fetch("https://www.facebook.com/api/graphql/", {
-  //   headers: {
-  //     accept: "*/*",
-  //     "accept-language": "en-US,en;q=0.9",
-  //     "content-type": "application/x-www-form-urlencoded",
-  //     "sec-ch-prefers-color-scheme": "light",
-  //     "sec-ch-ua":
-  //       '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
-  //     "sec-ch-ua-full-version-list":
-  //       '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
-  //     "sec-ch-ua-mobile": "?0",
-  //     "sec-ch-ua-platform": '"Windows"',
-  //     "sec-ch-ua-platform-version": '"10.0.0"',
-  //     "sec-fetch-dest": "empty",
-  //     "sec-fetch-mode": "cors",
-  //     "sec-fetch-site": "same-origin",
-  //     "viewport-width": "1075",
-  //     "x-asbd-id": "129477",
-  //     "x-fb-friendly-name": "CometMarketplaceSearchContentPaginationQuery",
-  //     "x-fb-lsd": "AVo43UCkvdo",
-  //   },
-  //   referrer: "https://www.facebook.com/marketplace/nyc/electronics",
-  //   referrerPolicy: "strict-origin-when-cross-origin",
-  //   body: "av=0&__user=0&__a=1&__req=m&__hs=19569.HYP%3Acomet_loggedout_pkg.2.1..0.0&dpr=1&__ccg=EXCELLENT&__rev=1007929989&__s=3gllyx%3Akiy7h7%3A7mz8s5&__hsi=7261837998079261734&__dyn=7xeUmwlE7ibwKBWo2vwAxu13wvoKewSwMwNw9G2S0im3y4o0B-q1ew65xO2O1Vw8G1Qw5Mx62G3i0Bo7O2l0Fwqo31wnEfovwRwlEjw8W58jwGzEao4236222SUbElxm0zK5o4q0GpovU1aUbodEGdw46wbS1LwTwNwLwFg661pwr82Mw&__csr=gx5tOvQKjRGC4JblquFHG9jGVaCiG4bgCQmcGifBu-UChuEgx2l1ehUTzBx2m78CWyWyoHx-17xO2mGwLx6m262m6FuE-5obo0CCEao05t-0Qi0q81gk0ki00QeOG4k5d03DU0ppo2Zw3FE1kUhw7qxS2q2y0Co0mYDS0v21JxO07LFy04Yw2kE0cmE0vCoaE0I5wYw3Uo0Ba04to0gWwvoyaCw&__comet_req=15&lsd=AVo43UCkvdo&jazoest=2953&__spin_r=1007929989&__spin_b=trunk&__spin_t=1690778415&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=CometMarketplaceSearchContentPaginationQuery&variables=%7B%22count%22%3A24%2C%22cursor%22%3A%22%7B%5C%22pg%5C%22%3A0%2C%5C%22cf%5C%22%3A%7B%5C%22basic%5C%22%3A%7B%5C%22item_index%5C%22%3A28%7D%2C%5C%22ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A24%2C%5C%22items_retrieved%5C%22%3A24%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A1%2C%5C%22feed_retrieved_items%5C%22%3A24%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A6338%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22boosted_ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A6419%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22lightning%5C%22%3A%7B%5C%22initial_request%5C%22%3Afalse%2C%5C%22top_unit_item_ids%5C%22%3Anull%2C%5C%22ranking_signature%5C%22%3Anull%2C%5C%22qid%5C%22%3Anull%7D%7D%2C%5C%22rcf%5C%22%3A%7B%5C%22basic%5C%22%3A%7B%5C%22item_index%5C%22%3A0%7D%2C%5C%22ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A60656%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22boosted_ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A45518%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22lightning%5C%22%3A%7B%5C%22initial_request%5C%22%3Atrue%2C%5C%22top_unit_item_ids%5C%22%3Anull%2C%5C%22ranking_signature%5C%22%3Anull%2C%5C%22qid%5C%22%3Anull%7D%7D%2C%5C%22ncfp%5C%22%3Afalse%2C%5C%22ncfr%5C%22%3Afalse%2C%5C%22cfrh%5C%22%3Atrue%7D%22%2C%22params%22%3A%7B%22bqf%22%3A%7B%22callsite%22%3A%22COMMERCE_MKTPLACE_SEO%22%2C%22query%22%3A%22%22%7D%2C%22browse_request_params%22%3A%7B%22commerce_enable_local_pickup%22%3Atrue%2C%22commerce_enable_shipping%22%3Atrue%2C%22commerce_search_and_rp_available%22%3Atrue%2C%22commerce_search_and_rp_category_id%22%3A%5B1792291877663080%5D%2C%22commerce_search_and_rp_condition%22%3Anull%2C%22commerce_search_and_rp_ctime_days%22%3Anull%2C%22filter_location_latitude%22%3A40.7142%2C%22filter_location_longitude%22%3A-74.0064%2C%22filter_price_lower_bound%22%3A0%2C%22filter_price_upper_bound%22%3A214748364700%2C%22filter_radius_km%22%3A65%7D%2C%22custom_request_params%22%3A%7B%22browse_context%22%3Anull%2C%22contextual_filters%22%3A%5B%5D%2C%22referral_code%22%3Anull%2C%22saved_search_strid%22%3Anull%2C%22search_vertical%22%3Anull%2C%22seo_url%22%3A%22electronics%22%2C%22surface%22%3A%22TOPIC_PAGE%22%2C%22virtual_contextual_filters%22%3A%5B%5D%7D%7D%2C%22scale%22%3A1%7D&server_timestamps=true&doc_id=9675081465898584",
-  //   method: "POST",
-  //   mode: "cors",
-  //   credentials: "include",
-  // });
+  const response = await fetch("https://www.facebook.com/api/graphql/", {
+    headers: {
+      accept: "*/*",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "application/x-www-form-urlencoded",
+      "sec-ch-prefers-color-scheme": "light",
+      "sec-ch-ua":
+        '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+      "sec-ch-ua-full-version-list":
+        '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": '"Windows"',
+      "sec-ch-ua-platform-version": '"10.0.0"',
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "viewport-width": "1075",
+      "x-asbd-id": "129477",
+      "x-fb-friendly-name": "CometMarketplaceSearchContentPaginationQuery",
+      "x-fb-lsd": "AVo43UCkvdo",
+    },
+    referrer: "https://www.facebook.com/marketplace/nyc/electronics",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    body: "av=0&__user=0&__a=1&__req=m&__hs=19569.HYP%3Acomet_loggedout_pkg.2.1..0.0&dpr=1&__ccg=EXCELLENT&__rev=1007929989&__s=3gllyx%3Akiy7h7%3A7mz8s5&__hsi=7261837998079261734&__dyn=7xeUmwlE7ibwKBWo2vwAxu13wvoKewSwMwNw9G2S0im3y4o0B-q1ew65xO2O1Vw8G1Qw5Mx62G3i0Bo7O2l0Fwqo31wnEfovwRwlEjw8W58jwGzEao4236222SUbElxm0zK5o4q0GpovU1aUbodEGdw46wbS1LwTwNwLwFg661pwr82Mw&__csr=gx5tOvQKjRGC4JblquFHG9jGVaCiG4bgCQmcGifBu-UChuEgx2l1ehUTzBx2m78CWyWyoHx-17xO2mGwLx6m262m6FuE-5obo0CCEao05t-0Qi0q81gk0ki00QeOG4k5d03DU0ppo2Zw3FE1kUhw7qxS2q2y0Co0mYDS0v21JxO07LFy04Yw2kE0cmE0vCoaE0I5wYw3Uo0Ba04to0gWwvoyaCw&__comet_req=15&lsd=AVo43UCkvdo&jazoest=2953&__spin_r=1007929989&__spin_b=trunk&__spin_t=1690778415&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=CometMarketplaceSearchContentPaginationQuery&variables=%7B%22count%22%3A24%2C%22cursor%22%3A%22%7B%5C%22pg%5C%22%3A0%2C%5C%22cf%5C%22%3A%7B%5C%22basic%5C%22%3A%7B%5C%22item_index%5C%22%3A28%7D%2C%5C%22ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A24%2C%5C%22items_retrieved%5C%22%3A24%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A1%2C%5C%22feed_retrieved_items%5C%22%3A24%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A6338%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22boosted_ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A6419%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22lightning%5C%22%3A%7B%5C%22initial_request%5C%22%3Afalse%2C%5C%22top_unit_item_ids%5C%22%3Anull%2C%5C%22ranking_signature%5C%22%3Anull%2C%5C%22qid%5C%22%3Anull%7D%7D%2C%5C%22rcf%5C%22%3A%7B%5C%22basic%5C%22%3A%7B%5C%22item_index%5C%22%3A0%7D%2C%5C%22ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A60656%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22boosted_ads%5C%22%3A%7B%5C%22items_since_last_ad%5C%22%3A0%2C%5C%22items_retrieved%5C%22%3A0%2C%5C%22ad_index%5C%22%3A0%2C%5C%22ad_slot%5C%22%3A0%2C%5C%22dynamic_gap_rule%5C%22%3A0%2C%5C%22counted_organic_items%5C%22%3A0%2C%5C%22average_organic_score%5C%22%3A0%2C%5C%22is_dynamic_gap_rule_set%5C%22%3Afalse%2C%5C%22first_organic_score%5C%22%3A0%2C%5C%22is_dynamic_initial_gap_set%5C%22%3Afalse%2C%5C%22iterated_organic_items%5C%22%3A0%2C%5C%22top_organic_score%5C%22%3A0%2C%5C%22feed_slice_number%5C%22%3A0%2C%5C%22feed_retrieved_items%5C%22%3A0%2C%5C%22ad_req_id%5C%22%3A0%2C%5C%22refresh_ts%5C%22%3A0%2C%5C%22cursor_id%5C%22%3A45518%2C%5C%22mc_id%5C%22%3A0%2C%5C%22ad_index_e2e%5C%22%3A0%2C%5C%22seen_ads%5C%22%3A%5B%5D%2C%5C%22has_ad_index_been_reset%5C%22%3Afalse%2C%5C%22is_reconsideration_ads_dropped%5C%22%3Afalse%7D%2C%5C%22lightning%5C%22%3A%7B%5C%22initial_request%5C%22%3Atrue%2C%5C%22top_unit_item_ids%5C%22%3Anull%2C%5C%22ranking_signature%5C%22%3Anull%2C%5C%22qid%5C%22%3Anull%7D%7D%2C%5C%22ncfp%5C%22%3Afalse%2C%5C%22ncfr%5C%22%3Afalse%2C%5C%22cfrh%5C%22%3Atrue%7D%22%2C%22params%22%3A%7B%22bqf%22%3A%7B%22callsite%22%3A%22COMMERCE_MKTPLACE_SEO%22%2C%22query%22%3A%22%22%7D%2C%22browse_request_params%22%3A%7B%22commerce_enable_local_pickup%22%3Atrue%2C%22commerce_enable_shipping%22%3Atrue%2C%22commerce_search_and_rp_available%22%3Atrue%2C%22commerce_search_and_rp_category_id%22%3A%5B1792291877663080%5D%2C%22commerce_search_and_rp_condition%22%3Anull%2C%22commerce_search_and_rp_ctime_days%22%3Anull%2C%22filter_location_latitude%22%3A40.7142%2C%22filter_location_longitude%22%3A-74.0064%2C%22filter_price_lower_bound%22%3A0%2C%22filter_price_upper_bound%22%3A214748364700%2C%22filter_radius_km%22%3A65%7D%2C%22custom_request_params%22%3A%7B%22browse_context%22%3Anull%2C%22contextual_filters%22%3A%5B%5D%2C%22referral_code%22%3Anull%2C%22saved_search_strid%22%3Anull%2C%22search_vertical%22%3Anull%2C%22seo_url%22%3A%22electronics%22%2C%22surface%22%3A%22TOPIC_PAGE%22%2C%22virtual_contextual_filters%22%3A%5B%5D%7D%7D%2C%22scale%22%3A1%7D&server_timestamps=true&doc_id=9675081465898584",
+    method: "POST",
+    mode: "cors",
+    credentials: "include",
+  });
 
-  // const data = await response.json();
+  const data = await response.json();
 
-  // const listings = data.data.marketplace_search.feed_units.edges.slice(0, 20);
+  const listings = data.data.marketplace_search.feed_units.edges.slice(0, 20);
 
-  // const results = listings.map((listing) => ({
-  //   title: listing.node.listing.marketplace_listing_title,
-  //   url: `https://www.facebook.com/marketplace/item/${listing.node.listing.id}`,
-  //   price: listing.node.listing.listing_price.formatted_amount,
-  //   imageUrl: listing.node.listing.primary_listing_photo.image.uri,
-  //   location:
-  //     listing.node.listing.location.reverse_geocode.city_page.display_name,
-  //   platform: "Facebook Marketplace",
-  // }));
-
-  // // send results back
-  // res.json(results);
+  const results = listings.map((listing) => ({
+    title: listing.node.listing.marketplace_listing_title,
+    url: `https://www.facebook.com/marketplace/item/${listing.node.listing.id}`,
+    price: listing.node.listing.listing_price.formatted_amount,
+    imageUrl: listing.node.listing.primary_listing_photo.image.uri,
+    location:
+      listing.node.listing.location.reverse_geocode.city_page.display_name,
+    platform: "Facebook Marketplace",
+  }));
+  
+  // send results back
+  res.json(results);
 };
 
 export const offerupHomeFeed = async (req, res) => {
@@ -592,61 +592,61 @@ export const offerupHomeFeed = async (req, res) => {
 
 export const etsyHomeFeed = async (req, res) => {
   // grab all Etsy listings sorted by score
-  // let url = "https://openapi.etsy.com/v3/application/listings/active";
-  // url += "?sort_on=score";
-  // url += "&limit=20";
+  let url = "https://openapi.etsy.com/v3/application/listings/active";
+  url += "?sort_on=score";
+  url += "&limit=20";
 
-  // const response = await fetch(url, {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-api-key": process.env.X_API_KEY,
-  //   },
-  // });
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
 
-  // const data = await response.json();
-  // const extractedData = data.results;
+  const data = await response.json();
+  const extractedData = data.results;
 
-  // // Array for main res data
-  // const newData = extractedData.map((item) => ({
-  //   title: item.title,
-  //   url: item.url,
-  //   price: `${item.price.amount / item.price.divisor} ${
-  //     item.price.currency_code
-  //   }`,
-  //   platform: "Etsy",
-  // }));
+  // Array for main res data
+  const newData = extractedData.map((item) => ({
+    title: item.title,
+    url: item.url,
+    price: `${item.price.amount / item.price.divisor} ${
+      item.price.currency_code
+    }`,
+    platform: "Etsy",
+  }));
 
-  // // Array for listingids to use for second API call
-  // const listingIds = extractedData.map((item) => item.listing_id);
+  // Array for listingids to use for second API call
+  const listingIds = extractedData.map((item) => item.listing_id);
 
-  // const listingIdsStr = listingIds.join(",");
+  const listingIdsStr = listingIds.join(",");
 
-  // // Insert the string into the URL
-  // const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
+  // Insert the string into the URL
+  const imageUrl = `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${listingIdsStr}&includes=Images`;
 
-  // const imgResponse = await fetch(imageUrl, {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     "x-api-key": process.env.X_API_KEY,
-  //   },
-  // });
+  const imgResponse = await fetch(imageUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.X_API_KEY,
+    },
+  });
 
-  // // extract and map an array of just listing images from second API call
-  // const imgData = await imgResponse.json();
-  // const extractedImgData = imgData.results;
-  // const newImgData = extractedImgData.map(
-  //   (item) => item.images[0].url_fullxfull
-  // );
+  // extract and map an array of just listing images from second API call
+  const imgData = await imgResponse.json();
+  const extractedImgData = imgData.results;
+  const newImgData = extractedImgData.map(
+    (item) => item.images[0].url_fullxfull
+  );
 
-  // // map new array that combines newData and the listing images
-  // const newArray = newData.map((item, index) => {
-  //   return {
-  //     ...item,
-  //     imageUrl: newImgData[index],
-  //   };
-  // });
+  // map new array that combines newData and the listing images
+  const newArray = newData.map((item, index) => {
+    return {
+      ...item,
+      imageUrl: newImgData[index],
+    };
+  });
 
-  // res.json(newArray);
+  res.json(newArray);
 };
 
 const getCoords = async (postalCode) => {

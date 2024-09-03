@@ -55,17 +55,15 @@ const Home = () => {
 
     Promise.all([
       API.get("/search/craigslistHomeFeed"),
-      // API.get("/search/ebayHomeFeed"),
-      // API.get("/search/facebookHomeFeed"),
+      API.get("/search/ebayHomeFeed"),
+      API.get("/search/facebookHomeFeed"),
       // API.get("/search/offerupHomeFeed"),
-      // API.get("/search/etsyHomeFeed"),
     ])
-      .then(([craigslist, ebay, facebook, offerup, etsy]) => {
+      .then(([craigslist, ebay, facebook, offerup]) => {
         setCraigslistHomeFeedData(Object.values(craigslist.data));
-        // setEbayHomeFeedData(ebay.data);
-        // setFacebookHomeFeedData(Object.values(facebook.data));
+        setEbayHomeFeedData(ebay.data);
+        setFacebookHomeFeedData(Object.values(facebook.data));
         // setOfferupHomeFeedData(Object.values(offerup.data));
-        // setEtsyHomeFeedData(etsy.data);
 
         // once all data is fetched, loading can be set false
         setIsLoading(false);
@@ -74,6 +72,15 @@ const Home = () => {
         console.error(error);
         // loading still false on error
         setIsLoading(false);
+      });
+
+    // handle separately for Etsy (incompatible with Promise)
+    API.get("/search/etsyHomeFeed")
+      .then((response) => {
+        setEtsyHomeFeedData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching Etsy HomeFeed data:", error);
       });
   };
 
@@ -162,7 +169,12 @@ const Home = () => {
   const displayResults = (data) => {
     return data.map((listing, index) => (
       <Grid item key={`${listing.title}${listing.platform}${index}`}>
-        <ListingCard listing={listing} user={user} setUser={setUser} api={API}/>
+        <ListingCard
+          listing={listing}
+          user={user}
+          setUser={setUser}
+          api={API}
+        />
       </Grid>
     ));
   };
