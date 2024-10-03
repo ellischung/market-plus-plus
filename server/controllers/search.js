@@ -7,7 +7,6 @@ dotenv.config();
 /* SEARCH METHODS FOR EACH PLATFORM */
 
 export const craigslistSearch = async (req, res) => {
-  // search input and filter options from frontend
   const search = req.query.input;
   const splitSearch = search.split(" ");
   let searchQuery = "";
